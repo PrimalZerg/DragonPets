@@ -1,0 +1,11 @@
+{
+  "_fv": 28,
+  "_type": "tab",
+  "definition": {
+    "name": "Dragons",
+    "icon": {
+      "value": "Blocks.DRAGON_EGG"
+    },
+    "showSearch": false
+  }
+}

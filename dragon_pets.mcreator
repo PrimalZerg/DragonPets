@@ -1,0 +1,178 @@
+{
+  "mod_elements": [
+    {
+      "name": "FireDragon",
+      "type": "livingentity",
+      "sortid": 1,
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "fire_dragon"
+    },
+    {
+      "name": "SpaceDragon",
+      "type": "livingentity",
+      "sortid": 2,
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "space_dragon"
+    },
+    {
+      "name": "IceDragon",
+      "type": "livingentity",
+      "sortid": 3,
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "ice_dragon"
+    },
+    {
+      "name": "EndDragon",
+      "type": "livingentity",
+      "sortid": 4,
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "end_dragon"
+    },
+    {
+      "name": "DiamondDragon",
+      "type": "livingentity",
+      "sortid": 5,
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "diamond_dragon"
+    },
+    {
+      "name": "AmethystDragon",
+      "type": "livingentity",
+      "sortid": 7,
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "amethyst_dragon"
+    },
+    {
+      "name": "IronDragon",
+      "type": "livingentity",
+      "sortid": 8,
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "iron_dragon"
+    },
+    {
+      "name": "GoldDragon",
+      "type": "livingentity",
+      "sortid": 9,
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "gold_dragon"
+    },
+    {
+      "name": "CopperDragon",
+      "type": "livingentity",
+      "sortid": 10,
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "copper_dragon"
+    },
+    {
+      "name": "Dragons",
+      "type": "tab",
+      "sortid": 11,
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "dragons"
+    },
+    {
+      "name": "RedstoneDragon",
+      "type": "livingentity",
+      "sortid": 12,
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "redstone_dragon"
+    },
+    {
+      "name": "DiamondDragonSpawns",
+      "type": "procedure",
+      "sortid": 13,
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "diamond_dragon_spawns",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
+      }
+    }
+  ],
+  "variable_elements": [],
+  "sound_elements": [],
+  "language_map": {
+    "en_us": {
+      "entity.dragon_pet.end_dragon": "End Dragon",
+      "entity.dragon_pets.gold_dragon": "Gold Dragon",
+      "entity.dragon_pet.iron_dragon": "Iron Dragon",
+      "item.dragon_pet.diamond_dragon_spawn_egg": "Diamond Dragon Spawn Egg",
+      "item.dragon_pet.iron_dragon_spawn_egg": "Iron Dragon Spawn Egg",
+      "item.dragon_pet.space_dragon_spawn_egg": "Space Dragon Spawn Egg",
+      "item.dragon_pets.diamond_dragon_spawn_egg": "Diamond Dragon Spawn Egg",
+      "entity.dragon_pet.redstone_dragon": "Redstone Dragon",
+      "entity.dragon_pet.ice_dragon": "Ice Dragon",
+      "item.dragon_pets.gold_dragon_spawn_egg": "Gold Dragon Spawn Egg",
+      "entity.dragon_pets.end_dragon": "End Dragon",
+      "item.dragon_pet.gold_dragon_spawn_egg": "Gold Dragon Spawn Egg",
+      "entity.dragon_pet.amethyst_dragon": "Amethyst Dragon",
+      "entity.dragon_pets.ice_dragon": "Ice Dragon",
+      "entity.dragon_pets.copper_dragon": "Copper Dragon",
+      "entity.dragon_pet.fire_dragon": "Fire Dragon",
+      "entity.dragon_pets.diamond_dragon": "Diamond Dragon",
+      "entity.dragon_pet.gold_dragon": "Gold Dragon",
+      "item.dragon_pets.redstone_dragon_spawn_egg": "Redstone Dragon Spawn Egg",
+      "item.dragon_pets.fire_dragon_spawn_egg": "Fire Dragon Spawn Egg",
+      "item.dragon_pet.ice_dragon_spawn_egg": "Ice Dragon Spawn Egg",
+      "item.dragon_pets.end_dragon_spawn_egg": "End Dragon Spawn Egg",
+      "item.dragon_pet.copper_dragon_spawn_egg": "Copper Dragon Spawn Egg",
+      "item.dragon_pet.redstone_dragon_spawn_egg": "Redstone Dragon Spawn Egg",
+      "entity.dragon_pets.space_dragon": "Space Dragon",
+      "itemGroup.tabdragons": "Dragons",
+      "item.dragon_pets.space_dragon_spawn_egg": "Space Dragon Spawn Egg",
+      "entity.dragon_pets.iron_dragon": "Iron Dragon",
+      "item.dragon_pets.iron_dragon_spawn_egg": "Iron Dragon Spawn Egg",
+      "item.dragon_pet.end_dragon_spawn_egg": "End Dragon Spawn Egg",
+      "entity.dragon_pet.copper_dragon": "Copper Dragon",
+      "item.dragon_pet.fire_dragon_spawn_egg": "Fire Dragon Spawn Egg",
+      "entity.dragon_pets.redstone_dragon": "Redstone Dragon",
+      "entity.dragon_pet.space_dragon": "Space Dragon",
+      "item.dragon_pets.ice_dragon_spawn_egg": "Ice Dragon Spawn Egg",
+      "item.dragon_pets.copper_dragon_spawn_egg": "Copper Dragon Spawn Egg",
+      "entity.dragon_pets.fire_dragon": "Fire Dragon",
+      "item.dragon_pets.amethyst_dragon_spawn_egg": "Amethyst Dragon Spawn Egg",
+      "entity.dragon_pets.amethyst_dragon": "Amethyst Dragon",
+      "entity.dragon_pet.diamond_dragon": "Diamond Dragon",
+      "item.dragon_pet.amethyst_dragon_spawn_egg": "Amethyst Dragon Spawn Egg"
+    }
+  },
+  "foldersRoot": {
+    "name": "~",
+    "children": []
+  },
+  "workspaceSettings": {
+    "modid": "dragon_pets",
+    "modName": "Dragon Pets",
+    "version": "1.0.0",
+    "author": "beth",
+    "websiteURL": "https://mcreator.net",
+    "license": "Academic Free License v3.0",
+    "disableForgeVersionCheck": true,
+    "serverSideOnly": false,
+    "requiredMods": [],
+    "dependencies": [],
+    "dependants": [],
+    "mcreatorDependencies": [],
+    "currentGenerator": "forge-1.18.2",
+    "credits": "Created using mod maker MCreator - https://mcreator.net/about",
+    "modElementsPackage": "net.primal.dragonpets",
+    "lockBaseModFiles": false
+  },
+  "mcreatorVersion": 202200120510
+}
