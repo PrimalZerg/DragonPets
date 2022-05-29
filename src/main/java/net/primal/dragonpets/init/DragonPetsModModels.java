@@ -4,8 +4,7 @@
  */
 package net.primal.dragonpets.init;
 
-import net.primal.dragonpets.client.model.Modelcustom_model;
-import net.primal.dragonpets.client.model.Modelbig_dragon;
+import net.primal.dragonpets.client.model.Modeldragon;
 
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -16,7 +15,6 @@ import net.minecraftforge.api.distmarker.Dist;
 public class DragonPetsModModels {
 	@SubscribeEvent
 	public static void registerLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
-		event.registerLayerDefinition(Modelbig_dragon.LAYER_LOCATION, Modelbig_dragon::createBodyLayer);
-		event.registerLayerDefinition(Modelcustom_model.LAYER_LOCATION, Modelcustom_model::createBodyLayer);
+		event.registerLayerDefinition(Modeldragon.LAYER_LOCATION, Modeldragon::createBodyLayer);
 	}
 }

@@ -26,12 +26,15 @@ import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation;
 import net.minecraft.world.entity.ai.goal.target.OwnerHurtTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.OwnerHurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
+import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
 import net.minecraft.world.entity.ai.goal.RandomStrollGoal;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
+import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.goal.FollowOwnerGoal;
 import net.minecraft.world.entity.ai.goal.FloatGoal;
+import net.minecraft.world.entity.ai.goal.BreedGoal;
 import net.minecraft.world.entity.ai.control.FlyingMoveControl;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -50,6 +53,7 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.Difficulty;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.network.protocol.Packet;
@@ -97,9 +101,11 @@ public class FireDragonEntity extends TamableAnimal {
 	@Override
 	protected void registerGoals() {
 		super.registerGoals();
-		this.goalSelector.addGoal(1, new OwnerHurtByTargetGoal(this));
-		this.targetSelector.addGoal(2, new OwnerHurtTargetGoal(this));
-		this.goalSelector.addGoal(3, new Goal() {
+		this.goalSelector.addGoal(1, new FloatGoal(this));
+		this.goalSelector.addGoal(2, new OwnerHurtByTargetGoal(this));
+		this.targetSelector.addGoal(3, new OwnerHurtTargetGoal(this));
+		this.goalSelector.addGoal(4, new BreedGoal(this, 1));
+		this.goalSelector.addGoal(5, new Goal() {
 			{
 				this.setFlags(EnumSet.of(Goal.Flag.MOVE));
 			}
@@ -139,15 +145,16 @@ public class FireDragonEntity extends TamableAnimal {
 				}
 			}
 		});
-		this.targetSelector.addGoal(4, new HurtByTargetGoal(this));
-		this.goalSelector.addGoal(5, new MeleeAttackGoal(this, 1.2, false) {
+		this.targetSelector.addGoal(6, new HurtByTargetGoal(this));
+		this.goalSelector.addGoal(7, new MeleeAttackGoal(this, 1.2, false) {
 			@Override
 			protected double getAttackReachSqr(LivingEntity entity) {
 				return (double) (4.0 + entity.getBbWidth() * entity.getBbWidth());
 			}
 		});
-		this.goalSelector.addGoal(6, new FollowOwnerGoal(this, 1, (float) 10, (float) 2, false));
-		this.goalSelector.addGoal(7, new RandomStrollGoal(this, 0.8, 20) {
+		this.goalSelector.addGoal(8, new FollowOwnerGoal(this, 1, (float) 10, (float) 2, false));
+		this.goalSelector.addGoal(9, new LookAtPlayerGoal(this, ServerPlayer.class, (float) 6));
+		this.goalSelector.addGoal(10, new RandomStrollGoal(this, 0.8, 20) {
 			@Override
 			protected Vec3 getPosition() {
 				Random random = FireDragonEntity.this.getRandom();
@@ -157,9 +164,9 @@ public class FireDragonEntity extends TamableAnimal {
 				return new Vec3(dir_x, dir_y, dir_z);
 			}
 		});
-		this.goalSelector.addGoal(8, new RandomStrollGoal(this, 0.8));
-		this.goalSelector.addGoal(9, new FloatGoal(this));
-		this.goalSelector.addGoal(10, new RandomLookAroundGoal(this));
+		this.goalSelector.addGoal(11, new RandomStrollGoal(this, 0.6));
+		this.goalSelector.addGoal(12, new WaterAvoidingRandomStrollGoal(this, 0.8));
+		this.goalSelector.addGoal(13, new RandomLookAroundGoal(this));
 	}
 
 	@Override
