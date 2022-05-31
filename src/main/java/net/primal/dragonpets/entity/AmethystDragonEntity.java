@@ -56,16 +56,20 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.core.BlockPos;
 
+import java.util.Set;
 import java.util.Random;
 import java.util.List;
 import java.util.EnumSet;
 
 @Mod.EventBusSubscriber
 public class AmethystDragonEntity extends TamableAnimal {
+	private static final Set<ResourceLocation> SPAWN_BIOMES = Set.of(new ResourceLocation("dripstone_caves"), new ResourceLocation("lush_caves"));
+
 	@SubscribeEvent
 	public static void addLivingEntityToBiomes(BiomeLoadingEvent event) {
-		event.getSpawns().getSpawner(MobCategory.MONSTER)
-				.add(new MobSpawnSettings.SpawnerData(DragonPetsModEntities.AMETHYST_DRAGON.get(), 10, 1, 1));
+		if (SPAWN_BIOMES.contains(event.getName()))
+			event.getSpawns().getSpawner(MobCategory.MONSTER)
+					.add(new MobSpawnSettings.SpawnerData(DragonPetsModEntities.AMETHYST_DRAGON.get(), 10, 1, 1));
 	}
 
 	public AmethystDragonEntity(PlayMessages.SpawnEntity packet, Level world) {

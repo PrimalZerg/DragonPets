@@ -4,7 +4,7 @@
   "definition": {
     "mobName": "Amethyst Dragon",
     "mobLabel": "",
-    "mobModelName": "Modelcustom_model",
+    "mobModelName": "Biped",
     "mobModelTexture": "amethyst_dragon.png",
     "mobModelGlowTexture": "amethyst_dragon_glow.png",
     "modelWidth": 0.7,
@@ -119,7 +119,14 @@
     "mobSpawningType": "monster",
     "minNumberOfMobsPerGroup": 1,
     "maxNumberOfMobsPerGroup": 1,
-    "restrictionBiomes": [],
+    "restrictionBiomes": [
+      {
+        "value": "dripstone_caves"
+      },
+      {
+        "value": "lush_caves"
+      }
+    ],
     "spawnInDungeons": false
   }
 }

@@ -4,7 +4,7 @@
   "definition": {
     "mobName": "Fire Dragon",
     "mobLabel": "",
-    "mobModelName": "Modelcustom_model",
+    "mobModelName": "Biped",
     "mobModelTexture": "fire_dragon.png",
     "mobModelGlowTexture": "fire_dragon_glow.png",
     "modelWidth": 0.7,
