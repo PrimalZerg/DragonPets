@@ -302,12 +302,14 @@ public class Modeldragon<T extends Entity> extends EntityModel<T> {
 			float headPitch) {
 		this.head.yRot = netHeadYaw / (180F / (float) Math.PI);
 		this.head.xRot = headPitch / (180F / (float) Math.PI);
-		this.wingright.xRot = Mth.cos(limbSwing * 1.0F) * 1.0F * limbSwingAmount;
+		this.wingright.zRot = Mth.cos(limbSwing * 1.0F) * 1.0F * limbSwingAmount;
 		this.rightleg.xRot = Mth.cos(limbSwing * 1.0F) * 1.0F * limbSwingAmount;
-		this.tail.yRot = Mth.cos(limbSwing * 1.0F) * -1.0F * limbSwingAmount;
+		this.tail.yRot = Mth.cos(limbSwing * 0.6662F + (float) Math.PI) * limbSwingAmount;
 		this.rightarm.xRot = Mth.cos(limbSwing * 0.6662F + (float) Math.PI) * limbSwingAmount;
 		this.leftleg.xRot = Mth.cos(limbSwing * 1.0F) * -1.0F * limbSwingAmount;
 		this.leftarm.xRot = Mth.cos(limbSwing * 0.6662F) * limbSwingAmount;
-		this.wingleft.xRot = Mth.cos(limbSwing * 1.0F) * -1.0F * limbSwingAmount;
+		this.body.yRot = netHeadYaw / (180F / (float) Math.PI);
+		this.body.xRot = headPitch / (180F / (float) Math.PI);
+		this.wingleft.zRot = Mth.cos(limbSwing * 1.0F) * -1.0F * limbSwingAmount;
 	}
 }

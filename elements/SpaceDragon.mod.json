@@ -4,7 +4,7 @@
   "definition": {
     "mobName": "Space Dragon",
     "mobLabel": "",
-    "mobModelName": "Modelcustom_model",
+    "mobModelName": "Modeldragon",
     "mobModelTexture": "space_dragon.png",
     "mobModelGlowTexture": "space_dragon_overlay.png",
     "modelWidth": 0.7000000000000001,

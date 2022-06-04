@@ -64,6 +64,7 @@ import java.util.Set;
 import java.util.Random;
 import java.util.List;
 import java.util.EnumSet;
+import net.minecraft.world.entity.ai.goal.SitWhenOrderedToGoal;
 
 @Mod.EventBusSubscriber
 public class FireDragonEntity extends TamableAnimal {
@@ -101,6 +102,7 @@ public class FireDragonEntity extends TamableAnimal {
 	@Override
 	protected void registerGoals() {
 		super.registerGoals();
+		this.goalSelector.addGoal(1, new SitWhenOrderedToGoal(this));
 		this.goalSelector.addGoal(1, new FloatGoal(this));
 		this.goalSelector.addGoal(2, new OwnerHurtByTargetGoal(this));
 		this.targetSelector.addGoal(3, new OwnerHurtTargetGoal(this));
@@ -238,7 +240,9 @@ public class FireDragonEntity extends TamableAnimal {
 				this.usePlayerItem(sourceentity, hand, itemstack);
 				if (this.random.nextInt(3) == 0 && !net.minecraftforge.event.ForgeEventFactory.onAnimalTame(this, sourceentity)) {
 					this.tame(sourceentity);
-					this.level.broadcastEntityEvent(this, (byte) 7);
+				    this.navigation.stop();
+                    this.setOrderedToSit(true);
+				   	this.level.broadcastEntityEvent(this, (byte) 7);
 				} else {
 					this.level.broadcastEntityEvent(this, (byte) 6);
 				}
@@ -250,6 +254,7 @@ public class FireDragonEntity extends TamableAnimal {
 					this.setPersistenceRequired();
 			}
 		}
+		sourceentity.startRiding(this);
 		return retval;
 	}
 
@@ -264,6 +269,39 @@ public class FireDragonEntity extends TamableAnimal {
 	public boolean isFood(ItemStack stack) {
 		return List.of(Blocks.BROWN_MUSHROOM.asItem(), Blocks.RED_MUSHROOM.asItem(), Blocks.WARPED_FUNGUS.asItem(), Blocks.CRIMSON_FUNGUS.asItem())
 				.contains(stack.getItem());
+	}
+
+	@Override
+	public void travel(Vec3 dir) {
+		Entity entity = this.getPassengers().isEmpty() ? null : (Entity) this.getPassengers().get(0);
+		if (this.isVehicle()) {
+			this.setYRot(entity.getYRot());
+			this.yRotO = this.getYRot();
+			this.setXRot(entity.getXRot() * 0.5F);
+			this.setRot(this.getYRot(), this.getXRot());
+			this.flyingSpeed = this.getSpeed() * 0.15F;
+			this.yBodyRot = entity.getYRot();
+			this.yHeadRot = entity.getYRot();
+			this.maxUpStep = 1.0F;
+			if (entity instanceof LivingEntity passenger) {
+				this.setSpeed((float) this.getAttributeValue(Attributes.MOVEMENT_SPEED));
+				float forward = passenger.zza;
+				float strafe = passenger.xxa;
+				super.travel(new Vec3(strafe, 0, forward));
+			}
+			this.animationSpeedOld = this.animationSpeed;
+			double d1 = this.getX() - this.xo;
+			double d0 = this.getZ() - this.zo;
+			float f1 = (float) Math.sqrt(d1 * d1 + d0 * d0) * 4;
+			if (f1 > 1.0F)
+				f1 = 1.0F;
+			this.animationSpeed += (f1 - this.animationSpeed) * 0.4F;
+			this.animationPosition += this.animationSpeed;
+			return;
+		}
+		this.maxUpStep = 0.5F;
+		this.flyingSpeed = 0.02F;
+		super.travel(dir);
 	}
 
 	@Override

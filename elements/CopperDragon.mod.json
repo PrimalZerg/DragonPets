@@ -4,7 +4,7 @@
   "definition": {
     "mobName": "Copper Dragon",
     "mobLabel": "",
-    "mobModelName": "Modelcustom_model",
+    "mobModelName": "Modeldragon",
     "mobModelTexture": "copper_dragon.png",
     "mobModelGlowTexture": "copper_dragon_glow.png",
     "modelWidth": 0.7000000000000001,

@@ -4,7 +4,7 @@
   "definition": {
     "mobName": "Amethyst Dragon",
     "mobLabel": "",
-    "mobModelName": "Biped",
+    "mobModelName": "Modeldragon",
     "mobModelTexture": "amethyst_dragon.png",
     "mobModelGlowTexture": "amethyst_dragon_glow.png",
     "modelWidth": 0.7,

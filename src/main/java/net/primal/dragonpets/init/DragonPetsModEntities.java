@@ -47,7 +47,7 @@ public class DragonPetsModEntities {
 			EntityType.Builder.<EndDragonEntity>of(EndDragonEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true)
 					.setTrackingRange(64).setUpdateInterval(3).setCustomClientFactory(EndDragonEntity::new)
 
-					.sized(0.7000000000000001f, 0.8f));
+					.sized(0.9f, 0.9f));
 	public static final RegistryObject<EntityType<DiamondDragonEntity>> DIAMOND_DRAGON = register("diamond_dragon",
 			EntityType.Builder.<DiamondDragonEntity>of(DiamondDragonEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true)
 					.setTrackingRange(64).setUpdateInterval(3).setCustomClientFactory(DiamondDragonEntity::new).fireImmune()
