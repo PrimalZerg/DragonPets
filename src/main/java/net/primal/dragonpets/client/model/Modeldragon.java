@@ -23,26 +23,44 @@ public class Modeldragon<T extends Entity> extends EntityModel<T> {
 	// This layer location should be baked with EntityRendererProvider.Context in
 	// the entity renderer and passed into this model's constructor
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation("dragon_pets", "modeldragon"), "main");
+	private static final String UPPERWINGRIGHT = "upperwingright";
+	private static final String UPPERWINGLEFT = "upperwingleft";
+	private static final String RIGHTFOOT = "rightfoot";
+	private static final String LEFTFOOT = "leftfoot";
+	private static final String RIGHTHAND = "righthand";
+	private static final String LEFTHAND = "lefthand";
 	public final ModelPart body;
 	public final ModelPart wingright;
+	public final ModelPart upperwingright;
 	public final ModelPart wingleft;
+	public final ModelPart upperwingleft;
 	public final ModelPart head;
 	public final ModelPart tail;
 	public final ModelPart rightleg;
+	public final ModelPart rightfoot;
 	public final ModelPart leftleg;
+	public final ModelPart leftfoot;
 	public final ModelPart rightarm;
+	public final ModelPart righthand;
 	public final ModelPart leftarm;
+	public final ModelPart lefthand;
 
 	public Modeldragon(ModelPart root) {
 		this.body = root.getChild("body");
 		this.wingright = root.getChild("wingright");
+		this.upperwingright = this.wingright.getChild("upperwingright");
 		this.wingleft = root.getChild("wingleft");
+		this.upperwingleft = this.wingleft.getChild("upperwingleft");
 		this.head = root.getChild("head");
 		this.tail = root.getChild("tail");
 		this.rightleg = root.getChild("rightleg");
+		this.rightfoot = this.rightleg.getChild("rightfoot");
 		this.leftleg = root.getChild("leftleg");
+		this.leftfoot = this.leftleg.getChild("leftfoot");
 		this.rightarm = root.getChild("rightarm");
+		this.righthand = this.rightarm.getChild("righthand");
 		this.leftarm = root.getChild("leftarm");
+		this.lefthand = this.leftarm.getChild("lefthand");
 	}
 
 	public static LayerDefinition createBodyLayer() {
@@ -225,17 +243,34 @@ public class Modeldragon<T extends Entity> extends EntityModel<T> {
 		leftarm.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
 	}
 
+	// public void prepareMobModel(T entity, float limbswing, float limbSwingAmount,
+	// float ageInTicks, float netHeadYaw,
+	// float headPitch) {
+	// if (entity.isInSittingPose()) {
+	// this.body.setPos(-1.5F, 2.5F, 0.0F);
+	// this.body.xRot = 40F;
+	// } else {
+	// this.body.setPos(-1.5F, 4.5F, -1F);
+	// this.body.xRot = 0F;
+	// }
+	// }
 	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+		this.wingright.zRot = Mth.cos(limbSwing * 0.9F + (float) Math.PI) * limbSwingAmount;
+		this.upperwingright.zRot = Mth.cos(limbSwing * 0.6662F) * limbSwingAmount;
+		this.tail.yRot = Mth.cos(limbSwing * 0.90F + (float) Math.PI) * limbSwingAmount;
 		this.head.yRot = netHeadYaw / (180F / (float) Math.PI);
 		this.head.xRot = headPitch / (180F / (float) Math.PI);
-		this.wingright.zRot = Mth.cos(limbSwing * 1.0F) * 1.0F * limbSwingAmount;
-		this.rightleg.xRot = Mth.cos(limbSwing * 1.0F) * 1.0F * limbSwingAmount;
-		this.tail.yRot = Mth.cos(limbSwing * 0.6662F + (float) Math.PI) * limbSwingAmount;
-		this.rightarm.xRot = Mth.cos(limbSwing * 0.6662F + (float) Math.PI) * limbSwingAmount;
-		this.leftleg.xRot = Mth.cos(limbSwing * 1.0F) * -1.0F * limbSwingAmount;
-		this.leftarm.xRot = Mth.cos(limbSwing * 0.6662F) * limbSwingAmount;
-		this.body.yRot = netHeadYaw / (180F / (float) Math.PI);
-		this.body.xRot = headPitch / (180F / (float) Math.PI);
-		this.wingleft.zRot = Mth.cos(limbSwing * 1.0F) * -1.0F * limbSwingAmount;
+		this.upperwingleft.zRot = Mth.cos(limbSwing * 0.6662F + (float) Math.PI) * limbSwingAmount;
+		this.wingleft.zRot = Mth.cos(limbSwing * 0.9F) * limbSwingAmount;
+		this.rightarm.xRot = 0.5F;
+		this.righthand.xRot = -30F;
+		this.righthand.setPos(0.0F, 6.3F, -1.0F);
+		this.leftarm.xRot = 0.5F;
+		this.lefthand.setPos(0.0F, 6.3F, -1.0F);
+		this.lefthand.xRot = -30F;
+		this.rightleg.xRot = -50.0F;
+		this.rightfoot.xRot = -42.5F;
+		this.leftleg.xRot = -50.0F;
+		this.leftfoot.xRot = -42.5F;
 	}
 }

@@ -3,15 +3,15 @@
     {
       "name": "FireDragon",
       "type": "livingentity",
-      "sortid": 1,
+      "sortid": 2,
       "compiles": true,
-      "locked_code": true,
+      "locked_code": false,
       "registry_name": "fire_dragon"
     },
     {
       "name": "SpaceDragon",
       "type": "livingentity",
-      "sortid": 2,
+      "sortid": 9,
       "compiles": true,
       "locked_code": false,
       "registry_name": "space_dragon"
@@ -19,7 +19,7 @@
     {
       "name": "IceDragon",
       "type": "livingentity",
-      "sortid": 3,
+      "sortid": 1,
       "compiles": true,
       "locked_code": false,
       "registry_name": "ice_dragon"
@@ -27,7 +27,7 @@
     {
       "name": "EndDragon",
       "type": "livingentity",
-      "sortid": 4,
+      "sortid": 10,
       "compiles": true,
       "locked_code": false,
       "registry_name": "end_dragon"
@@ -35,7 +35,7 @@
     {
       "name": "DiamondDragon",
       "type": "livingentity",
-      "sortid": 5,
+      "sortid": 3,
       "compiles": true,
       "locked_code": false,
       "registry_name": "diamond_dragon"
@@ -43,7 +43,7 @@
     {
       "name": "AmethystDragon",
       "type": "livingentity",
-      "sortid": 7,
+      "sortid": 8,
       "compiles": true,
       "locked_code": false,
       "registry_name": "amethyst_dragon"
@@ -51,7 +51,7 @@
     {
       "name": "IronDragon",
       "type": "livingentity",
-      "sortid": 8,
+      "sortid": 6,
       "compiles": true,
       "locked_code": false,
       "registry_name": "iron_dragon"
@@ -59,7 +59,7 @@
     {
       "name": "GoldDragon",
       "type": "livingentity",
-      "sortid": 9,
+      "sortid": 4,
       "compiles": true,
       "locked_code": false,
       "registry_name": "gold_dragon"
@@ -67,7 +67,7 @@
     {
       "name": "CopperDragon",
       "type": "livingentity",
-      "sortid": 10,
+      "sortid": 7,
       "compiles": true,
       "locked_code": false,
       "registry_name": "copper_dragon"
@@ -83,26 +83,10 @@
     {
       "name": "RedstoneDragon",
       "type": "livingentity",
-      "sortid": 12,
+      "sortid": 5,
       "compiles": true,
       "locked_code": false,
       "registry_name": "redstone_dragon"
-    },
-    {
-      "name": "DiamondDragonSpawns",
-      "type": "procedure",
-      "sortid": 13,
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "diamond_dragon_spawns",
-      "metadata": {
-        "dependencies": [
-          {
-            "name": "world",
-            "type": "world"
-          }
-        ]
-      }
     }
   ],
   "variable_elements": [],
@@ -162,7 +146,7 @@
     "version": "1.0.0",
     "author": "beth",
     "websiteURL": "https://mcreator.net",
-    "license": "Academic Free License v3.0",
+    "license": "MIT License",
     "disableForgeVersionCheck": true,
     "serverSideOnly": false,
     "requiredMods": [],
@@ -170,7 +154,7 @@
     "dependants": [],
     "mcreatorDependencies": [],
     "currentGenerator": "forge-1.18.2",
-    "credits": "Created using mod maker MCreator - https://mcreator.net/about",
+    "credits": "mod maker MCreator - https://mcreator.net/about",
     "modElementsPackage": "net.primal.dragonpets",
     "lockBaseModFiles": false
   },
