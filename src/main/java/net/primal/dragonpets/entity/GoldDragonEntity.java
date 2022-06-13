@@ -16,6 +16,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.biome.MobSpawnSettings;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.ItemStack;
@@ -28,6 +29,7 @@ import net.minecraft.world.entity.ai.goal.target.OwnerHurtTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.OwnerHurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
+import net.minecraft.world.entity.ai.goal.TemptGoal;
 import net.minecraft.world.entity.ai.goal.RandomStrollGoal;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
@@ -149,9 +151,9 @@ public class GoldDragonEntity extends TamableAnimal {
 				return (double) (4.0 + entity.getBbWidth() * entity.getBbWidth());
 			}
 		});
-		this.goalSelector.addGoal(7, new FollowOwnerGoal(this, 1, (float) 10, (float) 2, false));
-		this.targetSelector.addGoal(8, new HurtByTargetGoal(this).setAlertOthers());
-		this.goalSelector.addGoal(9, new LookAtPlayerGoal(this, Player.class, (float) 6));
+		this.targetSelector.addGoal(7, new HurtByTargetGoal(this).setAlertOthers());
+		this.goalSelector.addGoal(8, new FollowOwnerGoal(this, 1, (float) 10, (float) 2, false));
+		this.goalSelector.addGoal(9, new TemptGoal(this, 1, Ingredient.of(Items.GLOW_BERRIES), false));
 		this.goalSelector.addGoal(10, new RandomStrollGoal(this, 0.8, 20) {
 			@Override
 			protected Vec3 getPosition() {
@@ -164,7 +166,8 @@ public class GoldDragonEntity extends TamableAnimal {
 		});
 		this.goalSelector.addGoal(11, new RandomStrollGoal(this, 0.6));
 		this.goalSelector.addGoal(12, new WaterAvoidingRandomStrollGoal(this, 0.8));
-		this.goalSelector.addGoal(13, new RandomLookAroundGoal(this));
+		this.goalSelector.addGoal(13, new LookAtPlayerGoal(this, Player.class, (float) 6));
+		this.goalSelector.addGoal(14, new RandomLookAroundGoal(this));
 	}
 
 	@Override
@@ -173,13 +176,18 @@ public class GoldDragonEntity extends TamableAnimal {
 	}
 
 	@Override
+	public SoundEvent getAmbientSound() {
+		return ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("dragon_pets:dragon_growl"));
+	}
+
+	@Override
 	public void playStepSound(BlockPos pos, BlockState blockIn) {
-		this.playSound(ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.ender_dragon.flap")), 0.15f, 1);
+		this.playSound(ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("dragon_pets:dragon_flaps")), 0.15f, 1);
 	}
 
 	@Override
 	public SoundEvent getHurtSound(DamageSource ds) {
-		return ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.ender_dragon.hurt"));
+		return ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("dragon_pets:dragon_hurt"));
 	}
 
 	@Override

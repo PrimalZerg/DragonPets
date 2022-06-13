@@ -1,0 +1,92 @@
+{
+  "cave_dragon_growl": {
+    "category": "voice",
+    "subtitle": "subtitles.cave_dragon_growl",
+    "sounds": [
+      {
+        "name": "dragon_pets:cave_dragon_growls",
+        "stream": false
+      }
+    ]
+  },
+  "cave_dragon": {
+    "category": "voice",
+    "subtitle": "subtitles.cave_dragon",
+    "sounds": [
+      {
+        "name": "dragon_pets:cave_dragon",
+        "stream": false
+      }
+    ]
+  },
+  "space_dragon": {
+    "category": "voice",
+    "subtitle": "subtitles.space_dragon",
+    "sounds": [
+      {
+        "name": "dragon_pets:space_dragon",
+        "stream": false
+      }
+    ]
+  },
+  "dragon_hurt": {
+    "category": "voice",
+    "subtitle": "subtitles.dragon_hurt",
+    "sounds": [
+      {
+        "name": "dragon_pets:dragon_hurt.com",
+        "stream": false
+      }
+    ]
+  },
+  "soft_growl": {
+    "category": "voice",
+    "subtitle": "subtitles.soft_growl",
+    "sounds": [
+      {
+        "name": "dragon_pets:soft_dragon_growl",
+        "stream": false
+      }
+    ]
+  },
+  "dragon_flaps": {
+    "category": "neutral",
+    "subtitle": "subtitles.dragon_flaps",
+    "sounds": [
+      {
+        "name": "dragon_pets:dragon_flaps",
+        "stream": false
+      }
+    ]
+  },
+  "dragon_hurts": {
+    "category": "voice",
+    "subtitle": "subtitles.dragon_hurts",
+    "sounds": [
+      {
+        "name": "dragon_pets:dragon_hurt.com",
+        "stream": false
+      }
+    ]
+  },
+  "ice_dragon_growls": {
+    "category": "voice",
+    "subtitle": "subtitles.ice_dragon_growls",
+    "sounds": [
+      {
+        "name": "dragon_pets:ice_growl",
+        "stream": false
+      }
+    ]
+  },
+  "dragon_growl": {
+    "category": "voice",
+    "subtitle": "subtitles.dragon_growl",
+    "sounds": [
+      {
+        "name": "dragon_pets:dragon_growl",
+        "stream": false
+      }
+    ]
+  }
+}

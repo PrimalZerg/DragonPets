@@ -17,6 +17,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.biome.MobSpawnSettings;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.ItemStack;
@@ -28,6 +29,7 @@ import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation;
 import net.minecraft.world.entity.ai.goal.target.OwnerHurtTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.OwnerHurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
+import net.minecraft.world.entity.ai.goal.TemptGoal;
 import net.minecraft.world.entity.ai.goal.RandomSwimmingGoal;
 import net.minecraft.world.entity.ai.goal.RandomStrollGoal;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
@@ -65,6 +67,7 @@ import java.util.Set;
 import java.util.Random;
 import java.util.List;
 import java.util.EnumSet;
+import net.minecraft.world.entity.ai.goal.SitWhenOrderedToGoal;
 
 @Mod.EventBusSubscriber
 public class IceDragonEntity extends TamableAnimal {
@@ -103,9 +106,10 @@ public class IceDragonEntity extends TamableAnimal {
 	@Override
 	protected void registerGoals() {
 		super.registerGoals();
-		this.goalSelector.addGoal(1, new FloatGoal(this));
+		this.goalSelector.addGoal(0, new FloatGoal(this));
+		this.goalSelector.addGoal(1, new SitWhenOrderedToGoal(this));
 		this.goalSelector.addGoal(2, new OwnerHurtByTargetGoal(this));
-		this.targetSelector.addGoal(3, new OwnerHurtTargetGoal(this));
+		this.targetSelector.addGoal(2, new OwnerHurtTargetGoal(this));
 		this.goalSelector.addGoal(4, new BreedGoal(this, 1));
 		this.goalSelector.addGoal(5, new Goal() {
 			{
@@ -155,7 +159,7 @@ public class IceDragonEntity extends TamableAnimal {
 		});
 		this.targetSelector.addGoal(7, new HurtByTargetGoal(this).setAlertOthers());
 		this.goalSelector.addGoal(8, new FollowOwnerGoal(this, 1, (float) 10, (float) 2, false));
-		this.goalSelector.addGoal(9, new LookAtPlayerGoal(this, Player.class, (float) 6));
+		this.goalSelector.addGoal(9, new TemptGoal(this, 1, Ingredient.of(Items.RABBIT), false));
 		this.goalSelector.addGoal(10, new RandomStrollGoal(this, 0.8, 20) {
 			@Override
 			protected Vec3 getPosition() {
@@ -166,9 +170,10 @@ public class IceDragonEntity extends TamableAnimal {
 				return new Vec3(dir_x, dir_y, dir_z);
 			}
 		});
-		this.goalSelector.addGoal(11, new RandomStrollGoal(this, 0.6));
-		this.goalSelector.addGoal(12, new RandomSwimmingGoal(this, 1, 40));
-		this.goalSelector.addGoal(13, new RandomLookAroundGoal(this));
+		this.goalSelector.addGoal(10, new RandomStrollGoal(this, 0.6));
+		this.goalSelector.addGoal(10, new RandomSwimmingGoal(this, 1, 40));
+		this.goalSelector.addGoal(10, new LookAtPlayerGoal(this, Player.class, (float) 6));
+		this.goalSelector.addGoal(10, new RandomLookAroundGoal(this));
 	}
 
 	@Override
@@ -178,17 +183,17 @@ public class IceDragonEntity extends TamableAnimal {
 
 	@Override
 	public SoundEvent getAmbientSound() {
-		return ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.phantom.flap"));
+		return ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("dragon_pets:ice_dragon_growls"));
 	}
 
 	@Override
 	public void playStepSound(BlockPos pos, BlockState blockIn) {
-		this.playSound(ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.ender_dragon.flap")), 0.15f, 1);
+		this.playSound(ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("dragon_pets:dragon_flaps")), 0.15f, 1);
 	}
 
 	@Override
 	public SoundEvent getHurtSound(DamageSource ds) {
-		return ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.ender_dragon.hurt"));
+		return ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("dragon_pets:dragon_hurts"));
 	}
 
 	@Override
@@ -234,7 +239,11 @@ public class IceDragonEntity extends TamableAnimal {
 						this.usePlayerItem(sourceentity, hand, itemstack);
 						this.heal(4);
 						retval = InteractionResult.sidedSuccess(this.level.isClientSide());
-					} else {
+					} else if (this.isTame() && this.isOwnedBy(sourceentity)) {
+						this.usePlayerItem(sourceentity, hand, itemstack);
+						this.navigation.stop();
+           				this.setTarget((LivingEntity)null);
+      		            this.setOrderedToSit(!this.isOrderedToSit());
 						retval = super.mobInteract(sourceentity, hand);
 					}
 				}
@@ -252,9 +261,10 @@ public class IceDragonEntity extends TamableAnimal {
 				retval = super.mobInteract(sourceentity, hand);
 				if (retval == InteractionResult.SUCCESS || retval == InteractionResult.CONSUME)
 					this.setPersistenceRequired();
-			}
-		}
-		return retval;
+			} //else if (this.isStaff(itemstack)) {
+	//	sourceentity.startRiding(this);
+		//	}
+		}return retval;
 	}
 
 	@Override
@@ -268,6 +278,10 @@ public class IceDragonEntity extends TamableAnimal {
 	public boolean isFood(ItemStack stack) {
 		return List.of(Items.RABBIT, Items.CHICKEN).contains(stack.getItem());
 	}
+	//@Override 
+	//public boolean isStaff(ItemStack stack) {
+	//	return List.of(Items.STICK).contains(stack.getItem());
+	//}
 
 	@Override
 	public boolean canBreatheUnderwater() {
@@ -282,6 +296,39 @@ public class IceDragonEntity extends TamableAnimal {
 	@Override
 	public boolean isPushedByFluid() {
 		return false;
+	}
+
+	@Override
+	public void travel(Vec3 dir) {
+		Entity entity = this.getPassengers().isEmpty() ? null : (Entity) this.getPassengers().get(0);
+		if (this.isVehicle()) {
+			this.setYRot(entity.getYRot());
+			this.yRotO = this.getYRot();
+			this.setXRot(entity.getXRot() * 0.5F);
+			this.setRot(this.getYRot(), this.getXRot());
+			this.flyingSpeed = this.getSpeed() * 0.15F;
+			this.yBodyRot = entity.getYRot();
+			this.yHeadRot = entity.getYRot();
+			this.maxUpStep = 1.0F;
+			if (entity instanceof LivingEntity passenger) {
+				this.setSpeed((float) this.getAttributeValue(Attributes.MOVEMENT_SPEED));
+				float forward = passenger.zza;
+				float strafe = passenger.xxa;
+				super.travel(new Vec3(strafe, 0, forward));
+			}
+			this.animationSpeedOld = this.animationSpeed;
+			double d1 = this.getX() - this.xo;
+			double d0 = this.getZ() - this.zo;
+			float f1 = (float) Math.sqrt(d1 * d1 + d0 * d0) * 4;
+			if (f1 > 1.0F)
+				f1 = 1.0F;
+			this.animationSpeed += (f1 - this.animationSpeed) * 0.4F;
+			this.animationPosition += this.animationSpeed;
+			return;
+		}
+		this.maxUpStep = 0.5F;
+		this.flyingSpeed = 0.02F;
+		super.travel(dir);
 	}
 
 	@Override
