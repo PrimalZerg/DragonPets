@@ -153,7 +153,7 @@ public class EndDragonEntity extends TamableAnimal {
 			}
 		});
 		this.goalSelector.addGoal(8, new FollowOwnerGoal(this, 1, (float) 10, (float) 2, false));
-		this.goalSelector.addGoal(9, new TemptGoal(this, 1, Ingredient.of(Items.CHORUS_FRUIT), false));
+		this.goalSelector.addGoal(9, new TemptGoal(this, 1, Ingredient.of(Items.GOLDEN_APPLE,Items.CHORUS_FRUIT), false));
 		this.goalSelector.addGoal(10, new LookAtPlayerGoal(this, Player.class, (float) 6));
 		this.goalSelector.addGoal(11, new RandomStrollGoal(this, 0.8, 20) {
 			@Override

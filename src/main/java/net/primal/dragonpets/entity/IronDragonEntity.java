@@ -113,7 +113,7 @@ public class IronDragonEntity extends TamableAnimal {
 		});
 		this.targetSelector.addGoal(6, new HurtByTargetGoal(this).setAlertOthers());
 		this.goalSelector.addGoal(7, new FollowOwnerGoal(this, 1, (float) 10, (float) 2, false));
-		this.goalSelector.addGoal(8, new TemptGoal(this, 1, Ingredient.of(Items.GLOW_BERRIES), false));
+		this.goalSelector.addGoal(8, new TemptGoal(this, 1, Ingredient.of(Items.GOLDEN_APPLE,Items.GLOW_BERRIES), false));
 		this.goalSelector.addGoal(9, new RandomStrollGoal(this, 0.8, 20) {
 			@Override
 			protected Vec3 getPosition() {
