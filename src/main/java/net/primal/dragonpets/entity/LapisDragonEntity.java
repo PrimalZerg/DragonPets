@@ -27,7 +27,6 @@ import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation;
 import net.minecraft.world.entity.ai.goal.target.OwnerHurtTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.OwnerHurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
-import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
 import net.minecraft.world.entity.ai.goal.TemptGoal;
 import net.minecraft.world.entity.ai.goal.RandomStrollGoal;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
@@ -66,21 +65,21 @@ import java.util.EnumSet;
 import net.minecraft.world.entity.ai.goal.SitWhenOrderedToGoal;
 
 @Mod.EventBusSubscriber
-public class DiamondDragonEntity extends TamableAnimal {
+public class LapisDragonEntity extends TamableAnimal {
 	private static final Set<ResourceLocation> SPAWN_BIOMES = Set.of(new ResourceLocation("dripstone_caves"), new ResourceLocation("lush_caves"));
 
 	@SubscribeEvent
 	public static void addLivingEntityToBiomes(BiomeLoadingEvent event) {
 		if (SPAWN_BIOMES.contains(event.getName()))
 			event.getSpawns().getSpawner(MobCategory.MONSTER)
-					.add(new MobSpawnSettings.SpawnerData(DragonPetsModEntities.DIAMOND_DRAGON.get(), 10, 1, 1));
+					.add(new MobSpawnSettings.SpawnerData(DragonPetsModEntities.LAPIS_DRAGON.get(), 20, 1, 1));
 	}
 
-	public DiamondDragonEntity(PlayMessages.SpawnEntity packet, Level world) {
-		this(DragonPetsModEntities.DIAMOND_DRAGON.get(), world);
+	public LapisDragonEntity(PlayMessages.SpawnEntity packet, Level world) {
+		this(DragonPetsModEntities.LAPIS_DRAGON.get(), world);
 	}
 
-	public DiamondDragonEntity(EntityType<DiamondDragonEntity> type, Level world) {
+	public LapisDragonEntity(EntityType<LapisDragonEntity> type, Level world) {
 		super(type, world);
 		xpReward = 3;
 		setNoAi(false);
@@ -100,10 +99,10 @@ public class DiamondDragonEntity extends TamableAnimal {
 	@Override
 	protected void registerGoals() {
 		super.registerGoals();
-		this.goalSelector.addGoal(0, new FloatGoal(this));
+		this.goalSelector.addGoal(10, new FloatGoal(this));
 		this.goalSelector.addGoal(1, new SitWhenOrderedToGoal(this));
-		this.goalSelector.addGoal(2, new OwnerHurtByTargetGoal(this));
-		this.targetSelector.addGoal(3, new OwnerHurtTargetGoal(this));
+		this.targetSelector.addGoal(2, new OwnerHurtTargetGoal(this));
+		this.goalSelector.addGoal(3, new OwnerHurtByTargetGoal(this));
 		this.goalSelector.addGoal(4, new BreedGoal(this, 1));
 		this.goalSelector.addGoal(5, new Goal() {
 			{
@@ -111,7 +110,7 @@ public class DiamondDragonEntity extends TamableAnimal {
 			}
 
 			public boolean canUse() {
-				if (DiamondDragonEntity.this.getTarget() != null && !DiamondDragonEntity.this.getMoveControl().hasWanted()) {
+				if (LapisDragonEntity.this.getTarget() != null && !LapisDragonEntity.this.getMoveControl().hasWanted()) {
 					return true;
 				} else {
 					return false;
@@ -120,27 +119,27 @@ public class DiamondDragonEntity extends TamableAnimal {
 
 			@Override
 			public boolean canContinueToUse() {
-				return DiamondDragonEntity.this.getMoveControl().hasWanted() && DiamondDragonEntity.this.getTarget() != null
-						&& DiamondDragonEntity.this.getTarget().isAlive();
+				return LapisDragonEntity.this.getMoveControl().hasWanted() && LapisDragonEntity.this.getTarget() != null
+						&& LapisDragonEntity.this.getTarget().isAlive();
 			}
 
 			@Override
 			public void start() {
-				LivingEntity livingentity = DiamondDragonEntity.this.getTarget();
+				LivingEntity livingentity = LapisDragonEntity.this.getTarget();
 				Vec3 vec3d = livingentity.getEyePosition(1);
-				DiamondDragonEntity.this.moveControl.setWantedPosition(vec3d.x, vec3d.y, vec3d.z, 1);
+				LapisDragonEntity.this.moveControl.setWantedPosition(vec3d.x, vec3d.y, vec3d.z, 1);
 			}
 
 			@Override
 			public void tick() {
-				LivingEntity livingentity = DiamondDragonEntity.this.getTarget();
-				if (DiamondDragonEntity.this.getBoundingBox().intersects(livingentity.getBoundingBox())) {
-					DiamondDragonEntity.this.doHurtTarget(livingentity);
+				LivingEntity livingentity = LapisDragonEntity.this.getTarget();
+				if (LapisDragonEntity.this.getBoundingBox().intersects(livingentity.getBoundingBox())) {
+					LapisDragonEntity.this.doHurtTarget(livingentity);
 				} else {
-					double d0 = DiamondDragonEntity.this.distanceToSqr(livingentity);
+					double d0 = LapisDragonEntity.this.distanceToSqr(livingentity);
 					if (d0 < 16) {
 						Vec3 vec3d = livingentity.getEyePosition(1);
-						DiamondDragonEntity.this.moveControl.setWantedPosition(vec3d.x, vec3d.y, vec3d.z, 1);
+						LapisDragonEntity.this.moveControl.setWantedPosition(vec3d.x, vec3d.y, vec3d.z, 1);
 					}
 				}
 			}
@@ -153,21 +152,20 @@ public class DiamondDragonEntity extends TamableAnimal {
 		});
 		this.targetSelector.addGoal(7, new HurtByTargetGoal(this).setAlertOthers());
 		this.goalSelector.addGoal(8, new FollowOwnerGoal(this, 1, (float) 10, (float) 2, false));
-		this.goalSelector.addGoal(9, new TemptGoal(this, 1, Ingredient.of(Items.GOLDEN_APPLE,Items.GLOW_BERRIES), false));
+		this.goalSelector.addGoal(8, new TemptGoal(this, 1, Ingredient.of(Items.GOLDEN_APPLE,Items.GLOW_BERRIES), false));
 		this.goalSelector.addGoal(10, new LookAtPlayerGoal(this, Player.class, (float) 6));
-		this.goalSelector.addGoal(11, new RandomStrollGoal(this, 0.8, 20) {
+		this.goalSelector.addGoal(10, new RandomStrollGoal(this, 0.8, 20) {
 			@Override
 			protected Vec3 getPosition() {
-				Random random = DiamondDragonEntity.this.getRandom();
-				double dir_x = DiamondDragonEntity.this.getX() + ((random.nextFloat() * 2 - 1) * 16);
-				double dir_y = DiamondDragonEntity.this.getY() + ((random.nextFloat() * 2 - 1) * 16);
-				double dir_z = DiamondDragonEntity.this.getZ() + ((random.nextFloat() * 2 - 1) * 16);
+				Random random = LapisDragonEntity.this.getRandom();
+				double dir_x = LapisDragonEntity.this.getX() + ((random.nextFloat() * 2 - 1) * 16);
+				double dir_y = LapisDragonEntity.this.getY() + ((random.nextFloat() * 2 - 1) * 16);
+				double dir_z = LapisDragonEntity.this.getZ() + ((random.nextFloat() * 2 - 1) * 16);
 				return new Vec3(dir_x, dir_y, dir_z);
 			}
 		});
-		this.goalSelector.addGoal(12, new RandomStrollGoal(this, 0.6));
-		this.goalSelector.addGoal(13, new WaterAvoidingRandomStrollGoal(this, 0.8));
-		this.goalSelector.addGoal(14, new RandomLookAroundGoal(this));
+		this.goalSelector.addGoal(10, new RandomStrollGoal(this, 0.6));
+		this.goalSelector.addGoal(10, new RandomLookAroundGoal(this));
 	}
 
 	@Override
@@ -176,18 +174,8 @@ public class DiamondDragonEntity extends TamableAnimal {
 	}
 
 	@Override
-	public SoundEvent getAmbientSound() {
-		return ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("dragon_pets:cave_dragon_growl"));
-	}
-
-	@Override
-	public void playStepSound(BlockPos pos, BlockState blockIn) {
-		this.playSound(ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("dragon_pets:dragon_flaps")), 0.15f, 1);
-	}
-
-	@Override
 	public SoundEvent getHurtSound(DamageSource ds) {
-		return ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("dragon_pets:dragon_hurts"));
+		return ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.generic.hurt"));
 	}
 
 	@Override
@@ -233,7 +221,7 @@ public class DiamondDragonEntity extends TamableAnimal {
 						this.usePlayerItem(sourceentity, hand, itemstack);
 						this.heal(4);
 						retval = InteractionResult.sidedSuccess(this.level.isClientSide());
-					} else if (this.isTame() && this.isOwnedBy(sourceentity)) {
+					} else   if (this.isTame() && this.isOwnedBy(sourceentity)) {
 						this.usePlayerItem(sourceentity, hand, itemstack);
 						this.navigation.stop();
            				this.setTarget((LivingEntity)null);
@@ -262,7 +250,7 @@ public class DiamondDragonEntity extends TamableAnimal {
 
 	@Override
 	public AgeableMob getBreedOffspring(ServerLevel serverWorld, AgeableMob ageable) {
-		DiamondDragonEntity retval = DragonPetsModEntities.DIAMOND_DRAGON.get().create(serverWorld);
+		LapisDragonEntity retval = DragonPetsModEntities.LAPIS_DRAGON.get().create(serverWorld);
 		retval.finalizeSpawn(serverWorld, serverWorld.getCurrentDifficultyAt(retval.blockPosition()), MobSpawnType.BREEDING, null, null);
 		return retval;
 	}
@@ -287,8 +275,8 @@ public class DiamondDragonEntity extends TamableAnimal {
 	}
 
 	public static void init() {
-		SpawnPlacements.register(DragonPetsModEntities.DIAMOND_DRAGON.get(), SpawnPlacements.Type.ON_GROUND,
-				Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, (entityType, world, reason, pos, random) -> (world.getDifficulty() != Difficulty.PEACEFUL
+		SpawnPlacements.register(DragonPetsModEntities.LAPIS_DRAGON.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+				(entityType, world, reason, pos, random) -> (world.getDifficulty() != Difficulty.PEACEFUL
 						&& Monster.isDarkEnoughToSpawn(world, pos, random) && Mob.checkMobSpawnRules(entityType, world, reason, pos, random)));
 	}
 

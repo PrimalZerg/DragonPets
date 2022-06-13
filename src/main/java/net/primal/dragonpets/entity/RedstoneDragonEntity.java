@@ -202,6 +202,8 @@ public class RedstoneDragonEntity extends TamableAnimal {
 
 	@Override
 	public boolean hurt(DamageSource source, float amount) {
+		if (source.getDirectEntity() instanceof Player)
+			return false;
 		if (source == DamageSource.FALL)
 			return false;
 		if (source == DamageSource.DRAGON_BREATH)

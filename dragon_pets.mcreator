@@ -87,6 +87,14 @@
       "compiles": true,
       "locked_code": true,
       "registry_name": "redstone_dragon"
+    },
+    {
+      "name": "LapisDragon",
+      "type": "livingentity",
+      "sortid": 12,
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "lapis_dragon"
     }
   ],
   "variable_elements": [],
@@ -183,6 +191,7 @@
       "item.dragon_pet.redstone_dragon_spawn_egg": "Redstone Dragon Spawn Egg",
       "subtitles.dragon_hurts": "Dragon hurts",
       "subtitles.soft_growl": "low dragon growl",
+      "item.dragon_pets.lapis_dragon_spawn_egg": "Lapis Dragon Spawn Egg",
       "item.dragon_pets.iron_dragon_spawn_egg": "Iron Dragon Spawn Egg",
       "item.dragon_pet.end_dragon_spawn_egg": "End Dragon Spawn Egg",
       "entity.dragon_pet.copper_dragon": "Copper Dragon",
@@ -214,6 +223,7 @@
       "item.dragon_pets.ice_dragon_spawn_egg": "Ice Dragon Spawn Egg",
       "entity.dragon_pet.space_dragon": "Space Dragon",
       "entity.dragon_pets.fire_dragon": "Fire Dragon",
+      "entity.dragon_pets.lapis_dragon": "Lapis Dragon",
       "entity.dragon_pets.amethyst_dragon": "Amethyst Dragon",
       "entity.dragon_pet.diamond_dragon": "Diamond Dragon"
     }

@@ -6,6 +6,7 @@ package net.primal.dragonpets.init;
 
 import net.primal.dragonpets.entity.SpaceDragonEntity;
 import net.primal.dragonpets.entity.RedstoneDragonEntity;
+import net.primal.dragonpets.entity.LapisDragonEntity;
 import net.primal.dragonpets.entity.IronDragonEntity;
 import net.primal.dragonpets.entity.IceDragonEntity;
 import net.primal.dragonpets.entity.GoldDragonEntity;
@@ -74,6 +75,9 @@ public class DragonPetsModEntities {
 					.setTrackingRange(64).setUpdateInterval(3).setCustomClientFactory(EndDragonEntity::new)
 
 					.sized(0.9f, 0.9f));
+	public static final RegistryObject<EntityType<LapisDragonEntity>> LAPIS_DRAGON = register("lapis_dragon",
+			EntityType.Builder.<LapisDragonEntity>of(LapisDragonEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true)
+					.setTrackingRange(64).setUpdateInterval(3).setCustomClientFactory(LapisDragonEntity::new).fireImmune().sized(0.7f, 0.9f));
 
 	private static <T extends Entity> RegistryObject<EntityType<T>> register(String registryname, EntityType.Builder<T> entityTypeBuilder) {
 		return REGISTRY.register(registryname, () -> (EntityType<T>) entityTypeBuilder.build(registryname));
@@ -92,6 +96,7 @@ public class DragonPetsModEntities {
 			AmethystDragonEntity.init();
 			SpaceDragonEntity.init();
 			EndDragonEntity.init();
+			LapisDragonEntity.init();
 		});
 	}
 
@@ -107,5 +112,6 @@ public class DragonPetsModEntities {
 		event.put(AMETHYST_DRAGON.get(), AmethystDragonEntity.createAttributes().build());
 		event.put(SPACE_DRAGON.get(), SpaceDragonEntity.createAttributes().build());
 		event.put(END_DRAGON.get(), EndDragonEntity.createAttributes().build());
+		event.put(LAPIS_DRAGON.get(), LapisDragonEntity.createAttributes().build());
 	}
 }

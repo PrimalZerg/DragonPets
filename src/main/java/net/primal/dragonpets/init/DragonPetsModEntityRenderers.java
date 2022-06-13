@@ -6,6 +6,7 @@ package net.primal.dragonpets.init;
 
 import net.primal.dragonpets.client.renderer.SpaceDragonRenderer;
 import net.primal.dragonpets.client.renderer.RedstoneDragonRenderer;
+import net.primal.dragonpets.client.renderer.LapisDragonRenderer;
 import net.primal.dragonpets.client.renderer.IronDragonRenderer;
 import net.primal.dragonpets.client.renderer.IceDragonRenderer;
 import net.primal.dragonpets.client.renderer.GoldDragonRenderer;
@@ -34,5 +35,6 @@ public class DragonPetsModEntityRenderers {
 		event.registerEntityRenderer(DragonPetsModEntities.AMETHYST_DRAGON.get(), AmethystDragonRenderer::new);
 		event.registerEntityRenderer(DragonPetsModEntities.SPACE_DRAGON.get(), SpaceDragonRenderer::new);
 		event.registerEntityRenderer(DragonPetsModEntities.END_DRAGON.get(), EndDragonRenderer::new);
+		event.registerEntityRenderer(DragonPetsModEntities.LAPIS_DRAGON.get(), LapisDragonRenderer::new);
 	}
 }

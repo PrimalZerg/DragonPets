@@ -1,4 +1,4 @@
-// Made with Blockbench 4.2.4
+// Made with Blockbench 4.2.5
 // Exported for Minecraft version 1.17 - 1.18 with Mojang mappings
 // Paste this class into your mod and generate all required imports
 
@@ -7,12 +7,15 @@ public class Modeldragon<T extends Entity> extends EntityModel<T> {
 	// the entity renderer and passed into this model's constructor
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
 			new ResourceLocation("modid", "dragon"), "main");
-	private static final String UPPERWINGRIGHT = "upperwingright";
+		private static final String UPPERWINGRIGHT = "upperwingright";
 	private static final String UPPERWINGLEFT = "upperwingleft";
 	private static final String RIGHTFOOT = "rightfoot";
 	private static final String LEFTFOOT = "leftfoot";
 	private static final String RIGHTHAND = "righthand";
 	private static final String LEFTHAND = "lefthand";
+	private static final String TAIL2 = "tail2";
+	private static final String TAIL3 = "tail3";
+	private static final String TAIL4 = "tail4";
 	private final ModelPart body;
 	private final ModelPart wingright;
 	private final ModelPart upperwingright;
@@ -20,6 +23,9 @@ public class Modeldragon<T extends Entity> extends EntityModel<T> {
 	private final ModelPart upperwingleft;
 	private final ModelPart head;
 	private final ModelPart tail;
+	private final ModelPart tail2;
+	private final ModelPart tail3;
+	private final ModelPart tail4;
 	private final ModelPart rightleg;
 	private final ModelPart rightfoot;
 	private final ModelPart leftleg;
@@ -37,6 +43,9 @@ public class Modeldragon<T extends Entity> extends EntityModel<T> {
 		this.upperwingleft = this.wingleft.getChild("upperwingleft");
 		this.head = root.getChild("head");
 		this.tail = root.getChild("tail");
+		this.tail2 = this.tail.getChild("tail2");
+		this.tail3 = this.tail2.getChild("tail3");
+		this.tail4 = this.tail3.getChild("tail4");
 		this.rightleg = root.getChild("rightleg");
 		this.rightfoot = this.rightleg.getChild("rightfoot");
 		this.leftleg = root.getChild("leftleg");
@@ -79,11 +88,10 @@ public class Modeldragon<T extends Entity> extends EntityModel<T> {
 						.addBox(-9.894F, 1.7448F, 0.0571F, 10.0F, 0.0F, 13.0F, new CubeDeformation(0.0F)),
 				PartPose.offsetAndRotation(-11.4402F, -1.9497F, -0.5703F, -0.0172F, 0.1298F, -0.132F));
 
-		PartDefinition wingleft = partdefinition.addOrReplaceChild("wingleft",
-				CubeListBuilder.create().texOffs(16, 48)
-						.addBox(10.2328F, -1.2196F, -3.0315F, 1.0F, 1.0F, 3.0F, new CubeDeformation(0.0F)).texOffs(0, 0)
-						.addBox(-0.7672F, -0.2196F, -0.0315F, 12.0F, 0.0F, 12.0F, new CubeDeformation(0.0F)),
-				PartPose.offsetAndRotation(2.0F, 16.5029F, -3.4979F, -0.0136F, -0.0244F, -0.6157F));
+		PartDefinition wingleft = partdefinition.addOrReplaceChild("wingleft", CubeListBuilder.create().texOffs(16, 48)
+				.addBox(10.2328F, -1.2196F, -3.0315F, 1.0F, 1.0F, 3.0F, new CubeDeformation(0.0F)).texOffs(0, 12)
+				.mirror().addBox(-0.7672F, -0.2196F, -0.0315F, 12.0F, 0.0F, 12.0F, new CubeDeformation(0.0F))
+				.mirror(false), PartPose.offsetAndRotation(2.0F, 16.5029F, -3.4979F, -0.0157F, -0.0231F, -0.5285F));
 
 		PartDefinition cube_r3 = wingleft.addOrReplaceChild("cube_r3",
 				CubeListBuilder.create().texOffs(30, 32).addBox(-4.2008F, 1.2302F, -0.0627F, 8.0F, 1.0F, 2.0F,
@@ -95,10 +103,10 @@ public class Modeldragon<T extends Entity> extends EntityModel<T> {
 						new CubeDeformation(0.0F)),
 				PartPose.offsetAndRotation(0.4423F, -1.9498F, -0.0505F, 0.0F, -0.4363F, 0.0F));
 
-		PartDefinition upperwingleft = wingleft.addOrReplaceChild("upperwingleft",
-				CubeListBuilder.create().texOffs(22, 30)
-						.addBox(-0.1058F, 1.2449F, 0.0569F, 10.0F, 1.0F, 1.0F, new CubeDeformation(0.0F)).texOffs(23, 0)
-						.addBox(-0.1058F, 1.7449F, 0.0569F, 10.0F, 0.0F, 13.0F, new CubeDeformation(0.0F)),
+		PartDefinition upperwingleft = wingleft.addOrReplaceChild("upperwingleft", CubeListBuilder.create()
+				.texOffs(22, 30).addBox(-0.1058F, 1.2449F, 0.0569F, 10.0F, 1.0F, 1.0F, new CubeDeformation(0.0F))
+				.texOffs(23, 13).mirror()
+				.addBox(-0.1058F, 1.7449F, 0.0569F, 10.0F, 0.0F, 13.0F, new CubeDeformation(0.0F)).mirror(false),
 				PartPose.offsetAndRotation(11.4423F, -1.9498F, -0.5505F, -0.023F, -0.173F, 0.1329F));
 
 		PartDefinition head = partdefinition.addOrReplaceChild("head",
@@ -174,70 +182,75 @@ public class Modeldragon<T extends Entity> extends EntityModel<T> {
 				PartPose.offsetAndRotation(-6.7984F, -1.1097F, 1.8256F, 0.4429F, -0.8187F, -0.7072F));
 
 		PartDefinition tail = partdefinition.addOrReplaceChild("tail",
-				CubeListBuilder.create().texOffs(0, 18).addBox(-1.0F, -1.0405F, 0.1534F, 2.0F, 2.0F, 4.0F,
-						new CubeDeformation(0.0F)),
+				CubeListBuilder.create().texOffs(0, 18)
+						.addBox(-1.0F, -1.0405F, 0.1534F, 2.0F, 2.0F, 4.0F, new CubeDeformation(0.0F)).texOffs(10, 32)
+						.addBox(0.0F, -3.0405F, 0.1534F, 0.0F, 2.0F, 4.0F, new CubeDeformation(0.0F)),
 				PartPose.offsetAndRotation(0.0F, 17.5F, 2.0F, -0.7854F, 0.0F, 0.0F));
 
-		PartDefinition cube_r13 = tail.addOrReplaceChild("cube_r13",
+		PartDefinition tail2 = tail.addOrReplaceChild("tail2", CubeListBuilder.create(),
+				PartPose.offset(0.0F, 0.0858F, 4.0858F));
+
+		PartDefinition cube_r13 = tail2.addOrReplaceChild("cube_r13",
+				CubeListBuilder.create().texOffs(0, 48)
+						.addBox(-1.0F, 0.906F, 1.0334F, 2.0F, 2.0F, 3.0F, new CubeDeformation(0.0F)).texOffs(17, 50)
+						.addBox(0.0F, -1.094F, 1.0334F, 0.0F, 2.0F, 3.0F, new CubeDeformation(0.0F)),
+				PartPose.offsetAndRotation(0.0F, -1.5F, -2.0F, 0.3491F, 0.0F, 0.0F));
+
+		PartDefinition tail3 = tail2.addOrReplaceChild("tail3", CubeListBuilder.create(),
+				PartPose.offset(0.0F, -0.75F, 2.25F));
+
+		PartDefinition cube_r14 = tail3.addOrReplaceChild("cube_r14",
+				CubeListBuilder.create().texOffs(10, 30)
+						.addBox(0.0F, -1.5549F, -0.6131F, 0.0F, 2.0F, 4.0F, new CubeDeformation(0.0F)).texOffs(0, 12)
+						.addBox(-1.0F, 0.4451F, -0.6131F, 2.0F, 2.0F, 4.0F, new CubeDeformation(0.0F)),
+				PartPose.offsetAndRotation(0.0F, -1.75F, -0.25F, 0.5236F, 0.0F, 0.0F));
+
+		PartDefinition tail4 = tail3.addOrReplaceChild("tail4", CubeListBuilder.create(),
+				PartPose.offset(0.0F, -2.5F, 3.0F));
+
+		PartDefinition cube_r15 = tail4.addOrReplaceChild("cube_r15",
 				CubeListBuilder.create().texOffs(40, 42).addBox(-1.0F, 0.9593F, 3.2358F, 2.0F, 1.0F, 4.0F,
 						new CubeDeformation(0.0F)),
-				PartPose.offsetAndRotation(0.0F, -2.4142F, 6.0858F, 0.6109F, 0.0F, 0.0F));
+				PartPose.offsetAndRotation(0.0F, 0.75F, -3.25F, 0.6109F, 0.0F, 0.0F));
 
-		PartDefinition cube_r14 = tail.addOrReplaceChild("cube_r14",
-				CubeListBuilder.create().texOffs(0, 12).addBox(-1.0F, 0.4451F, -0.6131F, 2.0F, 2.0F, 4.0F,
-						new CubeDeformation(0.0F)),
-				PartPose.offsetAndRotation(0.0F, -2.4142F, 6.0858F, 0.5236F, 0.0F, 0.0F));
+		PartDefinition frills = tail4.addOrReplaceChild("frills", CubeListBuilder.create(),
+				PartPose.offset(0.0F, 1.75F, -7.25F));
 
-		PartDefinition cube_r15 = tail.addOrReplaceChild("cube_r15",
-				CubeListBuilder.create().texOffs(0, 48).addBox(-1.0F, 0.906F, 1.0334F, 2.0F, 2.0F, 3.0F,
+		PartDefinition cube_r16 = frills.addOrReplaceChild("cube_r16",
+				CubeListBuilder.create().texOffs(26, 50).addBox(-0.5F, 1.1833F, -1.4399F, 1.0F, 1.0F, 3.0F,
 						new CubeDeformation(0.0F)),
-				PartPose.offsetAndRotation(0.0F, -1.4142F, 2.0858F, 0.3491F, 0.0F, 0.0F));
+				PartPose.offsetAndRotation(0.0F, -5.7471F, 10.0021F, 0.9163F, 0.0F, 0.0F));
+
+		PartDefinition cube_r17 = frills
+				.addOrReplaceChild("cube_r17",
+						CubeListBuilder.create().texOffs(0, 0).addBox(0.0F, -0.5549F, 3.3869F, 0.0F, 2.0F, 4.0F,
+								new CubeDeformation(0.0F)),
+						PartPose.offsetAndRotation(0.0F, -1.0F, 4.0F, 0.5236F, 0.0F, 0.0F));
+
+		PartDefinition cube_r18 = frills.addOrReplaceChild("cube_r18",
+				CubeListBuilder.create().texOffs(0, 8).addBox(-1.96F, 1.7377F, -2.4232F, 3.0F, 0.0F, 4.0F,
+						new CubeDeformation(0.0F)),
+				PartPose.offsetAndRotation(1.5F, -4.2635F, 8.6113F, 0.6682F, -0.3879F, -0.2902F));
+
+		PartDefinition cube_r19 = frills.addOrReplaceChild("cube_r19",
+				CubeListBuilder.create().texOffs(0, 0).addBox(-1.04F, 1.7377F, -2.4232F, 3.0F, 0.0F, 4.0F,
+						new CubeDeformation(0.0F)),
+				PartPose.offsetAndRotation(-1.5F, -4.2635F, 8.6113F, 0.6682F, 0.3879F, 0.2902F));
 
 		PartDefinition spikes = tail.addOrReplaceChild("spikes", CubeListBuilder.create(),
 				PartPose.offset(0.0F, 0.0F, 0.0F));
 
-		PartDefinition cube_r16 = spikes.addOrReplaceChild("cube_r16",
-				CubeListBuilder.create().texOffs(26, 50).addBox(-0.5F, 1.1833F, -1.4399F, 1.0F, 1.0F, 3.0F,
-						new CubeDeformation(0.0F)),
-				PartPose.offsetAndRotation(0.0F, -7.1613F, 12.0879F, 0.9163F, 0.0F, 0.0F));
-
-		PartDefinition cube_r17 = spikes.addOrReplaceChild("cube_r17",
+		PartDefinition cube_r20 = spikes.addOrReplaceChild("cube_r20",
 				CubeListBuilder.create().texOffs(52, 26)
 						.addBox(-0.96F, 1.2377F, -0.4232F, 3.0F, 1.0F, 1.0F, new CubeDeformation(0.0F)).texOffs(53, 46)
 						.addBox(-1.96F, 1.2377F, -2.4232F, 3.0F, 1.0F, 1.0F, new CubeDeformation(0.0F)),
 				PartPose.offsetAndRotation(1.5F, -5.6777F, 10.6971F, 0.6682F, -0.3879F, -0.2902F));
 
-		PartDefinition cube_r18 = spikes.addOrReplaceChild("cube_r18",
+		PartDefinition cube_r21 = spikes.addOrReplaceChild("cube_r21",
 				CubeListBuilder.create().texOffs(25, 54)
 						.addBox(-2.04F, 1.2377F, -0.4232F, 3.0F, 1.0F, 1.0F, new CubeDeformation(0.0F)).texOffs(53, 48)
 						.addBox(-1.04F, 1.2377F, -2.4232F, 3.0F, 1.0F, 1.0F, new CubeDeformation(0.0F)),
 				PartPose.offsetAndRotation(-1.5F, -5.6777F, 10.6971F, 0.6682F, 0.3879F, 0.2902F));
-
-		PartDefinition frills = tail.addOrReplaceChild("frills", CubeListBuilder.create().texOffs(10, 32).addBox(0.0F,
-				-1.6263F, -1.9324F, 0.0F, 2.0F, 4.0F, new CubeDeformation(0.0F)),
-				PartPose.offset(0.0F, -1.4142F, 2.0858F));
-
-		PartDefinition cube_r19 = frills
-				.addOrReplaceChild("cube_r19",
-						CubeListBuilder.create().texOffs(17, 50).addBox(0.0F, -1.094F, 1.0334F, 0.0F, 2.0F, 3.0F,
-								new CubeDeformation(0.0F)),
-						PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.3491F, 0.0F, 0.0F));
-
-		PartDefinition cube_r20 = frills.addOrReplaceChild("cube_r20",
-				CubeListBuilder.create().texOffs(0, 0)
-						.addBox(0.0F, -0.5549F, 3.3869F, 0.0F, 2.0F, 4.0F, new CubeDeformation(0.0F)).texOffs(10, 30)
-						.addBox(0.0F, -1.5549F, -0.6131F, 0.0F, 2.0F, 4.0F, new CubeDeformation(0.0F)),
-				PartPose.offsetAndRotation(0.0F, -1.0F, 4.0F, 0.5236F, 0.0F, 0.0F));
-
-		PartDefinition cube_r21 = frills.addOrReplaceChild("cube_r21",
-				CubeListBuilder.create().texOffs(0, 8).addBox(-1.96F, 1.7377F, -2.4232F, 3.0F, 0.0F, 4.0F,
-						new CubeDeformation(0.0F)),
-				PartPose.offsetAndRotation(1.5F, -4.2635F, 8.6113F, 0.6682F, -0.3879F, -0.2902F));
-
-		PartDefinition cube_r22 = frills.addOrReplaceChild("cube_r22",
-				CubeListBuilder.create().texOffs(0, 0).addBox(-1.04F, 1.7377F, -2.4232F, 3.0F, 0.0F, 4.0F,
-						new CubeDeformation(0.0F)),
-				PartPose.offsetAndRotation(-1.5F, -4.2635F, 8.6113F, 0.6682F, 0.3879F, 0.2902F));
 
 		PartDefinition rightleg = partdefinition.addOrReplaceChild("rightleg",
 				CubeListBuilder.create().texOffs(6, 53)
@@ -267,53 +280,39 @@ public class Modeldragon<T extends Entity> extends EntityModel<T> {
 
 		PartDefinition rightarm = partdefinition.addOrReplaceChild("rightarm",
 				CubeListBuilder.create().texOffs(40, 51)
-						.addBox(-1.0F, -1.249F, -1.0436F, 1.0F, 4.0F, 2.0F, new CubeDeformation(0.0F)).texOffs(0, 2)
-						.addBox(-1.0F, 1.751F, 0.9564F, 1.0F, 1.0F, 1.0F, new CubeDeformation(0.0F)),
-				PartPose.offset(-1.5F, 18.2365F, -2.8887F));
+						.addBox(-0.5F, -0.499F, -1.0436F, 1.0F, 4.0F, 2.0F, new CubeDeformation(0.0F)).texOffs(0, 2)
+						.addBox(-0.5F, 2.501F, 0.9564F, 1.0F, 1.0F, 1.0F, new CubeDeformation(0.0F)),
+				PartPose.offset(-2.0F, 17.4865F, -2.8887F));
 
-		PartDefinition cube_r23 = rightarm.addOrReplaceChild("cube_r23",
+		PartDefinition cube_r22 = rightarm.addOrReplaceChild("cube_r22",
 				CubeListBuilder.create().texOffs(34, 51).addBox(-1.0F, -1.0F, 0.5F, 1.0F, 4.0F, 2.0F,
 						new CubeDeformation(0.0F)),
-				PartPose.offsetAndRotation(0.0F, 2.751F, -1.0436F, -0.2182F, 0.0F, 0.0F));
+				PartPose.offsetAndRotation(0.5F, 3.501F, -1.0436F, -0.2182F, 0.0F, 0.0F));
 
 		PartDefinition righthand = rightarm.addOrReplaceChild("righthand",
 				CubeListBuilder.create().texOffs(23, 45)
 						.addBox(-1.5F, 0.375F, -2.625F, 3.0F, 1.0F, 3.0F, new CubeDeformation(0.0F)).texOffs(26, 40)
 						.addBox(-1.5F, 0.875F, -2.625F, 3.0F, 0.0F, 2.0F, new CubeDeformation(0.0F)),
-				PartPose.offset(-0.5F, 4.626F, -0.1686F));
+				PartPose.offset(0.0F, 5.376F, -0.1686F));
 
 		PartDefinition leftarm = partdefinition.addOrReplaceChild("leftarm",
 				CubeListBuilder.create().texOffs(0, 34)
-						.addBox(-0.5F, -1.5F, -1.0F, 1.0F, 4.0F, 2.0F, new CubeDeformation(0.0F)).texOffs(0, 0)
-						.addBox(-0.5F, 1.5F, 1.0F, 1.0F, 1.0F, 1.0F, new CubeDeformation(0.0F)),
-				PartPose.offset(2.0F, 18.4865F, -2.8887F));
+						.addBox(-0.25F, -0.5F, -1.0F, 1.0F, 4.0F, 2.0F, new CubeDeformation(0.0F)).texOffs(0, 0)
+						.addBox(-0.25F, 2.5F, 1.0F, 1.0F, 1.0F, 1.0F, new CubeDeformation(0.0F)),
+				PartPose.offset(1.75F, 17.4865F, -2.8887F));
 
-		PartDefinition cube_r24 = leftarm.addOrReplaceChild("cube_r24",
+		PartDefinition cube_r23 = leftarm.addOrReplaceChild("cube_r23",
 				CubeListBuilder.create().texOffs(0, 24).addBox(-1.0F, -1.0F, 0.5F, 1.0F, 4.0F, 2.0F,
 						new CubeDeformation(0.0F)),
-				PartPose.offsetAndRotation(0.5F, 2.5F, -1.0F, -0.2182F, 0.0F, 0.0F));
+				PartPose.offsetAndRotation(0.75F, 3.5F, -1.0F, -0.2182F, 0.0F, 0.0F));
 
 		PartDefinition lefthand = leftarm.addOrReplaceChild("lefthand",
 				CubeListBuilder.create().texOffs(14, 44)
 						.addBox(-1.5F, 0.25F, -2.375F, 3.0F, 1.0F, 3.0F, new CubeDeformation(0.0F)).texOffs(8, 38)
 						.addBox(-1.5F, 0.75F, -2.375F, 3.0F, 0.0F, 2.0F, new CubeDeformation(0.0F)),
-				PartPose.offset(0.0F, 4.5F, -0.375F));
+				PartPose.offset(0.25F, 5.5F, -0.375F));
 
-		return LayerDefinition.create(meshdefinition, 64, 64);
-	}
-
-	@Override
-	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay,
-			float red, float green, float blue, float alpha) {
-		body.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
-		wingright.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
-		wingleft.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
-		head.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
-		tail.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
-		rightleg.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
-		leftleg.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
-		rightarm.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
-		leftarm.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+		return LayerDefinition.create(meshdefinition, 63, 64);
 	}
 	// public void prepareMobModel(T entity, float limbswing, float limbSwingAmount,
 	// float ageInTicks, float netHeadYaw,
@@ -332,6 +331,9 @@ public class Modeldragon<T extends Entity> extends EntityModel<T> {
 		this.wingright.zRot = Mth.cos(limbSwing * 0.9F + (float) Math.PI) * limbSwingAmount;
 		this.upperwingright.zRot = Mth.cos(limbSwing * 0.6662F) * limbSwingAmount;
 		this.tail.yRot = Mth.cos(limbSwing * 0.90F + (float) Math.PI) * limbSwingAmount;
+		this.tail2.yRot = Mth.cos(limbSwing * -0.45F + (float) Math.PI) * limbSwingAmount;
+		this.tail3.yRot = Mth.cos(limbSwing * 0.45F + (float) Math.PI) * limbSwingAmount;
+		this.tail4.yRot = Mth.cos(limbSwing * -0.45F + (float) Math.PI) * limbSwingAmount;
 		this.head.yRot = netHeadYaw / (180F / (float) Math.PI);
 		this.head.xRot = headPitch / (180F / (float) Math.PI);
 		this.upperwingleft.zRot = Mth.cos(limbSwing * 0.6662F + (float) Math.PI) * limbSwingAmount;
@@ -346,5 +348,18 @@ public class Modeldragon<T extends Entity> extends EntityModel<T> {
 		this.rightfoot.xRot = -42.5F;
 		this.leftleg.xRot = -50.0F;
 		this.leftfoot.xRot = -42.5F;
+   }
+	@Override
+	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay,
+			float red, float green, float blue, float alpha) {
+		body.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+		wingright.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+		wingleft.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+		head.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+		tail.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+		rightleg.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+		leftleg.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+		rightarm.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+		leftarm.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
 	}
 }
