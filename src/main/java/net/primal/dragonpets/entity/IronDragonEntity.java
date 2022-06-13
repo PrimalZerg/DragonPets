@@ -61,6 +61,7 @@ import net.minecraft.core.BlockPos;
 import java.util.Set;
 import java.util.Random;
 import java.util.List;
+import net.minecraft.world.entity.ai.goal.SitWhenOrderedToGoal;
 
 @Mod.EventBusSubscriber
 public class IronDragonEntity extends TamableAnimal {
@@ -99,7 +100,8 @@ public class IronDragonEntity extends TamableAnimal {
 	@Override
 	protected void registerGoals() {
 		super.registerGoals();
-		this.goalSelector.addGoal(1, new FloatGoal(this));
+		this.goalSelector.addGoal(0, new FloatGoal(this));
+		this.goalSelector.addGoal(1, new SitWhenOrderedToGoal(this));
 		this.goalSelector.addGoal(2, new OwnerHurtByTargetGoal(this));
 		this.targetSelector.addGoal(3, new OwnerHurtTargetGoal(this));
 		this.goalSelector.addGoal(4, new BreedGoal(this, 1));
@@ -194,7 +196,11 @@ public class IronDragonEntity extends TamableAnimal {
 						this.usePlayerItem(sourceentity, hand, itemstack);
 						this.heal(4);
 						retval = InteractionResult.sidedSuccess(this.level.isClientSide());
-					} else {
+					} else if (this.isTame() && this.isOwnedBy(sourceentity)) {
+						this.usePlayerItem(sourceentity, hand, itemstack);
+						this.navigation.stop();
+           				this.setTarget((LivingEntity)null);
+      		            this.setOrderedToSit(!this.isOrderedToSit());
 						retval = super.mobInteract(sourceentity, hand);
 					}
 				}

@@ -47,7 +47,6 @@ import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.InteractionResult;
@@ -63,6 +62,7 @@ import java.util.Set;
 import java.util.Random;
 import java.util.List;
 import java.util.EnumSet;
+import net.minecraft.world.entity.ai.goal.SitWhenOrderedToGoal;
 
 @Mod.EventBusSubscriber
 public class SpaceDragonEntity extends TamableAnimal {
@@ -100,7 +100,8 @@ public class SpaceDragonEntity extends TamableAnimal {
 	@Override
 	protected void registerGoals() {
 		super.registerGoals();
-		this.goalSelector.addGoal(1, new FloatGoal(this));
+		this.goalSelector.addGoal(0, new FloatGoal(this));
+		this.goalSelector.addGoal(1, new SitWhenOrderedToGoal(this));
 		this.targetSelector.addGoal(2, new OwnerHurtTargetGoal(this));
 		this.goalSelector.addGoal(3, new OwnerHurtByTargetGoal(this));
 		this.goalSelector.addGoal(4, new BreedGoal(this, 1));
@@ -163,9 +164,9 @@ public class SpaceDragonEntity extends TamableAnimal {
 				return new Vec3(dir_x, dir_y, dir_z);
 			}
 		});
-		this.goalSelector.addGoal(11, new LookAtPlayerGoal(this, Player.class, (float) 6));
-		this.goalSelector.addGoal(12, new RandomStrollGoal(this, 0.6));
-		this.goalSelector.addGoal(13, new RandomLookAroundGoal(this));
+		this.goalSelector.addGoal(10, new LookAtPlayerGoal(this, Player.class, (float) 6));
+		this.goalSelector.addGoal(10, new RandomStrollGoal(this, 0.6));
+		this.goalSelector.addGoal(10, new RandomLookAroundGoal(this));
 	}
 
 	@Override
@@ -231,7 +232,11 @@ public class SpaceDragonEntity extends TamableAnimal {
 						this.usePlayerItem(sourceentity, hand, itemstack);
 						this.heal(4);
 						retval = InteractionResult.sidedSuccess(this.level.isClientSide());
-					} else {
+					} else if (this.isTame() && this.isOwnedBy(sourceentity)) {
+						this.usePlayerItem(sourceentity, hand, itemstack);
+						this.navigation.stop();
+           				this.setTarget((LivingEntity)null);
+      		            this.setOrderedToSit(!this.isOrderedToSit());
 						retval = super.mobInteract(sourceentity, hand);
 					}
 				}
@@ -251,7 +256,6 @@ public class SpaceDragonEntity extends TamableAnimal {
 					this.setPersistenceRequired();
 			}
 		}
-		sourceentity.startRiding(this);
 		return retval;
 	}
 
@@ -265,39 +269,6 @@ public class SpaceDragonEntity extends TamableAnimal {
 	@Override
 	public boolean isFood(ItemStack stack) {
 		return List.of(Items.CHORUS_FRUIT).contains(stack.getItem());
-	}
-
-	@Override
-	public void travel(Vec3 dir) {
-		Entity entity = this.getPassengers().isEmpty() ? null : (Entity) this.getPassengers().get(0);
-		if (this.isVehicle()) {
-			this.setYRot(entity.getYRot());
-			this.yRotO = this.getYRot();
-			this.setXRot(entity.getXRot() * 0.5F);
-			this.setRot(this.getYRot(), this.getXRot());
-			this.flyingSpeed = this.getSpeed() * 0.15F;
-			this.yBodyRot = entity.getYRot();
-			this.yHeadRot = entity.getYRot();
-			this.maxUpStep = 1.0F;
-			if (entity instanceof LivingEntity passenger) {
-				this.setSpeed((float) this.getAttributeValue(Attributes.MOVEMENT_SPEED));
-				float forward = passenger.zza;
-				float strafe = passenger.xxa;
-				super.travel(new Vec3(strafe, 0, forward));
-			}
-			this.animationSpeedOld = this.animationSpeed;
-			double d1 = this.getX() - this.xo;
-			double d0 = this.getZ() - this.zo;
-			float f1 = (float) Math.sqrt(d1 * d1 + d0 * d0) * 4;
-			if (f1 > 1.0F)
-				f1 = 1.0F;
-			this.animationSpeed += (f1 - this.animationSpeed) * 0.4F;
-			this.animationPosition += this.animationSpeed;
-			return;
-		}
-		this.maxUpStep = 0.5F;
-		this.flyingSpeed = 0.02F;
-		super.travel(dir);
 	}
 
 	@Override

@@ -260,7 +260,7 @@ public class FireDragonEntity extends TamableAnimal {
 				if (retval == InteractionResult.SUCCESS || retval == InteractionResult.CONSUME)
 					this.setPersistenceRequired();
 			}
-		} sourceentity.startRiding(this);
+		}
 		return retval;
 	}
 

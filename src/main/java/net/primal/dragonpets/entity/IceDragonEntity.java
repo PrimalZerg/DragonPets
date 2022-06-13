@@ -109,7 +109,7 @@ public class IceDragonEntity extends TamableAnimal {
 		this.goalSelector.addGoal(0, new FloatGoal(this));
 		this.goalSelector.addGoal(1, new SitWhenOrderedToGoal(this));
 		this.goalSelector.addGoal(2, new OwnerHurtByTargetGoal(this));
-		this.targetSelector.addGoal(2, new OwnerHurtTargetGoal(this));
+		this.targetSelector.addGoal(3, new OwnerHurtTargetGoal(this));
 		this.goalSelector.addGoal(4, new BreedGoal(this, 1));
 		this.goalSelector.addGoal(5, new Goal() {
 			{
@@ -261,10 +261,9 @@ public class IceDragonEntity extends TamableAnimal {
 				retval = super.mobInteract(sourceentity, hand);
 				if (retval == InteractionResult.SUCCESS || retval == InteractionResult.CONSUME)
 					this.setPersistenceRequired();
-			} //else if (this.isStaff(itemstack)) {
-	//	sourceentity.startRiding(this);
-		//	}
-		}return retval;
+			}
+		}
+		return retval;
 	}
 
 	@Override
@@ -278,10 +277,6 @@ public class IceDragonEntity extends TamableAnimal {
 	public boolean isFood(ItemStack stack) {
 		return List.of(Items.RABBIT, Items.CHICKEN).contains(stack.getItem());
 	}
-	//@Override 
-	//public boolean isStaff(ItemStack stack) {
-	//	return List.of(Items.STICK).contains(stack.getItem());
-	//}
 
 	@Override
 	public boolean canBreatheUnderwater() {
