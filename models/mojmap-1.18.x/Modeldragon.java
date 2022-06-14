@@ -7,7 +7,7 @@ public class Modeldragon<T extends Entity> extends EntityModel<T> {
 	// the entity renderer and passed into this model's constructor
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
 			new ResourceLocation("modid", "dragon"), "main");
-		private static final String UPPERWINGRIGHT = "upperwingright";
+    private static final String UPPERWINGRIGHT = "upperwingright";
 	private static final String UPPERWINGLEFT = "upperwingleft";
 	private static final String RIGHTFOOT = "rightfoot";
 	private static final String LEFTFOOT = "leftfoot";
@@ -237,7 +237,7 @@ public class Modeldragon<T extends Entity> extends EntityModel<T> {
 						new CubeDeformation(0.0F)),
 				PartPose.offsetAndRotation(-1.5F, -4.2635F, 8.6113F, 0.6682F, 0.3879F, 0.2902F));
 
-		PartDefinition spikes = tail.addOrReplaceChild("spikes", CubeListBuilder.create(),
+		PartDefinition spikes = tail4.addOrReplaceChild("spikes", CubeListBuilder.create(),
 				PartPose.offset(0.0F, 0.0F, 0.0F));
 
 		PartDefinition cube_r20 = spikes.addOrReplaceChild("cube_r20",
@@ -312,7 +312,7 @@ public class Modeldragon<T extends Entity> extends EntityModel<T> {
 						.addBox(-1.5F, 0.75F, -2.375F, 3.0F, 0.0F, 2.0F, new CubeDeformation(0.0F)),
 				PartPose.offset(0.25F, 5.5F, -0.375F));
 
-		return LayerDefinition.create(meshdefinition, 63, 64);
+		return LayerDefinition.create(meshdefinition, 64, 64);
 	}
 	// public void prepareMobModel(T entity, float limbswing, float limbSwingAmount,
 	// float ageInTicks, float netHeadYaw,
@@ -349,6 +349,7 @@ public class Modeldragon<T extends Entity> extends EntityModel<T> {
 		this.leftleg.xRot = -50.0F;
 		this.leftfoot.xRot = -42.5F;
    }
+
 	@Override
 	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay,
 			float red, float green, float blue, float alpha) {

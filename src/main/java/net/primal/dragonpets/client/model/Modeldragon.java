@@ -186,7 +186,7 @@ public class Modeldragon<T extends Entity> extends EntityModel<T> {
 		PartDefinition cube_r19 = frills.addOrReplaceChild("cube_r19",
 				CubeListBuilder.create().texOffs(0, 0).addBox(-1.04F, 1.7377F, -2.4232F, 3.0F, 0.0F, 4.0F, new CubeDeformation(0.0F)),
 				PartPose.offsetAndRotation(-1.5F, -4.2635F, 8.6113F, 0.6682F, 0.3879F, 0.2902F));
-		PartDefinition spikes = tail.addOrReplaceChild("spikes", CubeListBuilder.create(), PartPose.offset(0.0F, 0.0F, 0.0F));
+		PartDefinition spikes = tail4.addOrReplaceChild("spikes", CubeListBuilder.create(), PartPose.offset(0.0F, 0.0F, 0.0F));
 		PartDefinition cube_r20 = spikes.addOrReplaceChild("cube_r20",
 				CubeListBuilder.create().texOffs(52, 26).addBox(-0.96F, 1.2377F, -0.4232F, 3.0F, 1.0F, 1.0F, new CubeDeformation(0.0F))
 						.texOffs(53, 46).addBox(-1.96F, 1.2377F, -2.4232F, 3.0F, 1.0F, 1.0F, new CubeDeformation(0.0F)),
@@ -235,7 +235,7 @@ public class Modeldragon<T extends Entity> extends EntityModel<T> {
 				"lefthand", CubeListBuilder.create().texOffs(14, 44).addBox(-1.5F, 0.25F, -2.375F, 3.0F, 1.0F, 3.0F, new CubeDeformation(0.0F))
 						.texOffs(8, 38).addBox(-1.5F, 0.75F, -2.375F, 3.0F, 0.0F, 2.0F, new CubeDeformation(0.0F)),
 				PartPose.offset(0.25F, 5.5F, -0.375F));
-		return LayerDefinition.create(meshdefinition, 63, 64);
+		return LayerDefinition.create(meshdefinition, 64, 64);
 	}
 
 	// public void prepareMobModel(T entity, float limbswing, float limbSwingAmount,

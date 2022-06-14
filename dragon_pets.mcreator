@@ -11,7 +11,7 @@
     {
       "name": "SpaceDragon",
       "type": "livingentity",
-      "sortid": 9,
+      "sortid": 11,
       "compiles": true,
       "locked_code": true,
       "registry_name": "space_dragon"
@@ -27,7 +27,7 @@
     {
       "name": "EndDragon",
       "type": "livingentity",
-      "sortid": 10,
+      "sortid": 12,
       "compiles": true,
       "locked_code": true,
       "registry_name": "end_dragon"
@@ -43,7 +43,7 @@
     {
       "name": "AmethystDragon",
       "type": "livingentity",
-      "sortid": 8,
+      "sortid": 10,
       "compiles": true,
       "locked_code": true,
       "registry_name": "amethyst_dragon"
@@ -51,7 +51,7 @@
     {
       "name": "IronDragon",
       "type": "livingentity",
-      "sortid": 6,
+      "sortid": 7,
       "compiles": true,
       "locked_code": true,
       "registry_name": "iron_dragon"
@@ -67,7 +67,7 @@
     {
       "name": "CopperDragon",
       "type": "livingentity",
-      "sortid": 7,
+      "sortid": 8,
       "compiles": true,
       "locked_code": true,
       "registry_name": "copper_dragon"
@@ -75,7 +75,7 @@
     {
       "name": "Dragons",
       "type": "tab",
-      "sortid": 11,
+      "sortid": 13,
       "compiles": true,
       "locked_code": false,
       "registry_name": "dragons"
@@ -91,10 +91,18 @@
     {
       "name": "LapisDragon",
       "type": "livingentity",
-      "sortid": 12,
+      "sortid": 6,
       "compiles": true,
       "locked_code": true,
       "registry_name": "lapis_dragon"
+    },
+    {
+      "name": "CoalDragon",
+      "type": "livingentity",
+      "sortid": 9,
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "coal_dragon"
     }
   ],
   "variable_elements": [],
@@ -189,10 +197,12 @@
       "subtitles.dragon_growl": "dragon growls",
       "subtitles.space_dragon": "space dragon growls",
       "item.dragon_pet.redstone_dragon_spawn_egg": "Redstone Dragon Spawn Egg",
+      "entity.dragon_pets.coal_dragon": "Coal Dragon",
       "subtitles.dragon_hurts": "Dragon hurts",
       "subtitles.soft_growl": "low dragon growl",
       "item.dragon_pets.lapis_dragon_spawn_egg": "Lapis Dragon Spawn Egg",
       "item.dragon_pets.iron_dragon_spawn_egg": "Iron Dragon Spawn Egg",
+      "item.dragon_pets.coal_dragon_spawn_egg": "Coal Dragon Spawn Egg",
       "item.dragon_pet.end_dragon_spawn_egg": "End Dragon Spawn Egg",
       "entity.dragon_pet.copper_dragon": "Copper Dragon",
       "item.dragon_pets.copper_dragon_spawn_egg": "Copper Dragon Spawn Egg",

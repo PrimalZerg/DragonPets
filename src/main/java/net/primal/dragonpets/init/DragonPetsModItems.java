@@ -29,11 +29,17 @@ public class DragonPetsModItems {
 	public static final RegistryObject<Item> REDSTONE_DRAGON = REGISTRY.register("redstone_dragon_spawn_egg",
 			() -> new ForgeSpawnEggItem(DragonPetsModEntities.REDSTONE_DRAGON, -9540243, -1372116,
 					new Item.Properties().tab(DragonPetsModTabs.TAB_DRAGONS)));
+	public static final RegistryObject<Item> LAPIS_DRAGON = REGISTRY.register("lapis_dragon_spawn_egg",
+			() -> new ForgeSpawnEggItem(DragonPetsModEntities.LAPIS_DRAGON, -6710887, -16763905,
+					new Item.Properties().tab(DragonPetsModTabs.TAB_DRAGONS)));
 	public static final RegistryObject<Item> IRON_DRAGON = REGISTRY.register("iron_dragon_spawn_egg",
 			() -> new ForgeSpawnEggItem(DragonPetsModEntities.IRON_DRAGON, -10526622, -2380152,
 					new Item.Properties().tab(DragonPetsModTabs.TAB_DRAGONS)));
 	public static final RegistryObject<Item> COPPER_DRAGON = REGISTRY.register("copper_dragon_spawn_egg",
 			() -> new ForgeSpawnEggItem(DragonPetsModEntities.COPPER_DRAGON, -1018588, -13639007,
+					new Item.Properties().tab(DragonPetsModTabs.TAB_DRAGONS)));
+	public static final RegistryObject<Item> COAL_DRAGON = REGISTRY.register("coal_dragon_spawn_egg",
+			() -> new ForgeSpawnEggItem(DragonPetsModEntities.COAL_DRAGON, -13882319, -16250873,
 					new Item.Properties().tab(DragonPetsModTabs.TAB_DRAGONS)));
 	public static final RegistryObject<Item> AMETHYST_DRAGON = REGISTRY.register("amethyst_dragon_spawn_egg",
 			() -> new ForgeSpawnEggItem(DragonPetsModEntities.AMETHYST_DRAGON, -12237493, -7844110,
@@ -43,8 +49,5 @@ public class DragonPetsModItems {
 					new Item.Properties().tab(DragonPetsModTabs.TAB_DRAGONS)));
 	public static final RegistryObject<Item> END_DRAGON = REGISTRY.register("end_dragon_spawn_egg",
 			() -> new ForgeSpawnEggItem(DragonPetsModEntities.END_DRAGON, -15790321, -7914562,
-					new Item.Properties().tab(DragonPetsModTabs.TAB_DRAGONS)));
-	public static final RegistryObject<Item> LAPIS_DRAGON = REGISTRY.register("lapis_dragon_spawn_egg",
-			() -> new ForgeSpawnEggItem(DragonPetsModEntities.LAPIS_DRAGON, -6710887, -16763905,
 					new Item.Properties().tab(DragonPetsModTabs.TAB_DRAGONS)));
 }

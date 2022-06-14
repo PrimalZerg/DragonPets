@@ -14,6 +14,7 @@ import net.primal.dragonpets.entity.FireDragonEntity;
 import net.primal.dragonpets.entity.EndDragonEntity;
 import net.primal.dragonpets.entity.DiamondDragonEntity;
 import net.primal.dragonpets.entity.CopperDragonEntity;
+import net.primal.dragonpets.entity.CoalDragonEntity;
 import net.primal.dragonpets.entity.AmethystDragonEntity;
 import net.primal.dragonpets.DragonPetsMod;
 
@@ -53,6 +54,9 @@ public class DragonPetsModEntities {
 					.setTrackingRange(64).setUpdateInterval(3).setCustomClientFactory(RedstoneDragonEntity::new)
 
 					.sized(0.7f, 0.7999999999999999f));
+	public static final RegistryObject<EntityType<LapisDragonEntity>> LAPIS_DRAGON = register("lapis_dragon",
+			EntityType.Builder.<LapisDragonEntity>of(LapisDragonEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true)
+					.setTrackingRange(64).setUpdateInterval(3).setCustomClientFactory(LapisDragonEntity::new).fireImmune().sized(0.7f, 0.9f));
 	public static final RegistryObject<EntityType<IronDragonEntity>> IRON_DRAGON = register("iron_dragon",
 			EntityType.Builder.<IronDragonEntity>of(IronDragonEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true)
 					.setTrackingRange(64).setUpdateInterval(3).setCustomClientFactory(IronDragonEntity::new).fireImmune().sized(0.7f, 0.8f));
@@ -61,6 +65,10 @@ public class DragonPetsModEntities {
 					.setTrackingRange(64).setUpdateInterval(3).setCustomClientFactory(CopperDragonEntity::new)
 
 					.sized(0.7000000000000001f, 0.8f));
+	public static final RegistryObject<EntityType<CoalDragonEntity>> COAL_DRAGON = register("coal_dragon",
+			EntityType.Builder.<CoalDragonEntity>of(CoalDragonEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true)
+					.setTrackingRange(64).setUpdateInterval(3).setCustomClientFactory(CoalDragonEntity::new).fireImmune()
+					.sized(0.7999999999999999f, 0.9f));
 	public static final RegistryObject<EntityType<AmethystDragonEntity>> AMETHYST_DRAGON = register("amethyst_dragon",
 			EntityType.Builder.<AmethystDragonEntity>of(AmethystDragonEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true)
 					.setTrackingRange(64).setUpdateInterval(3).setCustomClientFactory(AmethystDragonEntity::new)
@@ -75,9 +83,6 @@ public class DragonPetsModEntities {
 					.setTrackingRange(64).setUpdateInterval(3).setCustomClientFactory(EndDragonEntity::new)
 
 					.sized(0.9f, 0.9f));
-	public static final RegistryObject<EntityType<LapisDragonEntity>> LAPIS_DRAGON = register("lapis_dragon",
-			EntityType.Builder.<LapisDragonEntity>of(LapisDragonEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true)
-					.setTrackingRange(64).setUpdateInterval(3).setCustomClientFactory(LapisDragonEntity::new).fireImmune().sized(0.7f, 0.9f));
 
 	private static <T extends Entity> RegistryObject<EntityType<T>> register(String registryname, EntityType.Builder<T> entityTypeBuilder) {
 		return REGISTRY.register(registryname, () -> (EntityType<T>) entityTypeBuilder.build(registryname));
@@ -91,12 +96,13 @@ public class DragonPetsModEntities {
 			DiamondDragonEntity.init();
 			GoldDragonEntity.init();
 			RedstoneDragonEntity.init();
+			LapisDragonEntity.init();
 			IronDragonEntity.init();
 			CopperDragonEntity.init();
+			CoalDragonEntity.init();
 			AmethystDragonEntity.init();
 			SpaceDragonEntity.init();
 			EndDragonEntity.init();
-			LapisDragonEntity.init();
 		});
 	}
 
@@ -107,11 +113,12 @@ public class DragonPetsModEntities {
 		event.put(DIAMOND_DRAGON.get(), DiamondDragonEntity.createAttributes().build());
 		event.put(GOLD_DRAGON.get(), GoldDragonEntity.createAttributes().build());
 		event.put(REDSTONE_DRAGON.get(), RedstoneDragonEntity.createAttributes().build());
+		event.put(LAPIS_DRAGON.get(), LapisDragonEntity.createAttributes().build());
 		event.put(IRON_DRAGON.get(), IronDragonEntity.createAttributes().build());
 		event.put(COPPER_DRAGON.get(), CopperDragonEntity.createAttributes().build());
+		event.put(COAL_DRAGON.get(), CoalDragonEntity.createAttributes().build());
 		event.put(AMETHYST_DRAGON.get(), AmethystDragonEntity.createAttributes().build());
 		event.put(SPACE_DRAGON.get(), SpaceDragonEntity.createAttributes().build());
 		event.put(END_DRAGON.get(), EndDragonEntity.createAttributes().build());
-		event.put(LAPIS_DRAGON.get(), LapisDragonEntity.createAttributes().build());
 	}
 }

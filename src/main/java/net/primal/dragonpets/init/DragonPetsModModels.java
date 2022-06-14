@@ -4,8 +4,6 @@
  */
 package net.primal.dragonpets.init;
 
-import net.primal.dragonpets.client.model.Modeldragon;
-
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.client.event.EntityRenderersEvent;
