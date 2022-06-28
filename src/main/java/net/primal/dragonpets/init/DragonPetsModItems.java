@@ -50,4 +50,16 @@ public class DragonPetsModItems {
 	public static final RegistryObject<Item> END_DRAGON = REGISTRY.register("end_dragon_spawn_egg",
 			() -> new ForgeSpawnEggItem(DragonPetsModEntities.END_DRAGON, -15790321, -7914562,
 					new Item.Properties().tab(DragonPetsModTabs.TAB_DRAGONS)));
+	public static final RegistryObject<Item> DARK_OAK_DRAGON = REGISTRY.register("dark_oak_dragon_spawn_egg",
+			() -> new ForgeSpawnEggItem(DragonPetsModEntities.DARK_OAK_DRAGON, -14675701, -15907049,
+					new Item.Properties().tab(DragonPetsModTabs.TAB_DRAGONS)));
+	public static final RegistryObject<Item> SPRUCE_DRAGON = REGISTRY.register("spruce_dragon_spawn_egg",
+			() -> new ForgeSpawnEggItem(DragonPetsModEntities.SPRUCE_DRAGON, -13558511, -15782134,
+					new Item.Properties().tab(DragonPetsModTabs.TAB_DRAGONS)));
+	public static final RegistryObject<Item> ACACIA_DRAGON = REGISTRY.register("acacia_dragon_spawn_egg",
+			() -> new ForgeSpawnEggItem(DragonPetsModEntities.ACACIA_DRAGON, -11909810, -7749853,
+					new Item.Properties().tab(DragonPetsModTabs.TAB_DRAGONS)));
+	public static final RegistryObject<Item> BIRCH_DRAGON = REGISTRY.register("birch_dragon_spawn_egg",
+			() -> new ForgeSpawnEggItem(DragonPetsModEntities.BIRCH_DRAGON, -1514297, -7476172,
+					new Item.Properties().tab(DragonPetsModTabs.TAB_DRAGONS)));
 }

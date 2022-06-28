@@ -4,6 +4,7 @@
  */
 package net.primal.dragonpets.init;
 
+import net.primal.dragonpets.client.renderer.SpruceDragonRenderer;
 import net.primal.dragonpets.client.renderer.SpaceDragonRenderer;
 import net.primal.dragonpets.client.renderer.RedstoneDragonRenderer;
 import net.primal.dragonpets.client.renderer.LapisDragonRenderer;
@@ -13,9 +14,12 @@ import net.primal.dragonpets.client.renderer.GoldDragonRenderer;
 import net.primal.dragonpets.client.renderer.FireDragonRenderer;
 import net.primal.dragonpets.client.renderer.EndDragonRenderer;
 import net.primal.dragonpets.client.renderer.DiamondDragonRenderer;
+import net.primal.dragonpets.client.renderer.DarkOakDragonRenderer;
 import net.primal.dragonpets.client.renderer.CopperDragonRenderer;
 import net.primal.dragonpets.client.renderer.CoalDragonRenderer;
+import net.primal.dragonpets.client.renderer.BirchDragonRenderer;
 import net.primal.dragonpets.client.renderer.AmethystDragonRenderer;
+import net.primal.dragonpets.client.renderer.AcaciaDragonRenderer;
 
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -38,5 +42,9 @@ public class DragonPetsModEntityRenderers {
 		event.registerEntityRenderer(DragonPetsModEntities.AMETHYST_DRAGON.get(), AmethystDragonRenderer::new);
 		event.registerEntityRenderer(DragonPetsModEntities.SPACE_DRAGON.get(), SpaceDragonRenderer::new);
 		event.registerEntityRenderer(DragonPetsModEntities.END_DRAGON.get(), EndDragonRenderer::new);
+		event.registerEntityRenderer(DragonPetsModEntities.DARK_OAK_DRAGON.get(), DarkOakDragonRenderer::new);
+		event.registerEntityRenderer(DragonPetsModEntities.SPRUCE_DRAGON.get(), SpruceDragonRenderer::new);
+		event.registerEntityRenderer(DragonPetsModEntities.ACACIA_DRAGON.get(), AcaciaDragonRenderer::new);
+		event.registerEntityRenderer(DragonPetsModEntities.BIRCH_DRAGON.get(), BirchDragonRenderer::new);
 	}
 }

@@ -103,6 +103,38 @@
       "compiles": true,
       "locked_code": true,
       "registry_name": "coal_dragon"
+    },
+    {
+      "name": "DarkOakDragon",
+      "type": "livingentity",
+      "sortid": 14,
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "dark_oak_dragon"
+    },
+    {
+      "name": "SpruceDragon",
+      "type": "livingentity",
+      "sortid": 15,
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "spruce_dragon"
+    },
+    {
+      "name": "AcaciaDragon",
+      "type": "livingentity",
+      "sortid": 16,
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "acacia_dragon"
+    },
+    {
+      "name": "BirchDragon",
+      "type": "livingentity",
+      "sortid": 17,
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "birch_dragon"
     }
   ],
   "variable_elements": [],
@@ -182,13 +214,16 @@
   ],
   "language_map": {
     "en_us": {
+      "entity.dragon_pets.birch_dragon": "Birch Dragon",
       "item.dragon_pet.diamond_dragon_spawn_egg": "Diamond Dragon Spawn Egg",
       "item.dragon_pet.iron_dragon_spawn_egg": "Iron Dragon Spawn Egg",
       "item.dragon_pets.diamond_dragon_spawn_egg": "Diamond Dragon Spawn Egg",
       "entity.dragon_pet.redstone_dragon": "Redstone Dragon",
       "entity.dragon_pet.ice_dragon": "Ice Dragon",
       "item.dragon_pets.gold_dragon_spawn_egg": "Gold Dragon Spawn Egg",
+      "item.dragon_pets.birch_dragon_spawn_egg": "Birch Dragon Spawn Egg",
       "subtitles.dragon_hurt": "dragon hurts",
+      "entity.dragon_pets.dark_oak_dragon": "Dark Oak Dragon",
       "entity.dragon_pet.amethyst_dragon": "Amethyst Dragon",
       "entity.dragon_pets.ice_dragon": "Ice Dragon",
       "entity.dragon_pet.fire_dragon": "Fire Dragon",
@@ -212,6 +247,7 @@
       "entity.dragon_pet.end_dragon": "End Dragon",
       "entity.dragon_pets.gold_dragon": "Gold Dragon",
       "entity.dragon_pet.iron_dragon": "Iron Dragon",
+      "entity.dragon_pets.spruce_dragon": "Spruce Dragon",
       "item.dragon_pet.space_dragon_spawn_egg": "Space Dragon Spawn Egg",
       "entity.dragon_pets.end_dragon": "End Dragon",
       "item.dragon_pet.gold_dragon_spawn_egg": "Gold Dragon Spawn Egg",
@@ -221,12 +257,16 @@
       "item.dragon_pets.fire_dragon_spawn_egg": "Fire Dragon Spawn Egg",
       "item.dragon_pet.ice_dragon_spawn_egg": "Ice Dragon Spawn Egg",
       "item.dragon_pets.end_dragon_spawn_egg": "End Dragon Spawn Egg",
+      "item.dragon_pets.dark_oak_dragon_spawn_egg": "Dark Oak Dragon Spawn Egg",
       "item.dragon_pet.copper_dragon_spawn_egg": "Copper Dragon Spawn Egg",
       "entity.dragon_pets.space_dragon": "Space Dragon",
+      "item.dragon_pets.acacia_dragon_spawn_egg": "Acacia Dragon Spawn Egg",
       "itemGroup.tabdragons": "Dragons",
       "item.dragon_pets.space_dragon_spawn_egg": "Space Dragon Spawn Egg",
       "entity.dragon_pets.iron_dragon": "Iron Dragon",
       "subtitles.dragon_flaps": "Dragon Flaps",
+      "entity.dragon_pets.acacia_dragon": "Acacia Dragon",
+      "item.dragon_pets.spruce_dragon_spawn_egg": "Spruce Dragon Spawn Egg",
       "subtitles.ice_dragon_growls": "Ice Dragon Growls",
       "item.dragon_pet.fire_dragon_spawn_egg": "Fire Dragon Spawn Egg",
       "entity.dragon_pets.redstone_dragon": "Redstone Dragon",

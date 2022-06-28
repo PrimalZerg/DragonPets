@@ -106,9 +106,9 @@ public class FireDragonEntity extends TamableAnimal {
 		this.goalSelector.addGoal(0, new FloatGoal(this));
 		this.goalSelector.addGoal(1, new SitWhenOrderedToGoal(this));
 		this.goalSelector.addGoal(2, new OwnerHurtByTargetGoal(this));
-		this.targetSelector.addGoal(3, new OwnerHurtTargetGoal(this));
+		this.targetSelector.addGoal(2, new OwnerHurtTargetGoal(this));
 		this.goalSelector.addGoal(4, new BreedGoal(this, 1));
-		this.goalSelector.addGoal(5, new Goal() {
+		this.goalSelector.addGoal(3, new Goal() {
 			{
 				this.setFlags(EnumSet.of(Goal.Flag.MOVE));
 			}
@@ -148,14 +148,14 @@ public class FireDragonEntity extends TamableAnimal {
 				}
 			}
 		});
-		this.targetSelector.addGoal(6, new HurtByTargetGoal(this));
-		this.goalSelector.addGoal(6, new MeleeAttackGoal(this, 1.2, false) {
+		this.targetSelector.addGoal(2, new HurtByTargetGoal(this));
+		this.goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.2, false) {
 			@Override
 			protected double getAttackReachSqr(LivingEntity entity) {
 				return (double) (4.0 + entity.getBbWidth() * entity.getBbWidth());
 			}
 		});
-		this.goalSelector.addGoal(8, new FollowOwnerGoal(this, 1, (float) 10, (float) 2, false));
+		this.goalSelector.addGoal(4, new FollowOwnerGoal(this, 1, (float) 10, (float) 2, false));
 		this.goalSelector.addGoal(9, new TemptGoal(this, 1, Ingredient.of(Blocks.BROWN_MUSHROOM.asItem(),Blocks.RED_MUSHROOM.asItem(),Blocks.WARPED_FUNGUS.asItem(),Blocks.CRIMSON_FUNGUS.asItem()), false));
 		this.goalSelector.addGoal(10, new RandomStrollGoal(this, 0.8, 20) {
 			@Override
@@ -240,11 +240,13 @@ public class FireDragonEntity extends TamableAnimal {
       		            this.setOrderedToSit(!this.isOrderedToSit());
 						retval = InteractionResult.sidedSuccess(this.level.isClientSide());
 					} else if (this.isTame() && this.isOwnedBy(sourceentity)) {
-						this.usePlayerItem(sourceentity, hand, itemstack);
+						this.setOrderedToSit(!this.isOrderedToSit());
 						this.navigation.stop();
+				    	this.jumping = false;
            				this.setTarget((LivingEntity)null);
-      		            this.setOrderedToSit(!this.isOrderedToSit());
+           				
 						retval = super.mobInteract(sourceentity, hand);
+						return InteractionResult.SUCCESS;
 					}
 				}
 			} else if (this.isFood(itemstack)) {

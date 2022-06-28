@@ -57,7 +57,6 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.network.protocol.Packet;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.BlockPos;
 
 import java.util.Set;
@@ -67,23 +66,24 @@ import java.util.EnumSet;
 import net.minecraft.world.entity.ai.goal.SitWhenOrderedToGoal;
 
 @Mod.EventBusSubscriber
-public class CopperDragonEntity extends TamableAnimal {
-	private static final Set<ResourceLocation> SPAWN_BIOMES = Set.of(new ResourceLocation("dripstone_caves"), new ResourceLocation("lush_caves"));
+public class SpruceDragonEntity extends TamableAnimal {
+	private static final Set<ResourceLocation> SPAWN_BIOMES = Set.of(new ResourceLocation("taiga"), new ResourceLocation("snowy_taiga"),
+			new ResourceLocation("old_growth_spruce_taiga"));
 
 	@SubscribeEvent
 	public static void addLivingEntityToBiomes(BiomeLoadingEvent event) {
 		if (SPAWN_BIOMES.contains(event.getName()))
 			event.getSpawns().getSpawner(MobCategory.MONSTER)
-					.add(new MobSpawnSettings.SpawnerData(DragonPetsModEntities.COPPER_DRAGON.get(), 40, 1, 1));
+					.add(new MobSpawnSettings.SpawnerData(DragonPetsModEntities.SPRUCE_DRAGON.get(), 80, 1, 1));
 	}
 
-	public CopperDragonEntity(PlayMessages.SpawnEntity packet, Level world) {
-		this(DragonPetsModEntities.COPPER_DRAGON.get(), world);
+	public SpruceDragonEntity(PlayMessages.SpawnEntity packet, Level world) {
+		this(DragonPetsModEntities.SPRUCE_DRAGON.get(), world);
 	}
 
-	public CopperDragonEntity(EntityType<CopperDragonEntity> type, Level world) {
+	public SpruceDragonEntity(EntityType<SpruceDragonEntity> type, Level world) {
 		super(type, world);
-		xpReward = 3;
+		xpReward = 0;
 		setNoAi(false);
 		this.moveControl = new FlyingMoveControl(this, 10, true);
 	}
@@ -103,16 +103,16 @@ public class CopperDragonEntity extends TamableAnimal {
 		super.registerGoals();
 		this.goalSelector.addGoal(0, new FloatGoal(this));
 		this.goalSelector.addGoal(1, new SitWhenOrderedToGoal(this));
+		this.targetSelector.addGoal(2, new OwnerHurtTargetGoal(this));
 		this.goalSelector.addGoal(2, new OwnerHurtByTargetGoal(this));
-		this.targetSelector.addGoal(3, new OwnerHurtTargetGoal(this));
 		this.goalSelector.addGoal(4, new BreedGoal(this, 1));
-		this.goalSelector.addGoal(5, new Goal() {
+		this.goalSelector.addGoal(3, new Goal() {
 			{
 				this.setFlags(EnumSet.of(Goal.Flag.MOVE));
 			}
 
 			public boolean canUse() {
-				if (CopperDragonEntity.this.getTarget() != null && !CopperDragonEntity.this.getMoveControl().hasWanted()) {
+				if (SpruceDragonEntity.this.getTarget() != null && !SpruceDragonEntity.this.getMoveControl().hasWanted()) {
 					return true;
 				} else {
 					return false;
@@ -121,53 +121,53 @@ public class CopperDragonEntity extends TamableAnimal {
 
 			@Override
 			public boolean canContinueToUse() {
-				return CopperDragonEntity.this.getMoveControl().hasWanted() && CopperDragonEntity.this.getTarget() != null
-						&& CopperDragonEntity.this.getTarget().isAlive();
+				return SpruceDragonEntity.this.getMoveControl().hasWanted() && SpruceDragonEntity.this.getTarget() != null
+						&& SpruceDragonEntity.this.getTarget().isAlive();
 			}
 
 			@Override
 			public void start() {
-				LivingEntity livingentity = CopperDragonEntity.this.getTarget();
+				LivingEntity livingentity = SpruceDragonEntity.this.getTarget();
 				Vec3 vec3d = livingentity.getEyePosition(1);
-				CopperDragonEntity.this.moveControl.setWantedPosition(vec3d.x, vec3d.y, vec3d.z, 1);
+				SpruceDragonEntity.this.moveControl.setWantedPosition(vec3d.x, vec3d.y, vec3d.z, 1);
 			}
 
 			@Override
 			public void tick() {
-				LivingEntity livingentity = CopperDragonEntity.this.getTarget();
-				if (CopperDragonEntity.this.getBoundingBox().intersects(livingentity.getBoundingBox())) {
-					CopperDragonEntity.this.doHurtTarget(livingentity);
+				LivingEntity livingentity = SpruceDragonEntity.this.getTarget();
+				if (SpruceDragonEntity.this.getBoundingBox().intersects(livingentity.getBoundingBox())) {
+					SpruceDragonEntity.this.doHurtTarget(livingentity);
 				} else {
-					double d0 = CopperDragonEntity.this.distanceToSqr(livingentity);
+					double d0 = SpruceDragonEntity.this.distanceToSqr(livingentity);
 					if (d0 < 16) {
 						Vec3 vec3d = livingentity.getEyePosition(1);
-						CopperDragonEntity.this.moveControl.setWantedPosition(vec3d.x, vec3d.y, vec3d.z, 1);
+						SpruceDragonEntity.this.moveControl.setWantedPosition(vec3d.x, vec3d.y, vec3d.z, 1);
 					}
 				}
 			}
 		});
-		this.goalSelector.addGoal(6, new MeleeAttackGoal(this, 1.2, false) {
+		this.goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.2, false) {
 			@Override
 			protected double getAttackReachSqr(LivingEntity entity) {
 				return (double) (4.0 + entity.getBbWidth() * entity.getBbWidth());
 			}
 		});
-		this.targetSelector.addGoal(7, new HurtByTargetGoal(this).setAlertOthers());
-		this.goalSelector.addGoal(8, new FollowOwnerGoal(this, 1, (float) 10, (float) 2, false));
-		this.goalSelector.addGoal(9, new TemptGoal(this, 1, Ingredient.of(Items.GOLDEN_APPLE,Items.GLOW_BERRIES), false));
-		this.goalSelector.addGoal(10, new RandomStrollGoal(this, 0.8, 20) {
+		this.targetSelector.addGoal(2, new HurtByTargetGoal(this).setAlertOthers());
+		this.goalSelector.addGoal(4, new FollowOwnerGoal(this, 1, (float) 10, (float) 2, false));
+		this.goalSelector.addGoal(9, new TemptGoal(this, 1, Ingredient.of(Items.SWEET_BERRIES,Items.BEEF,Items.CHICKEN,Items.MUTTON,Items.PORKCHOP,Items.GOLDEN_APPLE), false));
+		this.goalSelector.addGoal(10, new LookAtPlayerGoal(this, Player.class, (float) 6));
+		this.goalSelector.addGoal(11, new RandomStrollGoal(this, 0.8, 20) {
 			@Override
 			protected Vec3 getPosition() {
-				Random random = CopperDragonEntity.this.getRandom();
-				double dir_x = CopperDragonEntity.this.getX() + ((random.nextFloat() * 2 - 1) * 16);
-				double dir_y = CopperDragonEntity.this.getY() + ((random.nextFloat() * 2 - 1) * 16);
-				double dir_z = CopperDragonEntity.this.getZ() + ((random.nextFloat() * 2 - 1) * 16);
+				Random random = SpruceDragonEntity.this.getRandom();
+				double dir_x = SpruceDragonEntity.this.getX() + ((random.nextFloat() * 2 - 1) * 16);
+				double dir_y = SpruceDragonEntity.this.getY() + ((random.nextFloat() * 2 - 1) * 16);
+				double dir_z = SpruceDragonEntity.this.getZ() + ((random.nextFloat() * 2 - 1) * 16);
 				return new Vec3(dir_x, dir_y, dir_z);
 			}
 		});
-		this.goalSelector.addGoal(10, new RandomStrollGoal(this, 0.6));
-		this.goalSelector.addGoal(10, new LookAtPlayerGoal(this, Player.class, (float) 6));
-		this.goalSelector.addGoal(10, new RandomLookAroundGoal(this));
+		this.goalSelector.addGoal(12, new RandomStrollGoal(this, 0.6));
+		this.goalSelector.addGoal(13, new RandomLookAroundGoal(this));
 	}
 
 	@Override
@@ -176,18 +176,8 @@ public class CopperDragonEntity extends TamableAnimal {
 	}
 
 	@Override
-	public SoundEvent getAmbientSound() {
-		return ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("dragon_pets:cave_dragon"));
-	}
-
-	@Override
-	public void playStepSound(BlockPos pos, BlockState blockIn) {
-		this.playSound(ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("dragon_pets:dragon_flaps")), 0.15f, 1);
-	}
-
-	@Override
 	public SoundEvent getHurtSound(DamageSource ds) {
-		return ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("dragon_pets:dragon_hurts"));
+		return ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.generic.hurt"));
 	}
 
 	@Override
@@ -205,8 +195,6 @@ public class CopperDragonEntity extends TamableAnimal {
 		if (source.getDirectEntity() instanceof Player)
 			return false;
 		if (source == DamageSource.FALL)
-			return false;
-		if (source == DamageSource.LIGHTNING_BOLT)
 			return false;
 		if (source == DamageSource.DRAGON_BREATH)
 			return false;
@@ -264,14 +252,47 @@ public class CopperDragonEntity extends TamableAnimal {
 
 	@Override
 	public AgeableMob getBreedOffspring(ServerLevel serverWorld, AgeableMob ageable) {
-		CopperDragonEntity retval = DragonPetsModEntities.COPPER_DRAGON.get().create(serverWorld);
+		SpruceDragonEntity retval = DragonPetsModEntities.SPRUCE_DRAGON.get().create(serverWorld);
 		retval.finalizeSpawn(serverWorld, serverWorld.getCurrentDifficultyAt(retval.blockPosition()), MobSpawnType.BREEDING, null, null);
 		return retval;
 	}
 
 	@Override
 	public boolean isFood(ItemStack stack) {
-		return List.of(Items.GLOW_BERRIES).contains(stack.getItem());
+		return List.of(Items.SWEET_BERRIES, Items.BEEF, Items.CHICKEN, Items.MUTTON, Items.PORKCHOP).contains(stack.getItem());
+	}
+
+	@Override
+	public void travel(Vec3 dir) {
+		Entity entity = this.getPassengers().isEmpty() ? null : (Entity) this.getPassengers().get(0);
+		if (this.isVehicle()) {
+			this.setYRot(entity.getYRot());
+			this.yRotO = this.getYRot();
+			this.setXRot(entity.getXRot() * 0.5F);
+			this.setRot(this.getYRot(), this.getXRot());
+			this.flyingSpeed = this.getSpeed() * 0.15F;
+			this.yBodyRot = entity.getYRot();
+			this.yHeadRot = entity.getYRot();
+			this.maxUpStep = 1.0F;
+			if (entity instanceof LivingEntity passenger) {
+				this.setSpeed((float) this.getAttributeValue(Attributes.MOVEMENT_SPEED));
+				float forward = passenger.zza;
+				float strafe = passenger.xxa;
+				super.travel(new Vec3(strafe, 0, forward));
+			}
+			this.animationSpeedOld = this.animationSpeed;
+			double d1 = this.getX() - this.xo;
+			double d0 = this.getZ() - this.zo;
+			float f1 = (float) Math.sqrt(d1 * d1 + d0 * d0) * 4;
+			if (f1 > 1.0F)
+				f1 = 1.0F;
+			this.animationSpeed += (f1 - this.animationSpeed) * 0.4F;
+			this.animationPosition += this.animationSpeed;
+			return;
+		}
+		this.maxUpStep = 0.5F;
+		this.flyingSpeed = 0.02F;
+		super.travel(dir);
 	}
 
 	@Override
@@ -286,24 +307,10 @@ public class CopperDragonEntity extends TamableAnimal {
 	public void aiStep() {
 		super.aiStep();
 		this.setNoGravity(true);
-		double x = this.getX();
-		double y = this.getY();
-		double z = this.getZ();
-		Entity entity = this;
-		Level world = this.level;
-		for (int l = 0; l < 1; ++l) {
-			double x0 = x + random.nextFloat();
-			double y0 = y + random.nextFloat();
-			double z0 = z + random.nextFloat();
-			double dx = (random.nextFloat() - 0.5D) * 0.0999999985098839D;
-			double dy = (random.nextFloat() - 0.5D) * 0.0999999985098839D;
-			double dz = (random.nextFloat() - 0.5D) * 0.0999999985098839D;
-			world.addParticle(ParticleTypes.WAX_OFF, x0, y0, z0, dx, dy, dz);
-		}
 	}
 
 	public static void init() {
-		SpawnPlacements.register(DragonPetsModEntities.COPPER_DRAGON.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+		SpawnPlacements.register(DragonPetsModEntities.SPRUCE_DRAGON.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
 				(entityType, world, reason, pos, random) -> (world.getDifficulty() != Difficulty.PEACEFUL
 						&& Monster.isDarkEnoughToSpawn(world, pos, random) && Mob.checkMobSpawnRules(entityType, world, reason, pos, random)));
 	}

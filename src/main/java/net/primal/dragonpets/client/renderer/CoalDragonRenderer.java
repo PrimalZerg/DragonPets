@@ -12,7 +12,7 @@ import net.minecraft.client.renderer.RenderType;
 
 public class CoalDragonRenderer extends MobRenderer<CoalDragonEntity, Modeldragon<CoalDragonEntity>> {
 	public CoalDragonRenderer(EntityRendererProvider.Context context) {
-		super(context, new Modeldragon(context.bakeLayer(Modeldragon.LAYER_LOCATION)), 0.3f);
+		super(context, new Modeldragon(context.bakeLayer(Modeldragon.LAYER_LOCATION)), 0.5f);
 		this.addLayer(new EyesLayer<CoalDragonEntity, Modeldragon<CoalDragonEntity>>(this) {
 			@Override
 			public RenderType renderType() {

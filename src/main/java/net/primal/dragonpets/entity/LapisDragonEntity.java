@@ -222,11 +222,11 @@ public class LapisDragonEntity extends TamableAnimal {
 						this.heal(4);
 						retval = InteractionResult.sidedSuccess(this.level.isClientSide());
 					} else   if (this.isTame() && this.isOwnedBy(sourceentity)) {
-						this.usePlayerItem(sourceentity, hand, itemstack);
+						this.setOrderedToSit(!this.isOrderedToSit());
 						this.navigation.stop();
            				this.setTarget((LivingEntity)null);
-      		            this.setOrderedToSit(!this.isOrderedToSit());
 						retval = super.mobInteract(sourceentity, hand);
+						return InteractionResult.SUCCESS;
 					}
 				}
 			} else if (this.isFood(itemstack)) {

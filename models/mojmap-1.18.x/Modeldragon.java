@@ -1,8 +1,7 @@
 // Made with Blockbench 4.2.5
 // Exported for Minecraft version 1.17 - 1.18 with Mojang mappings
 // Paste this class into your mod and generate all required imports
-
-public class Modeldragon<T extends Entity> extends EntityModel<T> {
+public class Modeldragon<T extends TamableAnimal >extends EntityModel<T> {
 	// This layer location should be baked with EntityRendererProvider.Context in
 	// the entity renderer and passed into this model's constructor
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
@@ -238,7 +237,7 @@ public class Modeldragon<T extends Entity> extends EntityModel<T> {
 				PartPose.offsetAndRotation(-1.5F, -4.2635F, 8.6113F, 0.6682F, 0.3879F, 0.2902F));
 
 		PartDefinition spikes = tail4.addOrReplaceChild("spikes", CubeListBuilder.create(),
-				PartPose.offset(0.0F, 0.0F, 0.0F));
+				PartPose.offset(0.0F, 0.0F, -7.0F));
 
 		PartDefinition cube_r20 = spikes.addOrReplaceChild("cube_r20",
 				CubeListBuilder.create().texOffs(52, 26)
@@ -314,20 +313,7 @@ public class Modeldragon<T extends Entity> extends EntityModel<T> {
 
 		return LayerDefinition.create(meshdefinition, 64, 64);
 	}
-	// public void prepareMobModel(T entity, float limbswing, float limbSwingAmount,
-	// float ageInTicks, float netHeadYaw,
-	// float headPitch) {
-	// if (entity.isInSittingPose()) {
-	// this.body.setPos(-1.5F, 2.5F, 0.0F);
-	// this.body.xRot = 40F;
-	// } else {
-	// this.body.setPos(-1.5F, 4.5F, -1F);
-	// this.body.xRot = 0F;
-	// }
-	// }
-
-	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw,
-			float headPitch) {
+			public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw,float headPitch) {
 		this.wingright.zRot = Mth.cos(limbSwing * 0.9F + (float) Math.PI) * limbSwingAmount;
 		this.upperwingright.zRot = Mth.cos(limbSwing * 0.6662F) * limbSwingAmount;
 		this.tail.yRot = Mth.cos(limbSwing * 0.90F + (float) Math.PI) * limbSwingAmount;
@@ -338,6 +324,36 @@ public class Modeldragon<T extends Entity> extends EntityModel<T> {
 		this.head.xRot = headPitch / (180F / (float) Math.PI);
 		this.upperwingleft.zRot = Mth.cos(limbSwing * 0.6662F + (float) Math.PI) * limbSwingAmount;
 		this.wingleft.zRot = Mth.cos(limbSwing * 0.9F) * limbSwingAmount;
+}
+ public void prepareMobModel(T entity, float p_104133_, float p_104134_, float p_104135_) {
+   if (entity.isInSittingPose()) {
+ 	    this.body.xRot = -0.50F;
+ 	    this.head.setPos(0.0F,18.5F,-4.0F);
+    	this.body.setPos(0.0F,19.0F,0.0F);
+    	this.rightleg.setPos(-1.3F,21.7F,2.5F);
+    	this.leftleg.setPos(1.3F,21.7F,2.5F);
+  	 	this.rightleg.xRot = -.9F;
+   		this.leftleg.xRot = -.9F;
+   		this.leftfoot.xRot = .40F;
+   		this.rightfoot.xRot = .40F;
+  		this.rightarm.xRot = 0.0F;
+  		this.leftarm.xRot = 0.0F;
+  		this.lefthand.xRot = 0.0F;
+  		this.righthand.xRot = 0.0F;
+  		this.tail.setPos(0.0F,21F,3.0F);
+  		this.wingright.setPos(-1.3F,18F,-1F);
+		this.wingright.zRot = 6.0F;
+		this.wingleft.setPos(1.3F,18F,-1F);
+		this.wingleft.yRot = -6.0F;
+		this.upperwingleft.yRot = 6.0F;
+		this.upperwingright.yRot = -6.0F;
+	}
+	else {
+		this.body.xRot = 0.0F;
+		this.head.setPos(0.0F,18F,-4.5F);
+		this.body.setPos(0.0F,17.0F,0.0F);
+		this.rightleg.setPos(-1.3F,18.0F,4F);
+    	this.leftleg.setPos(1.3F,18.0F,4F);
 		this.rightarm.xRot = 0.5F;
 		this.righthand.xRot = -30F;
 		this.righthand.setPos(0.0F,6.3F,-1.0F);
@@ -348,9 +364,11 @@ public class Modeldragon<T extends Entity> extends EntityModel<T> {
 		this.rightfoot.xRot = -42.5F;
 		this.leftleg.xRot = -50.0F;
 		this.leftfoot.xRot = -42.5F;
-   }
+		this.tail.setPos(0.0F,17.0F,3.0F);
+	}
+}
 
-	@Override
+   @Override
 	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay,
 			float red, float green, float blue, float alpha) {
 		body.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);

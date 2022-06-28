@@ -103,9 +103,9 @@ public class SpaceDragonEntity extends TamableAnimal {
 		this.goalSelector.addGoal(0, new FloatGoal(this));
 		this.goalSelector.addGoal(1, new SitWhenOrderedToGoal(this));
 		this.targetSelector.addGoal(2, new OwnerHurtTargetGoal(this));
-		this.goalSelector.addGoal(3, new OwnerHurtByTargetGoal(this));
+		this.goalSelector.addGoal(2, new OwnerHurtByTargetGoal(this));
 		this.goalSelector.addGoal(4, new BreedGoal(this, 1));
-		this.goalSelector.addGoal(5, new Goal() {
+		this.goalSelector.addGoal(3, new Goal() {
 			{
 				this.setFlags(EnumSet.of(Goal.Flag.MOVE));
 			}
@@ -152,7 +152,7 @@ public class SpaceDragonEntity extends TamableAnimal {
 			}
 		});
 		this.targetSelector.addGoal(7, new HurtByTargetGoal(this).setAlertOthers());
-		this.goalSelector.addGoal(8, new FollowOwnerGoal(this, 1, (float) 10, (float) 2, false));
+		this.goalSelector.addGoal(4, new FollowOwnerGoal(this, 1, (float) 10, (float) 2, false));
 		this.goalSelector.addGoal(9, new TemptGoal(this, 1, Ingredient.of(Items.CHORUS_FRUIT), false));
 		this.goalSelector.addGoal(10, new RandomStrollGoal(this, 0.8, 20) {
 			@Override
@@ -235,11 +235,12 @@ public class SpaceDragonEntity extends TamableAnimal {
 						this.heal(4);
 						retval = InteractionResult.sidedSuccess(this.level.isClientSide());
 					} else if (this.isTame() && this.isOwnedBy(sourceentity)) {
-						this.usePlayerItem(sourceentity, hand, itemstack);
+						 this.setOrderedToSit(!this.isOrderedToSit());
 						this.navigation.stop();
            				this.setTarget((LivingEntity)null);
-      		            this.setOrderedToSit(!this.isOrderedToSit());
 						retval = super.mobInteract(sourceentity, hand);
+							return InteractionResult.SUCCESS;
+	
 					}
 				}
 			} else if (this.isFood(itemstack)) {
