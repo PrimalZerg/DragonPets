@@ -74,7 +74,7 @@ public class CopperDragonEntity extends TamableAnimal {
 	public static void addLivingEntityToBiomes(BiomeLoadingEvent event) {
 		if (SPAWN_BIOMES.contains(event.getName()))
 			event.getSpawns().getSpawner(MobCategory.MONSTER)
-					.add(new MobSpawnSettings.SpawnerData(DragonPetsModEntities.COPPER_DRAGON.get(), 40, 1, 1));
+					.add(new MobSpawnSettings.SpawnerData(DragonPetsModEntities.COPPER_DRAGON.get(), 100, 1, 1));
 	}
 
 	public CopperDragonEntity(PlayMessages.SpawnEntity packet, Level world) {

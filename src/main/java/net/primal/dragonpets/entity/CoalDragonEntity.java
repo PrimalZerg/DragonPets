@@ -75,7 +75,7 @@ public class CoalDragonEntity extends TamableAnimal {
 	public static void addLivingEntityToBiomes(BiomeLoadingEvent event) {
 		if (SPAWN_BIOMES.contains(event.getName()))
 			event.getSpawns().getSpawner(MobCategory.MONSTER)
-					.add(new MobSpawnSettings.SpawnerData(DragonPetsModEntities.COAL_DRAGON.get(), 40, 1, 1));
+					.add(new MobSpawnSettings.SpawnerData(DragonPetsModEntities.COAL_DRAGON.get(), 80, 1, 1));
 	}
 
 	public CoalDragonEntity(PlayMessages.SpawnEntity packet, Level world) {

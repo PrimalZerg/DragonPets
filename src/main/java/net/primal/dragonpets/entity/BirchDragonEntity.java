@@ -63,6 +63,7 @@ import java.util.Set;
 import java.util.Random;
 import java.util.List;
 import java.util.EnumSet;
+import net.minecraft.world.entity.ai.goal.SitWhenOrderedToGoal;
 
 @Mod.EventBusSubscriber
 public class BirchDragonEntity extends TamableAnimal {
@@ -100,11 +101,12 @@ public class BirchDragonEntity extends TamableAnimal {
 	@Override
 	protected void registerGoals() {
 		super.registerGoals();
-		this.goalSelector.addGoal(1, new FloatGoal(this));
+		this.goalSelector.addGoal(0, new FloatGoal(this));
+		this.goalSelector.addGoal(1, new SitWhenOrderedToGoal(this));
 		this.targetSelector.addGoal(2, new OwnerHurtTargetGoal(this));
-		this.goalSelector.addGoal(3, new OwnerHurtByTargetGoal(this));
+		this.goalSelector.addGoal(2, new OwnerHurtByTargetGoal(this));
 		this.goalSelector.addGoal(4, new BreedGoal(this, 1));
-		this.goalSelector.addGoal(5, new Goal() {
+		this.goalSelector.addGoal(3, new Goal() {
 			{
 				this.setFlags(EnumSet.of(Goal.Flag.MOVE));
 			}
@@ -144,15 +146,15 @@ public class BirchDragonEntity extends TamableAnimal {
 				}
 			}
 		});
-		this.goalSelector.addGoal(6, new MeleeAttackGoal(this, 1.2, false) {
+		this.goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.2, false) {
 			@Override
 			protected double getAttackReachSqr(LivingEntity entity) {
 				return (double) (4.0 + entity.getBbWidth() * entity.getBbWidth());
 			}
 		});
-		this.targetSelector.addGoal(7, new HurtByTargetGoal(this).setAlertOthers());
-		this.goalSelector.addGoal(8, new FollowOwnerGoal(this, 1, (float) 10, (float) 2, false));
-		this.goalSelector.addGoal(9, new TemptGoal(this, 1, Ingredient.of(Items.SWEET_BERRIES), false));
+		this.targetSelector.addGoal(2, new HurtByTargetGoal(this).setAlertOthers());
+		this.goalSelector.addGoal(4, new FollowOwnerGoal(this, 1, (float) 10, (float) 2, false));
+		this.goalSelector.addGoal(9, new TemptGoal(this, 1, Ingredient.of(Items.GOLDEN_APPLE,Items.SWEET_BERRIES, Items.BEEF, Items.CHICKEN, Items.PORKCHOP, Items.MUTTON), false));
 		this.goalSelector.addGoal(10, new LookAtPlayerGoal(this, Player.class, (float) 6));
 		this.goalSelector.addGoal(11, new RandomStrollGoal(this, 0.8, 20) {
 			@Override
@@ -221,8 +223,12 @@ public class BirchDragonEntity extends TamableAnimal {
 						this.usePlayerItem(sourceentity, hand, itemstack);
 						this.heal(4);
 						retval = InteractionResult.sidedSuccess(this.level.isClientSide());
-					} else {
+					} else  if (this.isTame() && this.isOwnedBy(sourceentity)) {
+						this.setOrderedToSit(!this.isOrderedToSit());
+						this.navigation.stop();
+           				this.setTarget((LivingEntity)null);
 						retval = super.mobInteract(sourceentity, hand);
+						return InteractionResult.SUCCESS;
 					}
 				}
 			} else if (this.isFood(itemstack)) {
@@ -241,7 +247,6 @@ public class BirchDragonEntity extends TamableAnimal {
 					this.setPersistenceRequired();
 			}
 		}
-		sourceentity.startRiding(this);
 		return retval;
 	}
 

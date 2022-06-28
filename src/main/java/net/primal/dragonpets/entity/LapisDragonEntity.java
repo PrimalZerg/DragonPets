@@ -72,7 +72,7 @@ public class LapisDragonEntity extends TamableAnimal {
 	public static void addLivingEntityToBiomes(BiomeLoadingEvent event) {
 		if (SPAWN_BIOMES.contains(event.getName()))
 			event.getSpawns().getSpawner(MobCategory.MONSTER)
-					.add(new MobSpawnSettings.SpawnerData(DragonPetsModEntities.LAPIS_DRAGON.get(), 20, 1, 1));
+					.add(new MobSpawnSettings.SpawnerData(DragonPetsModEntities.LAPIS_DRAGON.get(), 40, 1, 1));
 	}
 
 	public LapisDragonEntity(PlayMessages.SpawnEntity packet, Level world) {

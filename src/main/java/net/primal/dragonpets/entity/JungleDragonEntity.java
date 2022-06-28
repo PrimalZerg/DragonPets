@@ -27,12 +27,12 @@ import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation;
 import net.minecraft.world.entity.ai.goal.target.OwnerHurtTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.OwnerHurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
-import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
 import net.minecraft.world.entity.ai.goal.TemptGoal;
 import net.minecraft.world.entity.ai.goal.RandomStrollGoal;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
+import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.goal.FollowOwnerGoal;
 import net.minecraft.world.entity.ai.goal.FloatGoal;
 import net.minecraft.world.entity.ai.goal.BreedGoal;
@@ -47,6 +47,7 @@ import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.InteractionResult;
@@ -61,29 +62,29 @@ import net.minecraft.core.BlockPos;
 import java.util.Set;
 import java.util.Random;
 import java.util.List;
+import java.util.EnumSet;
 import net.minecraft.world.entity.ai.goal.SitWhenOrderedToGoal;
 
 @Mod.EventBusSubscriber
-public class IronDragonEntity extends TamableAnimal {
-	private static final Set<ResourceLocation> SPAWN_BIOMES = Set.of(new ResourceLocation("windswept_hills"), new ResourceLocation("dripstone_caves"),
-			new ResourceLocation("windswept_gravelly_hills"));
+public class JungleDragonEntity extends TamableAnimal {
+	private static final Set<ResourceLocation> SPAWN_BIOMES = Set.of(new ResourceLocation("bamboo_jungle"), new ResourceLocation("sparse_jungle"),
+			new ResourceLocation("jungle"));
 
 	@SubscribeEvent
 	public static void addLivingEntityToBiomes(BiomeLoadingEvent event) {
 		if (SPAWN_BIOMES.contains(event.getName()))
 			event.getSpawns().getSpawner(MobCategory.MONSTER)
-					.add(new MobSpawnSettings.SpawnerData(DragonPetsModEntities.IRON_DRAGON.get(), 80, 1, 1));
+					.add(new MobSpawnSettings.SpawnerData(DragonPetsModEntities.JUNGLE_DRAGON.get(), 120, 1, 1));
 	}
 
-	public IronDragonEntity(PlayMessages.SpawnEntity packet, Level world) {
-		this(DragonPetsModEntities.IRON_DRAGON.get(), world);
+	public JungleDragonEntity(PlayMessages.SpawnEntity packet, Level world) {
+		this(DragonPetsModEntities.JUNGLE_DRAGON.get(), world);
 	}
 
-	public IronDragonEntity(EntityType<IronDragonEntity> type, Level world) {
+	public JungleDragonEntity(EntityType<JungleDragonEntity> type, Level world) {
 		super(type, world);
-		xpReward = 3;
+		xpReward = 0;
 		setNoAi(false);
-		setPersistenceRequired();
 		this.moveControl = new FlyingMoveControl(this, 10, true);
 	}
 
@@ -102,31 +103,70 @@ public class IronDragonEntity extends TamableAnimal {
 		super.registerGoals();
 		this.goalSelector.addGoal(0, new FloatGoal(this));
 		this.goalSelector.addGoal(1, new SitWhenOrderedToGoal(this));
+		this.targetSelector.addGoal(2, new OwnerHurtTargetGoal(this));
 		this.goalSelector.addGoal(2, new OwnerHurtByTargetGoal(this));
-		this.targetSelector.addGoal(3, new OwnerHurtTargetGoal(this));
 		this.goalSelector.addGoal(4, new BreedGoal(this, 1));
-		this.goalSelector.addGoal(5, new MeleeAttackGoal(this, 1.2, false) {
+		this.goalSelector.addGoal(3, new Goal() {
+			{
+				this.setFlags(EnumSet.of(Goal.Flag.MOVE));
+			}
+
+			public boolean canUse() {
+				if (JungleDragonEntity.this.getTarget() != null && !JungleDragonEntity.this.getMoveControl().hasWanted()) {
+					return true;
+				} else {
+					return false;
+				}
+			}
+
+			@Override
+			public boolean canContinueToUse() {
+				return JungleDragonEntity.this.getMoveControl().hasWanted() && JungleDragonEntity.this.getTarget() != null
+						&& JungleDragonEntity.this.getTarget().isAlive();
+			}
+
+			@Override
+			public void start() {
+				LivingEntity livingentity = JungleDragonEntity.this.getTarget();
+				Vec3 vec3d = livingentity.getEyePosition(1);
+				JungleDragonEntity.this.moveControl.setWantedPosition(vec3d.x, vec3d.y, vec3d.z, 1);
+			}
+
+			@Override
+			public void tick() {
+				LivingEntity livingentity = JungleDragonEntity.this.getTarget();
+				if (JungleDragonEntity.this.getBoundingBox().intersects(livingentity.getBoundingBox())) {
+					JungleDragonEntity.this.doHurtTarget(livingentity);
+				} else {
+					double d0 = JungleDragonEntity.this.distanceToSqr(livingentity);
+					if (d0 < 16) {
+						Vec3 vec3d = livingentity.getEyePosition(1);
+						JungleDragonEntity.this.moveControl.setWantedPosition(vec3d.x, vec3d.y, vec3d.z, 1);
+					}
+				}
+			}
+		});
+		this.goalSelector.addGoal(6, new MeleeAttackGoal(this, 1.2, false) {
 			@Override
 			protected double getAttackReachSqr(LivingEntity entity) {
 				return (double) (4.0 + entity.getBbWidth() * entity.getBbWidth());
 			}
 		});
-		this.targetSelector.addGoal(6, new HurtByTargetGoal(this).setAlertOthers());
-		this.goalSelector.addGoal(7, new FollowOwnerGoal(this, 1, (float) 10, (float) 2, false));
-		this.goalSelector.addGoal(8, new TemptGoal(this, 1, Ingredient.of(Items.GOLDEN_APPLE,Items.GLOW_BERRIES), false));
-		this.goalSelector.addGoal(9, new RandomStrollGoal(this, 0.8, 20) {
+		this.targetSelector.addGoal(2, new HurtByTargetGoal(this).setAlertOthers());
+		this.goalSelector.addGoal(4, new FollowOwnerGoal(this, 1, (float) 10, (float) 2, false));
+		this.goalSelector.addGoal(9, new TemptGoal(this, 1, Ingredient.of(Items.SWEET_BERRIES), false));
+		this.goalSelector.addGoal(10, new LookAtPlayerGoal(this, Player.class, (float) 6));
+		this.goalSelector.addGoal(11, new RandomStrollGoal(this, 0.8, 20) {
 			@Override
 			protected Vec3 getPosition() {
-				Random random = IronDragonEntity.this.getRandom();
-				double dir_x = IronDragonEntity.this.getX() + ((random.nextFloat() * 2 - 1) * 16);
-				double dir_y = IronDragonEntity.this.getY() + ((random.nextFloat() * 2 - 1) * 16);
-				double dir_z = IronDragonEntity.this.getZ() + ((random.nextFloat() * 2 - 1) * 16);
+				Random random = JungleDragonEntity.this.getRandom();
+				double dir_x = JungleDragonEntity.this.getX() + ((random.nextFloat() * 2 - 1) * 16);
+				double dir_y = JungleDragonEntity.this.getY() + ((random.nextFloat() * 2 - 1) * 16);
+				double dir_z = JungleDragonEntity.this.getZ() + ((random.nextFloat() * 2 - 1) * 16);
 				return new Vec3(dir_x, dir_y, dir_z);
 			}
 		});
-		this.goalSelector.addGoal(10, new RandomStrollGoal(this, 0.6));
-		this.goalSelector.addGoal(11, new WaterAvoidingRandomStrollGoal(this, 0.8));
-		this.goalSelector.addGoal(12, new LookAtPlayerGoal(this, Player.class, (float) 6));
+		this.goalSelector.addGoal(12, new RandomStrollGoal(this, 0.6));
 		this.goalSelector.addGoal(13, new RandomLookAroundGoal(this));
 	}
 
@@ -136,23 +176,8 @@ public class IronDragonEntity extends TamableAnimal {
 	}
 
 	@Override
-	public boolean removeWhenFarAway(double distanceToClosestPlayer) {
-		return false;
-	}
-
-	@Override
-	public SoundEvent getAmbientSound() {
-		return ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("dragon_pets:cave_dragon"));
-	}
-
-	@Override
-	public void playStepSound(BlockPos pos, BlockState blockIn) {
-		this.playSound(ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("dragon_pets:dragon_flaps")), 0.15f, 1);
-	}
-
-	@Override
 	public SoundEvent getHurtSound(DamageSource ds) {
-		return ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("dragon_pets:dragon_hurts"));
+		return ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.generic.hurt"));
 	}
 
 	@Override
@@ -198,7 +223,7 @@ public class IronDragonEntity extends TamableAnimal {
 						this.usePlayerItem(sourceentity, hand, itemstack);
 						this.heal(4);
 						retval = InteractionResult.sidedSuccess(this.level.isClientSide());
-					} else if (this.isTame() && this.isOwnedBy(sourceentity)) {
+					} else  if (this.isTame() && this.isOwnedBy(sourceentity)) {
 						this.setOrderedToSit(!this.isOrderedToSit());
 						this.navigation.stop();
            				this.setTarget((LivingEntity)null);
@@ -227,14 +252,47 @@ public class IronDragonEntity extends TamableAnimal {
 
 	@Override
 	public AgeableMob getBreedOffspring(ServerLevel serverWorld, AgeableMob ageable) {
-		IronDragonEntity retval = DragonPetsModEntities.IRON_DRAGON.get().create(serverWorld);
+		JungleDragonEntity retval = DragonPetsModEntities.JUNGLE_DRAGON.get().create(serverWorld);
 		retval.finalizeSpawn(serverWorld, serverWorld.getCurrentDifficultyAt(retval.blockPosition()), MobSpawnType.BREEDING, null, null);
 		return retval;
 	}
 
 	@Override
 	public boolean isFood(ItemStack stack) {
-		return List.of(Items.GLOW_BERRIES).contains(stack.getItem());
+		return List.of(Items.MELON_SLICE, Items.SWEET_BERRIES, Items.PORKCHOP, Items.CHICKEN, Items.BEEF, Items.MUTTON).contains(stack.getItem());
+	}
+
+	@Override
+	public void travel(Vec3 dir) {
+		Entity entity = this.getPassengers().isEmpty() ? null : (Entity) this.getPassengers().get(0);
+		if (this.isVehicle()) {
+			this.setYRot(entity.getYRot());
+			this.yRotO = this.getYRot();
+			this.setXRot(entity.getXRot() * 0.5F);
+			this.setRot(this.getYRot(), this.getXRot());
+			this.flyingSpeed = this.getSpeed() * 0.15F;
+			this.yBodyRot = entity.getYRot();
+			this.yHeadRot = entity.getYRot();
+			this.maxUpStep = 1.0F;
+			if (entity instanceof LivingEntity passenger) {
+				this.setSpeed((float) this.getAttributeValue(Attributes.MOVEMENT_SPEED));
+				float forward = passenger.zza;
+				float strafe = passenger.xxa;
+				super.travel(new Vec3(strafe, 0, forward));
+			}
+			this.animationSpeedOld = this.animationSpeed;
+			double d1 = this.getX() - this.xo;
+			double d0 = this.getZ() - this.zo;
+			float f1 = (float) Math.sqrt(d1 * d1 + d0 * d0) * 4;
+			if (f1 > 1.0F)
+				f1 = 1.0F;
+			this.animationSpeed += (f1 - this.animationSpeed) * 0.4F;
+			this.animationPosition += this.animationSpeed;
+			return;
+		}
+		this.maxUpStep = 0.5F;
+		this.flyingSpeed = 0.02F;
+		super.travel(dir);
 	}
 
 	@Override
@@ -252,7 +310,7 @@ public class IronDragonEntity extends TamableAnimal {
 	}
 
 	public static void init() {
-		SpawnPlacements.register(DragonPetsModEntities.IRON_DRAGON.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+		SpawnPlacements.register(DragonPetsModEntities.JUNGLE_DRAGON.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
 				(entityType, world, reason, pos, random) -> (world.getDifficulty() != Difficulty.PEACEFUL
 						&& Monster.isDarkEnoughToSpawn(world, pos, random) && Mob.checkMobSpawnRules(entityType, world, reason, pos, random)));
 	}

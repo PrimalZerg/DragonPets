@@ -73,7 +73,7 @@ public class RedstoneDragonEntity extends TamableAnimal {
 	public static void addLivingEntityToBiomes(BiomeLoadingEvent event) {
 		if (SPAWN_BIOMES.contains(event.getName()))
 			event.getSpawns().getSpawner(MobCategory.MONSTER)
-					.add(new MobSpawnSettings.SpawnerData(DragonPetsModEntities.REDSTONE_DRAGON.get(), 30, 1, 1));
+					.add(new MobSpawnSettings.SpawnerData(DragonPetsModEntities.REDSTONE_DRAGON.get(), 50, 1, 1));
 	}
 
 	public RedstoneDragonEntity(PlayMessages.SpawnEntity packet, Level world) {

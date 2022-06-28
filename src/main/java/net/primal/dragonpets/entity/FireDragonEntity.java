@@ -76,7 +76,7 @@ public class FireDragonEntity extends TamableAnimal {
 	public static void addLivingEntityToBiomes(BiomeLoadingEvent event) {
 		if (SPAWN_BIOMES.contains(event.getName()))
 			event.getSpawns().getSpawner(MobCategory.MONSTER)
-					.add(new MobSpawnSettings.SpawnerData(DragonPetsModEntities.FIRE_DRAGON.get(), 30, 1, 1));
+					.add(new MobSpawnSettings.SpawnerData(DragonPetsModEntities.FIRE_DRAGON.get(), 100, 1, 1));
 	}
 
 	public FireDragonEntity(PlayMessages.SpawnEntity packet, Level world) {

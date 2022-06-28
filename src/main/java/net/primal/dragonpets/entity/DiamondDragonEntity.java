@@ -73,7 +73,7 @@ public class DiamondDragonEntity extends TamableAnimal {
 	public static void addLivingEntityToBiomes(BiomeLoadingEvent event) {
 		if (SPAWN_BIOMES.contains(event.getName()))
 			event.getSpawns().getSpawner(MobCategory.MONSTER)
-					.add(new MobSpawnSettings.SpawnerData(DragonPetsModEntities.DIAMOND_DRAGON.get(), 10, 1, 1));
+					.add(new MobSpawnSettings.SpawnerData(DragonPetsModEntities.DIAMOND_DRAGON.get(), 20, 1, 1));
 	}
 
 	public DiamondDragonEntity(PlayMessages.SpawnEntity packet, Level world) {

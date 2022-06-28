@@ -73,7 +73,7 @@ public class SpaceDragonEntity extends TamableAnimal {
 	public static void addLivingEntityToBiomes(BiomeLoadingEvent event) {
 		if (SPAWN_BIOMES.contains(event.getName()))
 			event.getSpawns().getSpawner(MobCategory.MONSTER)
-					.add(new MobSpawnSettings.SpawnerData(DragonPetsModEntities.SPACE_DRAGON.get(), 5, 1, 1));
+					.add(new MobSpawnSettings.SpawnerData(DragonPetsModEntities.SPACE_DRAGON.get(), 20, 1, 1));
 	}
 
 	public SpaceDragonEntity(PlayMessages.SpawnEntity packet, Level world) {

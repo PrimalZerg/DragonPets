@@ -73,7 +73,7 @@ public class EndDragonEntity extends TamableAnimal {
 	@SubscribeEvent
 	public static void addLivingEntityToBiomes(BiomeLoadingEvent event) {
 		if (SPAWN_BIOMES.contains(event.getName()))
-			event.getSpawns().getSpawner(MobCategory.MONSTER).add(new MobSpawnSettings.SpawnerData(DragonPetsModEntities.END_DRAGON.get(), 10, 1, 1));
+			event.getSpawns().getSpawner(MobCategory.MONSTER).add(new MobSpawnSettings.SpawnerData(DragonPetsModEntities.END_DRAGON.get(), 20, 1, 1));
 	}
 
 	public EndDragonEntity(PlayMessages.SpawnEntity packet, Level world) {

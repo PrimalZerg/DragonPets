@@ -75,7 +75,7 @@ public class GoldDragonEntity extends TamableAnimal {
 	public static void addLivingEntityToBiomes(BiomeLoadingEvent event) {
 		if (SPAWN_BIOMES.contains(event.getName()))
 			event.getSpawns().getSpawner(MobCategory.MONSTER)
-					.add(new MobSpawnSettings.SpawnerData(DragonPetsModEntities.GOLD_DRAGON.get(), 20, 1, 1));
+					.add(new MobSpawnSettings.SpawnerData(DragonPetsModEntities.GOLD_DRAGON.get(), 50, 1, 1));
 	}
 
 	public GoldDragonEntity(PlayMessages.SpawnEntity packet, Level world) {
