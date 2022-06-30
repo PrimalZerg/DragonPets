@@ -154,7 +154,7 @@ public class JungleDragonEntity extends TamableAnimal {
 		});
 		this.targetSelector.addGoal(2, new HurtByTargetGoal(this).setAlertOthers());
 		this.goalSelector.addGoal(4, new FollowOwnerGoal(this, 1, (float) 10, (float) 2, false));
-		this.goalSelector.addGoal(9, new TemptGoal(this, 1, Ingredient.of(Items.SWEET_BERRIES), false));
+		this.goalSelector.addGoal(9, new TemptGoal(this, 1, Ingredient.of(Items.SWEET_BERRIES, Items.PORKCHOP, Items.CHICKEN, Items.BEEF, Items.MUTTON,Items.GOLDEN_APPLE), false));
 		this.goalSelector.addGoal(10, new LookAtPlayerGoal(this, Player.class, (float) 6));
 		this.goalSelector.addGoal(11, new RandomStrollGoal(this, 0.8, 20) {
 			@Override
@@ -311,8 +311,7 @@ public class JungleDragonEntity extends TamableAnimal {
 
 	public static void init() {
 		SpawnPlacements.register(DragonPetsModEntities.JUNGLE_DRAGON.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
-				(entityType, world, reason, pos, random) -> (world.getDifficulty() != Difficulty.PEACEFUL
-						&& Monster.isDarkEnoughToSpawn(world, pos, random) && Mob.checkMobSpawnRules(entityType, world, reason, pos, random)));
+				(entityType, world, reason, pos, random) -> Monster.isDarkEnoughToSpawn(world, pos, random) && Mob.checkMobSpawnRules(entityType, world, reason, pos, random));
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {

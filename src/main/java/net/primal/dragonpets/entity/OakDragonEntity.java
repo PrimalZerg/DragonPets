@@ -66,22 +66,21 @@ import java.util.EnumSet;
 import net.minecraft.world.entity.ai.goal.SitWhenOrderedToGoal;
 
 @Mod.EventBusSubscriber
-public class BirchDragonEntity extends TamableAnimal {
-	private static final Set<ResourceLocation> SPAWN_BIOMES = Set.of(new ResourceLocation("old_growth_birch_forest"),
-			new ResourceLocation("birch_forest"));
+public class OakDragonEntity extends TamableAnimal {
+	private static final Set<ResourceLocation> SPAWN_BIOMES = Set.of(new ResourceLocation("forest"), new ResourceLocation("flower_forest"));
 
 	@SubscribeEvent
 	public static void addLivingEntityToBiomes(BiomeLoadingEvent event) {
 		if (SPAWN_BIOMES.contains(event.getName()))
 			event.getSpawns().getSpawner(MobCategory.MONSTER)
-					.add(new MobSpawnSettings.SpawnerData(DragonPetsModEntities.BIRCH_DRAGON.get(), 120, 1, 1));
+					.add(new MobSpawnSettings.SpawnerData(DragonPetsModEntities.OAK_DRAGON.get(), 120, 1, 1));
 	}
 
-	public BirchDragonEntity(PlayMessages.SpawnEntity packet, Level world) {
-		this(DragonPetsModEntities.BIRCH_DRAGON.get(), world);
+	public OakDragonEntity(PlayMessages.SpawnEntity packet, Level world) {
+		this(DragonPetsModEntities.OAK_DRAGON.get(), world);
 	}
 
-	public BirchDragonEntity(EntityType<BirchDragonEntity> type, Level world) {
+	public OakDragonEntity(EntityType<OakDragonEntity> type, Level world) {
 		super(type, world);
 		xpReward = 0;
 		setNoAi(false);
@@ -112,7 +111,7 @@ public class BirchDragonEntity extends TamableAnimal {
 			}
 
 			public boolean canUse() {
-				if (BirchDragonEntity.this.getTarget() != null && !BirchDragonEntity.this.getMoveControl().hasWanted()) {
+				if (OakDragonEntity.this.getTarget() != null && !OakDragonEntity.this.getMoveControl().hasWanted()) {
 					return true;
 				} else {
 					return false;
@@ -121,27 +120,27 @@ public class BirchDragonEntity extends TamableAnimal {
 
 			@Override
 			public boolean canContinueToUse() {
-				return BirchDragonEntity.this.getMoveControl().hasWanted() && BirchDragonEntity.this.getTarget() != null
-						&& BirchDragonEntity.this.getTarget().isAlive();
+				return OakDragonEntity.this.getMoveControl().hasWanted() && OakDragonEntity.this.getTarget() != null
+						&& OakDragonEntity.this.getTarget().isAlive();
 			}
 
 			@Override
 			public void start() {
-				LivingEntity livingentity = BirchDragonEntity.this.getTarget();
+				LivingEntity livingentity = OakDragonEntity.this.getTarget();
 				Vec3 vec3d = livingentity.getEyePosition(1);
-				BirchDragonEntity.this.moveControl.setWantedPosition(vec3d.x, vec3d.y, vec3d.z, 1);
+				OakDragonEntity.this.moveControl.setWantedPosition(vec3d.x, vec3d.y, vec3d.z, 1);
 			}
 
 			@Override
 			public void tick() {
-				LivingEntity livingentity = BirchDragonEntity.this.getTarget();
-				if (BirchDragonEntity.this.getBoundingBox().intersects(livingentity.getBoundingBox())) {
-					BirchDragonEntity.this.doHurtTarget(livingentity);
+				LivingEntity livingentity = OakDragonEntity.this.getTarget();
+				if (OakDragonEntity.this.getBoundingBox().intersects(livingentity.getBoundingBox())) {
+					OakDragonEntity.this.doHurtTarget(livingentity);
 				} else {
-					double d0 = BirchDragonEntity.this.distanceToSqr(livingentity);
+					double d0 = OakDragonEntity.this.distanceToSqr(livingentity);
 					if (d0 < 16) {
 						Vec3 vec3d = livingentity.getEyePosition(1);
-						BirchDragonEntity.this.moveControl.setWantedPosition(vec3d.x, vec3d.y, vec3d.z, 1);
+						OakDragonEntity.this.moveControl.setWantedPosition(vec3d.x, vec3d.y, vec3d.z, 1);
 					}
 				}
 			}
@@ -154,15 +153,15 @@ public class BirchDragonEntity extends TamableAnimal {
 		});
 		this.targetSelector.addGoal(2, new HurtByTargetGoal(this).setAlertOthers());
 		this.goalSelector.addGoal(4, new FollowOwnerGoal(this, 1, (float) 10, (float) 2, false));
-		this.goalSelector.addGoal(9, new TemptGoal(this, 1, Ingredient.of(Items.GOLDEN_APPLE,Items.SWEET_BERRIES, Items.BEEF, Items.CHICKEN, Items.PORKCHOP, Items.MUTTON), false));
+		this.goalSelector.addGoal(9, new TemptGoal(this, 1, Ingredient.of(Items.SWEET_BERRIES, Items.PORKCHOP, Items.CHICKEN, Items.BEEF, Items.MUTTON,Items.GOLDEN_APPLE), false));
 		this.goalSelector.addGoal(10, new LookAtPlayerGoal(this, Player.class, (float) 6));
 		this.goalSelector.addGoal(11, new RandomStrollGoal(this, 0.8, 20) {
 			@Override
 			protected Vec3 getPosition() {
-				Random random = BirchDragonEntity.this.getRandom();
-				double dir_x = BirchDragonEntity.this.getX() + ((random.nextFloat() * 2 - 1) * 16);
-				double dir_y = BirchDragonEntity.this.getY() + ((random.nextFloat() * 2 - 1) * 16);
-				double dir_z = BirchDragonEntity.this.getZ() + ((random.nextFloat() * 2 - 1) * 16);
+				Random random = OakDragonEntity.this.getRandom();
+				double dir_x = OakDragonEntity.this.getX() + ((random.nextFloat() * 2 - 1) * 16);
+				double dir_y = OakDragonEntity.this.getY() + ((random.nextFloat() * 2 - 1) * 16);
+				double dir_z = OakDragonEntity.this.getZ() + ((random.nextFloat() * 2 - 1) * 16);
 				return new Vec3(dir_x, dir_y, dir_z);
 			}
 		});
@@ -223,7 +222,7 @@ public class BirchDragonEntity extends TamableAnimal {
 						this.usePlayerItem(sourceentity, hand, itemstack);
 						this.heal(4);
 						retval = InteractionResult.sidedSuccess(this.level.isClientSide());
-					} else  if (this.isTame() && this.isOwnedBy(sourceentity)) {
+					} else if (this.isTame() && this.isOwnedBy(sourceentity)) {
 						this.setOrderedToSit(!this.isOrderedToSit());
 						this.navigation.stop();
            				this.setTarget((LivingEntity)null);
@@ -252,14 +251,14 @@ public class BirchDragonEntity extends TamableAnimal {
 
 	@Override
 	public AgeableMob getBreedOffspring(ServerLevel serverWorld, AgeableMob ageable) {
-		BirchDragonEntity retval = DragonPetsModEntities.BIRCH_DRAGON.get().create(serverWorld);
+		OakDragonEntity retval = DragonPetsModEntities.OAK_DRAGON.get().create(serverWorld);
 		retval.finalizeSpawn(serverWorld, serverWorld.getCurrentDifficultyAt(retval.blockPosition()), MobSpawnType.BREEDING, null, null);
 		return retval;
 	}
 
 	@Override
 	public boolean isFood(ItemStack stack) {
-		return List.of(Items.SWEET_BERRIES, Items.PORKCHOP, Items.BEEF, Items.CHICKEN, Items.MUTTON).contains(stack.getItem());
+		return List.of(Items.SWEET_BERRIES, Items.BEEF, Items.CHICKEN, Items.MUTTON, Items.PORKCHOP).contains(stack.getItem());
 	}
 
 	@Override
@@ -310,7 +309,7 @@ public class BirchDragonEntity extends TamableAnimal {
 	}
 
 	public static void init() {
-		SpawnPlacements.register(DragonPetsModEntities.BIRCH_DRAGON.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+		SpawnPlacements.register(DragonPetsModEntities.OAK_DRAGON.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
 				(entityType, world, reason, pos, random) -> Monster.isDarkEnoughToSpawn(world, pos, random) && Mob.checkMobSpawnRules(entityType, world, reason, pos, random));
 	}
 

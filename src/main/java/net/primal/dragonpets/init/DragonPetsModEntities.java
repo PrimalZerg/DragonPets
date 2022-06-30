@@ -7,6 +7,7 @@ package net.primal.dragonpets.init;
 import net.primal.dragonpets.entity.SpruceDragonEntity;
 import net.primal.dragonpets.entity.SpaceDragonEntity;
 import net.primal.dragonpets.entity.RedstoneDragonEntity;
+import net.primal.dragonpets.entity.OakDragonEntity;
 import net.primal.dragonpets.entity.LapisDragonEntity;
 import net.primal.dragonpets.entity.JungleDragonEntity;
 import net.primal.dragonpets.entity.IronDragonEntity;
@@ -113,6 +114,11 @@ public class DragonPetsModEntities {
 					.setTrackingRange(64).setUpdateInterval(3).setCustomClientFactory(JungleDragonEntity::new)
 
 					.sized(0.8f, 0.9f));
+	public static final RegistryObject<EntityType<OakDragonEntity>> OAK_DRAGON = register("oak_dragon",
+			EntityType.Builder.<OakDragonEntity>of(OakDragonEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true)
+					.setTrackingRange(64).setUpdateInterval(3).setCustomClientFactory(OakDragonEntity::new)
+
+					.sized(0.7999999999999999f, 0.9f));
 
 	private static <T extends Entity> RegistryObject<EntityType<T>> register(String registryname, EntityType.Builder<T> entityTypeBuilder) {
 		return REGISTRY.register(registryname, () -> (EntityType<T>) entityTypeBuilder.build(registryname));
@@ -138,6 +144,7 @@ public class DragonPetsModEntities {
 			AcaciaDragonEntity.init();
 			BirchDragonEntity.init();
 			JungleDragonEntity.init();
+			OakDragonEntity.init();
 		});
 	}
 
@@ -160,5 +167,6 @@ public class DragonPetsModEntities {
 		event.put(ACACIA_DRAGON.get(), AcaciaDragonEntity.createAttributes().build());
 		event.put(BIRCH_DRAGON.get(), BirchDragonEntity.createAttributes().build());
 		event.put(JUNGLE_DRAGON.get(), JungleDragonEntity.createAttributes().build());
+		event.put(OAK_DRAGON.get(), OakDragonEntity.createAttributes().build());
 	}
 }

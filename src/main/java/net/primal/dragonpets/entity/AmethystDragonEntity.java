@@ -286,8 +286,7 @@ public class AmethystDragonEntity extends TamableAnimal {
 
 	public static void init() {
 		SpawnPlacements.register(DragonPetsModEntities.AMETHYST_DRAGON.get(), SpawnPlacements.Type.ON_GROUND,
-				Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, (entityType, world, reason, pos, random) -> (world.getDifficulty() != Difficulty.PEACEFUL
-						&& Monster.isDarkEnoughToSpawn(world, pos, random) && Mob.checkMobSpawnRules(entityType, world, reason, pos, random)));
+				Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, (entityType, world, reason, pos, random) -> Monster.isDarkEnoughToSpawn(world, pos, random) && Mob.checkMobSpawnRules(entityType, world, reason, pos, random));
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {

@@ -75,7 +75,7 @@
     {
       "name": "Dragons",
       "type": "tab",
-      "sortid": 13,
+      "sortid": 19,
       "compiles": true,
       "locked_code": false,
       "registry_name": "dragons"
@@ -107,7 +107,7 @@
     {
       "name": "DarkOakDragon",
       "type": "livingentity",
-      "sortid": 14,
+      "sortid": 13,
       "compiles": true,
       "locked_code": true,
       "registry_name": "dark_oak_dragon"
@@ -115,7 +115,7 @@
     {
       "name": "SpruceDragon",
       "type": "livingentity",
-      "sortid": 15,
+      "sortid": 14,
       "compiles": true,
       "locked_code": true,
       "registry_name": "spruce_dragon"
@@ -123,7 +123,7 @@
     {
       "name": "AcaciaDragon",
       "type": "livingentity",
-      "sortid": 16,
+      "sortid": 15,
       "compiles": true,
       "locked_code": true,
       "registry_name": "acacia_dragon"
@@ -131,7 +131,7 @@
     {
       "name": "BirchDragon",
       "type": "livingentity",
-      "sortid": 17,
+      "sortid": 16,
       "compiles": true,
       "locked_code": true,
       "registry_name": "birch_dragon"
@@ -139,10 +139,18 @@
     {
       "name": "JungleDragon",
       "type": "livingentity",
-      "sortid": 18,
+      "sortid": 17,
       "compiles": true,
       "locked_code": true,
       "registry_name": "jungle_dragon"
+    },
+    {
+      "name": "OakDragon",
+      "type": "livingentity",
+      "sortid": 18,
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "oak_dragon"
     }
   ],
   "variable_elements": [],
@@ -255,6 +263,7 @@
       "item.dragon_pet.amethyst_dragon_spawn_egg": "Amethyst Dragon Spawn Egg",
       "entity.dragon_pet.end_dragon": "End Dragon",
       "entity.dragon_pets.gold_dragon": "Gold Dragon",
+      "item.dragon_pets.oak_dragon_spawn_egg": "Oak Dragon Spawn Egg",
       "entity.dragon_pet.iron_dragon": "Iron Dragon",
       "entity.dragon_pets.spruce_dragon": "Spruce Dragon",
       "item.dragon_pet.space_dragon_spawn_egg": "Space Dragon Spawn Egg",
@@ -279,6 +288,7 @@
       "item.dragon_pets.jungle_dragon_spawn_egg": "Jungle Dragon Spawn Egg",
       "subtitles.ice_dragon_growls": "Ice Dragon Growls",
       "item.dragon_pet.fire_dragon_spawn_egg": "Fire Dragon Spawn Egg",
+      "entity.dragon_pets.oak_dragon": "Oak Dragon",
       "entity.dragon_pets.redstone_dragon": "Redstone Dragon",
       "item.dragon_pets.ice_dragon_spawn_egg": "Ice Dragon Spawn Egg",
       "entity.dragon_pet.space_dragon": "Space Dragon",

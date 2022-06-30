@@ -65,4 +65,7 @@ public class DragonPetsModItems {
 	public static final RegistryObject<Item> JUNGLE_DRAGON = REGISTRY.register("jungle_dragon_spawn_egg",
 			() -> new ForgeSpawnEggItem(DragonPetsModEntities.JUNGLE_DRAGON, -11717879, -13416956,
 					new Item.Properties().tab(DragonPetsModTabs.TAB_DRAGONS)));
+	public static final RegistryObject<Item> OAK_DRAGON = REGISTRY.register("oak_dragon_spawn_egg",
+			() -> new ForgeSpawnEggItem(DragonPetsModEntities.OAK_DRAGON, -9155285, -10769100,
+					new Item.Properties().tab(DragonPetsModTabs.TAB_DRAGONS)));
 }

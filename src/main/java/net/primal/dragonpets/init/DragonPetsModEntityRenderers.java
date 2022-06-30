@@ -7,6 +7,7 @@ package net.primal.dragonpets.init;
 import net.primal.dragonpets.client.renderer.SpruceDragonRenderer;
 import net.primal.dragonpets.client.renderer.SpaceDragonRenderer;
 import net.primal.dragonpets.client.renderer.RedstoneDragonRenderer;
+import net.primal.dragonpets.client.renderer.OakDragonRenderer;
 import net.primal.dragonpets.client.renderer.LapisDragonRenderer;
 import net.primal.dragonpets.client.renderer.JungleDragonRenderer;
 import net.primal.dragonpets.client.renderer.IronDragonRenderer;
@@ -48,5 +49,6 @@ public class DragonPetsModEntityRenderers {
 		event.registerEntityRenderer(DragonPetsModEntities.ACACIA_DRAGON.get(), AcaciaDragonRenderer::new);
 		event.registerEntityRenderer(DragonPetsModEntities.BIRCH_DRAGON.get(), BirchDragonRenderer::new);
 		event.registerEntityRenderer(DragonPetsModEntities.JUNGLE_DRAGON.get(), JungleDragonRenderer::new);
+		event.registerEntityRenderer(DragonPetsModEntities.OAK_DRAGON.get(), OakDragonRenderer::new);
 	}
 }
