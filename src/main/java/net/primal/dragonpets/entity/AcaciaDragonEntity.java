@@ -316,11 +316,11 @@ public class AcaciaDragonEntity extends TamableAnimal {
 
 	public static AttributeSupplier.Builder createAttributes() {
 		AttributeSupplier.Builder builder = Mob.createMobAttributes();
-		builder = builder.add(Attributes.MOVEMENT_SPEED, 0.6);
+		builder = builder.add(Attributes.MOVEMENT_SPEED, 0.5);
 		builder = builder.add(Attributes.MAX_HEALTH, 40);
 		builder = builder.add(Attributes.ARMOR, 5);
 		builder = builder.add(Attributes.ATTACK_DAMAGE, 5);
-		builder = builder.add(Attributes.FLYING_SPEED, 0.6);
+		builder = builder.add(Attributes.FLYING_SPEED, 0.5);
 		return builder;
 	}
 }
