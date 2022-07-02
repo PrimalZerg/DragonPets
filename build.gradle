@@ -10,9 +10,9 @@ buildscript {
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 
-version = '1.0'
-group = 'com.yourname.modid'
-archivesBaseName = 'modid'
+version = System.getenv("CATHERDER_VERSION") ?: new File(".VERSION").text.trim()
+group = 'com.sweetrpg'
+archivesBaseName = "DragonPets-${project.target_mc_version}"
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
