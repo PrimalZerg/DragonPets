@@ -47,8 +47,8 @@ jobs:
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN}}
           tag-prefix: ''
-          default-version: '0.0.1'
-          prerelease: 'alpha'
+          default-version: '1.0.3'
+          prerelease: 'beta'
       - name: Commit version file
         run: |
           git config --global user.email "ci@sweetrpg.com"
