@@ -74,7 +74,7 @@ public class AcaciaDragonEntity extends TamableAnimal {
 	public static void addLivingEntityToBiomes(BiomeLoadingEvent event) {
 		if (SPAWN_BIOMES.contains(event.getName()))
 			event.getSpawns().getSpawner(MobCategory.MONSTER)
-					.add(new MobSpawnSettings.SpawnerData(DragonPetsModEntities.ACACIA_DRAGON.get(), 120, 1, 1));
+					.add(new MobSpawnSettings.SpawnerData(DragonPetsModEntities.ACACIA_DRAGON.get(), 60, 1, 1));
 	}
 
 	public AcaciaDragonEntity(PlayMessages.SpawnEntity packet, Level world) {

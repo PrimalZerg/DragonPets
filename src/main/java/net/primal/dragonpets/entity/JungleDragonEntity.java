@@ -74,7 +74,7 @@ public class JungleDragonEntity extends TamableAnimal {
 	public static void addLivingEntityToBiomes(BiomeLoadingEvent event) {
 		if (SPAWN_BIOMES.contains(event.getName()))
 			event.getSpawns().getSpawner(MobCategory.MONSTER)
-					.add(new MobSpawnSettings.SpawnerData(DragonPetsModEntities.JUNGLE_DRAGON.get(), 80, 1, 1));
+					.add(new MobSpawnSettings.SpawnerData(DragonPetsModEntities.JUNGLE_DRAGON.get(), 60, 1, 1));
 	}
 
 	public JungleDragonEntity(PlayMessages.SpawnEntity packet, Level world) {

@@ -73,7 +73,7 @@ public class DarkOakDragonEntity extends TamableAnimal {
 	public static void addLivingEntityToBiomes(BiomeLoadingEvent event) {
 		if (SPAWN_BIOMES.contains(event.getName()))
 			event.getSpawns().getSpawner(MobCategory.MONSTER)
-					.add(new MobSpawnSettings.SpawnerData(DragonPetsModEntities.DARK_OAK_DRAGON.get(), 120, 1, 1));
+					.add(new MobSpawnSettings.SpawnerData(DragonPetsModEntities.DARK_OAK_DRAGON.get(), 60, 1, 1));
 	}
 
 	public DarkOakDragonEntity(PlayMessages.SpawnEntity packet, Level world) {
