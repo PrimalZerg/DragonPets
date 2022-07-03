@@ -1,6 +1,7 @@
 
 package net.primal.dragonpets.entity;
 
+import net.primal.dragonpets.common.ConfigHandler;
 import net.primal.dragonpets.init.DragonPetsModEntities;
 
 import net.minecraftforge.registries.ForgeRegistries;
@@ -79,7 +80,7 @@ public class IceDragonEntity extends TamableAnimal {
 	@SubscribeEvent
 	public static void addLivingEntityToBiomes(BiomeLoadingEvent event) {
 		if (SPAWN_BIOMES.contains(event.getName()))
-			event.getSpawns().getSpawner(MobCategory.MONSTER).add(new MobSpawnSettings.SpawnerData(DragonPetsModEntities.ICE_DRAGON.get(), 30, 1, 1));
+			event.getSpawns().getSpawner(MobCategory.MONSTER).add(new MobSpawnSettings.SpawnerData(DragonPetsModEntities.ICE_DRAGON.get(), ConfigHandler.SERVER.ICE_DRAGON_SPAWN_WEIGHT.get(), 1, 1));
 	}
 
 	public IceDragonEntity(PlayMessages.SpawnEntity packet, Level world) {

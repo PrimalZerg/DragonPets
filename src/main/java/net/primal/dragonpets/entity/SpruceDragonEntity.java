@@ -1,6 +1,7 @@
 
 package net.primal.dragonpets.entity;
 
+import net.primal.dragonpets.common.ConfigHandler;
 import net.primal.dragonpets.init.DragonPetsModEntities;
 
 import net.minecraftforge.registries.ForgeRegistries;
@@ -74,7 +75,7 @@ public class SpruceDragonEntity extends TamableAnimal {
 	public static void addLivingEntityToBiomes(BiomeLoadingEvent event) {
 		if (SPAWN_BIOMES.contains(event.getName()))
 			event.getSpawns().getSpawner(MobCategory.MONSTER)
-					.add(new MobSpawnSettings.SpawnerData(DragonPetsModEntities.SPRUCE_DRAGON.get(), 120, 1, 1));
+					.add(new MobSpawnSettings.SpawnerData(DragonPetsModEntities.SPRUCE_DRAGON.get(), ConfigHandler.SERVER.SPRUCE_DRAGON_SPAWN_WEIGHT.get(), 1, 1));
 	}
 
 	public SpruceDragonEntity(PlayMessages.SpawnEntity packet, Level world) {

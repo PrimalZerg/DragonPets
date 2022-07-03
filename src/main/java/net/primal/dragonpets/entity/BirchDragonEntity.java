@@ -1,6 +1,7 @@
 
 package net.primal.dragonpets.entity;
 
+import net.primal.dragonpets.common.ConfigHandler;
 import net.primal.dragonpets.init.DragonPetsModEntities;
 
 import net.minecraftforge.registries.ForgeRegistries;
@@ -74,7 +75,7 @@ public class BirchDragonEntity extends TamableAnimal {
 	public static void addLivingEntityToBiomes(BiomeLoadingEvent event) {
 		if (SPAWN_BIOMES.contains(event.getName()))
 			event.getSpawns().getSpawner(MobCategory.MONSTER)
-					.add(new MobSpawnSettings.SpawnerData(DragonPetsModEntities.BIRCH_DRAGON.get(), 80, 1, 1));
+					.add(new MobSpawnSettings.SpawnerData(DragonPetsModEntities.BIRCH_DRAGON.get(), ConfigHandler.SERVER.BIRCH_DRAGON_SPAWN_WEIGHT.get(), 1, 1));
 	}
 
 	public BirchDragonEntity(PlayMessages.SpawnEntity packet, Level world) {

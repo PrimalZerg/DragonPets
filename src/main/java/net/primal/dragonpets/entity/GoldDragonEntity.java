@@ -1,6 +1,7 @@
 
 package net.primal.dragonpets.entity;
 
+import net.primal.dragonpets.common.ConfigHandler;
 import net.primal.dragonpets.init.DragonPetsModEntities;
 
 import net.minecraftforge.registries.ForgeRegistries;
@@ -75,7 +76,7 @@ public class GoldDragonEntity extends TamableAnimal {
 	public static void addLivingEntityToBiomes(BiomeLoadingEvent event) {
 		if (SPAWN_BIOMES.contains(event.getName()))
 			event.getSpawns().getSpawner(MobCategory.MONSTER)
-					.add(new MobSpawnSettings.SpawnerData(DragonPetsModEntities.GOLD_DRAGON.get(), 50, 1, 1));
+					.add(new MobSpawnSettings.SpawnerData(DragonPetsModEntities.GOLD_DRAGON.get(), ConfigHandler.SERVER.GOLD_DRAGON_SPAWN_WEIGHT.get(), 1, 1));
 	}
 
 	public GoldDragonEntity(PlayMessages.SpawnEntity packet, Level world) {

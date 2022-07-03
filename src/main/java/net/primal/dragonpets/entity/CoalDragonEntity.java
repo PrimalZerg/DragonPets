@@ -1,6 +1,7 @@
 
 package net.primal.dragonpets.entity;
 
+import net.primal.dragonpets.common.ConfigHandler;
 import net.primal.dragonpets.init.DragonPetsModEntities;
 
 import net.minecraftforge.registries.ForgeRegistries;
@@ -75,7 +76,7 @@ public class CoalDragonEntity extends TamableAnimal {
 	public static void addLivingEntityToBiomes(BiomeLoadingEvent event) {
 		if (SPAWN_BIOMES.contains(event.getName()))
 			event.getSpawns().getSpawner(MobCategory.MONSTER)
-					.add(new MobSpawnSettings.SpawnerData(DragonPetsModEntities.COAL_DRAGON.get(), 80, 1, 1));
+					.add(new MobSpawnSettings.SpawnerData(DragonPetsModEntities.COAL_DRAGON.get(), ConfigHandler.SERVER.COAL_DRAGON_SPAWN_WEIGHT.get(), 1, 1));
 	}
 
 	public CoalDragonEntity(PlayMessages.SpawnEntity packet, Level world) {
