@@ -1,6 +1,7 @@
 
 package net.primal.dragonpets.entity;
 
+import net.primal.dragonpets.common.ConfigHandler;
 import net.primal.dragonpets.init.DragonPetsModEntities;
 
 import net.minecraftforge.registries.ForgeRegistries;
@@ -74,7 +75,7 @@ public class AcaciaDragonEntity extends TamableAnimal {
 	public static void addLivingEntityToBiomes(BiomeLoadingEvent event) {
 		if (SPAWN_BIOMES.contains(event.getName()))
 			event.getSpawns().getSpawner(MobCategory.MONSTER)
-					.add(new MobSpawnSettings.SpawnerData(DragonPetsModEntities.ACACIA_DRAGON.get(), 60, 1, 1));
+					.add(new MobSpawnSettings.SpawnerData(DragonPetsModEntities.ACACIA_DRAGON.get(), ConfigHandler.SERVER.ACACIA_DRAGON_SPAWN_WEIGHT.get(), 1, 1));
 	}
 
 	public AcaciaDragonEntity(PlayMessages.SpawnEntity packet, Level world) {

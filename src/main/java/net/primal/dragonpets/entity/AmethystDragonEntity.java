@@ -1,6 +1,7 @@
 
 package net.primal.dragonpets.entity;
 
+import net.primal.dragonpets.common.ConfigHandler;
 import net.primal.dragonpets.init.DragonPetsModEntities;
 
 import net.minecraftforge.registries.ForgeRegistries;
@@ -72,7 +73,7 @@ public class AmethystDragonEntity extends TamableAnimal {
 	public static void addLivingEntityToBiomes(BiomeLoadingEvent event) {
 		if (SPAWN_BIOMES.contains(event.getName()))
 			event.getSpawns().getSpawner(MobCategory.MONSTER)
-					.add(new MobSpawnSettings.SpawnerData(DragonPetsModEntities.AMETHYST_DRAGON.get(), 30, 1, 1));
+					.add(new MobSpawnSettings.SpawnerData(DragonPetsModEntities.AMETHYST_DRAGON.get(), ConfigHandler.SERVER.AMETHYST_DRAGON_SPAWN_WEIGHT.get(), 1, 1));
 	}
 
 	public AmethystDragonEntity(PlayMessages.SpawnEntity packet, Level world) {

@@ -1,6 +1,7 @@
 
 package net.primal.dragonpets.entity;
 
+import net.primal.dragonpets.common.ConfigHandler;
 import net.primal.dragonpets.init.DragonPetsModEntities;
 
 import net.minecraftforge.registries.ForgeRegistries;
@@ -73,7 +74,7 @@ public class EndDragonEntity extends TamableAnimal {
 	@SubscribeEvent
 	public static void addLivingEntityToBiomes(BiomeLoadingEvent event) {
 		if (SPAWN_BIOMES.contains(event.getName()))
-			event.getSpawns().getSpawner(MobCategory.MONSTER).add(new MobSpawnSettings.SpawnerData(DragonPetsModEntities.END_DRAGON.get(), 20, 1, 1));
+			event.getSpawns().getSpawner(MobCategory.MONSTER).add(new MobSpawnSettings.SpawnerData(DragonPetsModEntities.END_DRAGON.get(), ConfigHandler.SERVER.END_DRAGON_SPAWN_WEIGHT.get(), 1, 1));
 	}
 
 	public EndDragonEntity(PlayMessages.SpawnEntity packet, Level world) {

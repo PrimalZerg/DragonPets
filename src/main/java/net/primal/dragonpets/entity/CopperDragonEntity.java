@@ -1,6 +1,7 @@
 
 package net.primal.dragonpets.entity;
 
+import net.primal.dragonpets.common.ConfigHandler;
 import net.primal.dragonpets.init.DragonPetsModEntities;
 
 import net.minecraftforge.registries.ForgeRegistries;
@@ -74,7 +75,7 @@ public class CopperDragonEntity extends TamableAnimal {
 	public static void addLivingEntityToBiomes(BiomeLoadingEvent event) {
 		if (SPAWN_BIOMES.contains(event.getName()))
 			event.getSpawns().getSpawner(MobCategory.MONSTER)
-					.add(new MobSpawnSettings.SpawnerData(DragonPetsModEntities.COPPER_DRAGON.get(), 100, 1, 1));
+					.add(new MobSpawnSettings.SpawnerData(DragonPetsModEntities.COPPER_DRAGON.get(), ConfigHandler.SERVER.COPPER_DRAGON_SPAWN_WEIGHT.get(), 1, 1));
 	}
 
 	public CopperDragonEntity(PlayMessages.SpawnEntity packet, Level world) {

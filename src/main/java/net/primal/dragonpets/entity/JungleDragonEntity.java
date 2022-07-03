@@ -1,6 +1,7 @@
 
 package net.primal.dragonpets.entity;
 
+import net.primal.dragonpets.common.ConfigHandler;
 import net.primal.dragonpets.init.DragonPetsModEntities;
 
 import net.minecraftforge.registries.ForgeRegistries;
@@ -74,7 +75,7 @@ public class JungleDragonEntity extends TamableAnimal {
 	public static void addLivingEntityToBiomes(BiomeLoadingEvent event) {
 		if (SPAWN_BIOMES.contains(event.getName()))
 			event.getSpawns().getSpawner(MobCategory.MONSTER)
-					.add(new MobSpawnSettings.SpawnerData(DragonPetsModEntities.JUNGLE_DRAGON.get(), 60, 1, 1));
+					.add(new MobSpawnSettings.SpawnerData(DragonPetsModEntities.JUNGLE_DRAGON.get(), ConfigHandler.SERVER.JUNGLE_DRAGON_SPAWN_WEIGHT.get(), 1, 1));
 	}
 
 	public JungleDragonEntity(PlayMessages.SpawnEntity packet, Level world) {

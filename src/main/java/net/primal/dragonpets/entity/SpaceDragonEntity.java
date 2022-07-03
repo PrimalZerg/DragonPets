@@ -1,6 +1,7 @@
 
 package net.primal.dragonpets.entity;
 
+import net.primal.dragonpets.common.ConfigHandler;
 import net.primal.dragonpets.init.DragonPetsModEntities;
 
 import net.minecraftforge.registries.ForgeRegistries;
@@ -73,7 +74,7 @@ public class SpaceDragonEntity extends TamableAnimal {
 	public static void addLivingEntityToBiomes(BiomeLoadingEvent event) {
 		if (SPAWN_BIOMES.contains(event.getName()))
 			event.getSpawns().getSpawner(MobCategory.MONSTER)
-					.add(new MobSpawnSettings.SpawnerData(DragonPetsModEntities.SPACE_DRAGON.get(), 20, 1, 1));
+					.add(new MobSpawnSettings.SpawnerData(DragonPetsModEntities.SPACE_DRAGON.get(), ConfigHandler.SERVER.SPACE_DRAGON_SPAWN_WEIGHT.get(), 1, 1));
 	}
 
 	public SpaceDragonEntity(PlayMessages.SpawnEntity packet, Level world) {

@@ -1,6 +1,7 @@
 
 package net.primal.dragonpets.entity;
 
+import net.primal.dragonpets.common.ConfigHandler;
 import net.primal.dragonpets.init.DragonPetsModEntities;
 
 import net.minecraftforge.registries.ForgeRegistries;
@@ -73,7 +74,7 @@ public class RedstoneDragonEntity extends TamableAnimal {
 	public static void addLivingEntityToBiomes(BiomeLoadingEvent event) {
 		if (SPAWN_BIOMES.contains(event.getName()))
 			event.getSpawns().getSpawner(MobCategory.MONSTER)
-					.add(new MobSpawnSettings.SpawnerData(DragonPetsModEntities.REDSTONE_DRAGON.get(), 40, 1, 1));
+					.add(new MobSpawnSettings.SpawnerData(DragonPetsModEntities.REDSTONE_DRAGON.get(), ConfigHandler.SERVER.REDSTONE_DRAGON_SPAWN_WEIGHT.get(), 1, 1));
 	}
 
 	public RedstoneDragonEntity(PlayMessages.SpawnEntity packet, Level world) {

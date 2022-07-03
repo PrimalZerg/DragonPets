@@ -1,6 +1,7 @@
 
 package net.primal.dragonpets.entity;
 
+import net.primal.dragonpets.common.ConfigHandler;
 import net.primal.dragonpets.init.DragonPetsModEntities;
 
 import net.minecraftforge.registries.ForgeRegistries;
@@ -76,7 +77,7 @@ public class FireDragonEntity extends TamableAnimal {
 	public static void addLivingEntityToBiomes(BiomeLoadingEvent event) {
 		if (SPAWN_BIOMES.contains(event.getName()))
 			event.getSpawns().getSpawner(MobCategory.MONSTER)
-					.add(new MobSpawnSettings.SpawnerData(DragonPetsModEntities.FIRE_DRAGON.get(), 50, 1, 1));
+					.add(new MobSpawnSettings.SpawnerData(DragonPetsModEntities.FIRE_DRAGON.get(), ConfigHandler.SERVER.FIRE_DRAGON_SPAWN_WEIGHT.get(), 1, 1));
 	}
 
 	public FireDragonEntity(PlayMessages.SpawnEntity packet, Level world) {
