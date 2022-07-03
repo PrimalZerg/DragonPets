@@ -33,11 +33,19 @@ public class ConfigHandler {
 
     public static class ClientConfig {
 
-//        public ForgeConfigSpec.BooleanValue DIRE_PARTICLES;
+        public ForgeConfigSpec.BooleanValue PARTICLES;
 
         public ClientConfig(ForgeConfigSpec.Builder builder) {
             {
                 builder.push("General");
+
+                builder.pop();
+            }
+
+            {
+                builder.push("Rendering");
+
+                PARTICLES = builder.comment("Show particles around dragons").translation("Show particles around dragons").define("show_particles", true);
 
                 builder.pop();
             }
