@@ -29,7 +29,7 @@ def branch = grgit.branch.current()
 println "On branch: ${branch.fullName}"
 println "Pipeline branch: " + (System.getenv('CI_COMMIT_BRANCH') ?: 'NONE')
 
-version = System.getenv("DRAGONPETS_VERSION") ?: new File(".VERSION").text.trim()
+version = System.getenv("DRAGONPETS_VERSION") ?: new File(project.getRootDir().absolutePath + "/.VERSION").text.trim()
 group = 'com.sweetrpg'
 archivesBaseName = "DragonPets-${project.target_mc_version}"
 
@@ -80,20 +80,20 @@ tasks.withType(JavaCompile).configureEach {
 apply from: 'mcreator.gradle'
 
 task makeChangelog(type: se.bjurr.gitchangelog.plugin.gradle.GitChangelogTask) {
-    file = new File("build/changelog.md")
+    file = new File(project.getRootDir().absolutePath + "/build/changelog.md")
     fromRepo = file(".")
     untaggedName = "Current release ${project.version}"
-    fromCommit = new File(".RELEASE_HASH").text.trim()
+    fromCommit = new File(project.getRootDir().absolutePath + "/.RELEASE_HASH").text.trim()
     toRef = 'HEAD'
 
-    templateContent = file('changelog.mustache').getText('UTF-8')
+    templateContent = file(project.getRootDir().absolutePath + '/changelog.mustache').getText('UTF-8')
 }
 
 curseforge {
     apiKey = System.getenv('CURSEFORGE_API_KEY') ?: 0
     project {
         id = project.curseforge_project_id
-        changelog = file("build/changelog.md")
+        changelog = file(project.getRootDir().absolutePath + "/build/changelog.md")
         changelogType = 'markdown'
         releaseType = findProperty("curseforge_release_type") ?: 'beta'
         addGameVersion project.target_mc_version
