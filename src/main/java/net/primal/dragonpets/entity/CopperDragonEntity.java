@@ -1,6 +1,7 @@
 
 package net.primal.dragonpets.entity;
 
+import net.minecraftforge.common.ForgeMod;
 import net.primal.dragonpets.common.ConfigHandler;
 import net.primal.dragonpets.init.DragonPetsModEntities;
 
@@ -279,14 +280,8 @@ public class CopperDragonEntity extends TamableAnimal {
 	protected void checkFallDamage(double y, boolean onGroundIn, BlockState state, BlockPos pos) {
 	}
 
-	@Override
-	public void setNoGravity(boolean ignored) {
-		super.setNoGravity(true);
-	}
-
 	public void aiStep() {
 		super.aiStep();
-		this.setNoGravity(true);
 		double x = this.getX();
 		double y = this.getY();
 		double z = this.getZ();
@@ -315,6 +310,7 @@ public class CopperDragonEntity extends TamableAnimal {
 		builder = builder.add(Attributes.ARMOR, 5);
 		builder = builder.add(Attributes.ATTACK_DAMAGE, 5);
 		builder = builder.add(Attributes.FLYING_SPEED, 0.6);
+		builder = builder.add(ForgeMod.ENTITY_GRAVITY.get(), 0.0003);
 		return builder;
 	}
 }

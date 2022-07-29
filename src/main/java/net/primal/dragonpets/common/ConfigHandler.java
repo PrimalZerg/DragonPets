@@ -88,24 +88,24 @@ public class ConfigHandler {
                 //DEBUG_MODE = builder
                 //        .comment("Enables debugging mode, which would output values for the sake of finding issues in the mod.")
                 //        .define("debugMode", false);
-                ACACIA_DRAGON_SPAWN_WEIGHT = builder.comment("Spawn weight for acacia dragons").translation("Spawn weight for acacia dragons").defineInRange("acacia_dragon_spawn_weight", 60, 1, 200);
+                ACACIA_DRAGON_SPAWN_WEIGHT = builder.comment("Spawn weight for acacia dragons").translation("Spawn weight for acacia dragons").defineInRange("acacia_dragon_spawn_weight", 10, 1, 200);
                 AMETHYST_DRAGON_SPAWN_WEIGHT = builder.comment("Spawn weight for amethyst dragons").translation("Spawn weight for amethyst dragons").defineInRange("amethyst_dragon_spawn_weight", 30, 1, 200);
-                BIRCH_DRAGON_SPAWN_WEIGHT = builder.comment("Spawn weight for birch dragons").translation("Spawn weight for birch dragons").defineInRange("birch_dragon_spawn_weight", 60, 1, 200);
-                COAL_DRAGON_SPAWN_WEIGHT = builder.comment("Spawn weight for coal dragons").translation("Spawn weight for coal dragons").defineInRange("coal_dragon_spawn_weight", 40, 1, 200);
-                COPPER_DRAGON_SPAWN_WEIGHT = builder.comment("Spawn weight for copper dragons").translation("Spawn weight for copper dragons").defineInRange("copper_dragon_spawn_weight", 50, 1, 200);
-                DARKOAK_DRAGON_SPAWN_WEIGHT = builder.comment("Spawn weight for dark oak dragons").translation("Spawn weight for dark oak dragons").defineInRange("dark_oak_dragon_spawn_weight", 60, 1, 200);
+                BIRCH_DRAGON_SPAWN_WEIGHT = builder.comment("Spawn weight for birch dragons").translation("Spawn weight for birch dragons").defineInRange("birch_dragon_spawn_weight", 10, 1, 200);
+                COAL_DRAGON_SPAWN_WEIGHT = builder.comment("Spawn weight for coal dragons").translation("Spawn weight for coal dragons").defineInRange("coal_dragon_spawn_weight", 10, 1, 200);
+                COPPER_DRAGON_SPAWN_WEIGHT = builder.comment("Spawn weight for copper dragons").translation("Spawn weight for copper dragons").defineInRange("copper_dragon_spawn_weight", 10, 1, 200);
+                DARKOAK_DRAGON_SPAWN_WEIGHT = builder.comment("Spawn weight for dark oak dragons").translation("Spawn weight for dark oak dragons").defineInRange("dark_oak_dragon_spawn_weight", 10, 1, 200);
                 DIAMOND_DRAGON_SPAWN_WEIGHT = builder.comment("Spawn weight for diamond dragons").translation("Spawn weight for diamond dragons").defineInRange("diamond_dragon_spawn_weight", 20, 1, 200);
                 END_DRAGON_SPAWN_WEIGHT = builder.comment("Spawn weight for end dragons").translation("Spawn weight for end dragons").defineInRange("end_dragon_spawn_weight", 20, 1, 200);
-                FIRE_DRAGON_SPAWN_WEIGHT = builder.comment("Spawn weight for fire dragons").translation("Spawn weight for fire dragons").defineInRange("fire_dragon_spawn_weight", 50, 1, 200);
-                GOLD_DRAGON_SPAWN_WEIGHT = builder.comment("Spawn weight for gold dragons").translation("Spawn weight for gold dragons").defineInRange("gold_dragon_spawn_weight", 50, 1, 200);
-                ICE_DRAGON_SPAWN_WEIGHT = builder.comment("Spawn weight for ice dragons").translation("Spawn weight for ice dragons").defineInRange("ice_dragon_spawn_weight", 50, 1, 200);
-                IRON_DRAGON_SPAWN_WEIGHT = builder.comment("Spawn weight for iron dragons").translation("Spawn weight for iron dragons").defineInRange("iron_dragon_spawn_weight", 80, 1, 200);
-                JUNGLE_DRAGON_SPAWN_WEIGHT = builder.comment("Spawn weight for jungle dragons").translation("Spawn weight for jungle dragons").defineInRange("jungle_dragon_spawn_weight", 60, 1, 200);
-                LAPIS_DRAGON_SPAWN_WEIGHT = builder.comment("Spawn weight for lapis dragons").translation("Spawn weight for lapis dragons").defineInRange("lapis_dragon_spawn_weight", 40, 1, 200);
-                OAK_DRAGON_SPAWN_WEIGHT = builder.comment("Spawn weight for oak dragons").translation("Spawn weight for oak dragons").defineInRange("oak_dragon_spawn_weight", 60, 1, 200);
+                FIRE_DRAGON_SPAWN_WEIGHT = builder.comment("Spawn weight for fire dragons").translation("Spawn weight for fire dragons").defineInRange("fire_dragon_spawn_weight", 10, 1, 200);
+                GOLD_DRAGON_SPAWN_WEIGHT = builder.comment("Spawn weight for gold dragons").translation("Spawn weight for gold dragons").defineInRange("gold_dragon_spawn_weight", 10, 1, 200);
+                ICE_DRAGON_SPAWN_WEIGHT = builder.comment("Spawn weight for ice dragons").translation("Spawn weight for ice dragons").defineInRange("ice_dragon_spawn_weight", 10, 1, 200);
+                IRON_DRAGON_SPAWN_WEIGHT = builder.comment("Spawn weight for iron dragons").translation("Spawn weight for iron dragons").defineInRange("iron_dragon_spawn_weight", 10, 1, 200);
+                JUNGLE_DRAGON_SPAWN_WEIGHT = builder.comment("Spawn weight for jungle dragons").translation("Spawn weight for jungle dragons").defineInRange("jungle_dragon_spawn_weight", 10, 1, 200);
+                LAPIS_DRAGON_SPAWN_WEIGHT = builder.comment("Spawn weight for lapis dragons").translation("Spawn weight for lapis dragons").defineInRange("lapis_dragon_spawn_weight", 10, 1, 200);
+                OAK_DRAGON_SPAWN_WEIGHT = builder.comment("Spawn weight for oak dragons").translation("Spawn weight for oak dragons").defineInRange("oak_dragon_spawn_weight", 10, 1, 200);
                 REDSTONE_DRAGON_SPAWN_WEIGHT = builder.comment("Spawn weight for redstone dragons").translation("Spawn weight for redstone dragons").defineInRange("redstone_dragon_spawn_weight", 40, 1, 200);
                 SPACE_DRAGON_SPAWN_WEIGHT = builder.comment("Spawn weight for space dragons").translation("Spawn weight for space dragons").defineInRange("space_dragon_spawn_weight", 20, 1, 200);
-                SPRUCE_DRAGON_SPAWN_WEIGHT = builder.comment("Spawn weight for spruce dragons").translation("Spawn weight for spruce dragons").defineInRange("spruce_dragon_spawn_weight", 60, 1, 200);
+                SPRUCE_DRAGON_SPAWN_WEIGHT = builder.comment("Spawn weight for spruce dragons").translation("Spawn weight for spruce dragons").defineInRange("spruce_dragon_spawn_weight", 10, 1, 200);
 
                 builder.pop();
             }

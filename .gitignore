@@ -13,7 +13,7 @@ build/
 run/
 
 # MacOS system files
-.DS_STORE
+.DS_Store
 
 # Other Files (In Eclipse)
 .classpath
