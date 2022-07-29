@@ -300,7 +300,6 @@ public class JungleDragonEntity extends TamableAnimal {
 	@Override
 	protected void checkFallDamage(double y, boolean onGroundIn, BlockState state, BlockPos pos) {
 	}
-
 	public void aiStep() {
 		super.aiStep();
 	}

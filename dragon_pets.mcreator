@@ -4,7 +4,7 @@
       "name": "FireDragon",
       "type": "livingentity",
       "sortid": 2,
-      "compiles": false,
+      "compiles": true,
       "locked_code": true,
       "registry_name": "fire_dragon"
     },
@@ -36,7 +36,7 @@
       "name": "DiamondDragon",
       "type": "livingentity",
       "sortid": 3,
-      "compiles": false,
+      "compiles": true,
       "locked_code": true,
       "registry_name": "diamond_dragon"
     },
@@ -44,7 +44,7 @@
       "name": "AmethystDragon",
       "type": "livingentity",
       "sortid": 10,
-      "compiles": false,
+      "compiles": true,
       "locked_code": true,
       "registry_name": "amethyst_dragon"
     },
@@ -52,7 +52,7 @@
       "name": "IronDragon",
       "type": "livingentity",
       "sortid": 7,
-      "compiles": false,
+      "compiles": true,
       "locked_code": true,
       "registry_name": "iron_dragon"
     },
@@ -60,7 +60,7 @@
       "name": "GoldDragon",
       "type": "livingentity",
       "sortid": 4,
-      "compiles": false,
+      "compiles": true,
       "locked_code": true,
       "registry_name": "gold_dragon"
     },
@@ -92,7 +92,7 @@
       "name": "LapisDragon",
       "type": "livingentity",
       "sortid": 6,
-      "compiles": false,
+      "compiles": true,
       "locked_code": true,
       "registry_name": "lapis_dragon"
     },
@@ -100,7 +100,7 @@
       "name": "CoalDragon",
       "type": "livingentity",
       "sortid": 9,
-      "compiles": false,
+      "compiles": true,
       "locked_code": true,
       "registry_name": "coal_dragon"
     },
@@ -108,7 +108,7 @@
       "name": "DarkOakDragon",
       "type": "livingentity",
       "sortid": 13,
-      "compiles": false,
+      "compiles": true,
       "locked_code": true,
       "registry_name": "dark_oak_dragon"
     },
@@ -116,7 +116,7 @@
       "name": "SpruceDragon",
       "type": "livingentity",
       "sortid": 14,
-      "compiles": false,
+      "compiles": true,
       "locked_code": true,
       "registry_name": "spruce_dragon"
     },
@@ -132,7 +132,7 @@
       "name": "BirchDragon",
       "type": "livingentity",
       "sortid": 16,
-      "compiles": false,
+      "compiles": true,
       "locked_code": true,
       "registry_name": "birch_dragon"
     },
@@ -148,7 +148,7 @@
       "name": "OakDragon",
       "type": "livingentity",
       "sortid": 18,
-      "compiles": false,
+      "compiles": true,
       "locked_code": true,
       "registry_name": "oak_dragon"
     }
