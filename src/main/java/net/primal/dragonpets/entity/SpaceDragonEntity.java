@@ -279,9 +279,13 @@ public class SpaceDragonEntity extends TamableAnimal {
 	@Override
 	protected void checkFallDamage(double y, boolean onGroundIn, BlockState state, BlockPos pos) {
 	}
-
+	@Override
+	public void setNoGravity(boolean ignored) {
+		super.setNoGravity(false);
+	}
 	public void aiStep() {
 		super.aiStep();
+		this.setNoGravity(false);
 	}
 
 	public static void init() {
@@ -296,7 +300,7 @@ public class SpaceDragonEntity extends TamableAnimal {
 		builder = builder.add(Attributes.ARMOR, 5);
 		builder = builder.add(Attributes.ATTACK_DAMAGE, 5);
 		builder = builder.add(Attributes.FLYING_SPEED, 0.6);
-		builder = builder.add(ForgeMod.ENTITY_GRAVITY.get(), 0.0003);
+		builder = builder.add(ForgeMod.ENTITY_GRAVITY.get(), 0.03);
 		return builder;
 	}
 }

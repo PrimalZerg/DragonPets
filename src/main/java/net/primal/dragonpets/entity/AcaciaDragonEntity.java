@@ -300,8 +300,13 @@ public class AcaciaDragonEntity extends TamableAnimal {
 	@Override
 	protected void checkFallDamage(double y, boolean onGroundIn, BlockState state, BlockPos pos) {
 	}
+	@Override
+	public void setNoGravity(boolean ignored) {
+		super.setNoGravity(false);
+	}
 	public void aiStep() {
 		super.aiStep();
+		this.setNoGravity(false);
 	}
 
 	public static void init() {

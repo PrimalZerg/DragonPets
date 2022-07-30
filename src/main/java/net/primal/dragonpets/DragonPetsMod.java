@@ -13,6 +13,7 @@
  */
 package net.primal.dragonpets;
 
+import net.primal.dragonpets.common.ConfigHandler;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 
@@ -50,6 +51,7 @@ public class DragonPetsMod {
 		DragonPetsModItems.REGISTRY.register(bus);
 		DragonPetsModEntities.REGISTRY.register(bus);
 
+		ConfigHandler.init(bus);
 	}
 
 	public static <T> void addNetworkMessage(Class<T> messageType, BiConsumer<T, FriendlyByteBuf> encoder, Function<FriendlyByteBuf, T> decoder,

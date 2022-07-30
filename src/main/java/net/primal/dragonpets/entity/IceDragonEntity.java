@@ -333,9 +333,13 @@ public class IceDragonEntity extends TamableAnimal {
 	@Override
 	protected void checkFallDamage(double y, boolean onGroundIn, BlockState state, BlockPos pos) {
 	}
-
+	@Override
+	public void setNoGravity(boolean ignored) {
+		super.setNoGravity(false);
+	}
 	public void aiStep() {
 		super.aiStep();
+		this.setNoGravity(false);
 		double x = this.getX();
 		double y = this.getY();
 		double z = this.getZ();
