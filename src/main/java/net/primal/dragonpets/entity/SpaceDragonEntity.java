@@ -237,9 +237,11 @@ public class SpaceDragonEntity extends TamableAnimal {
 						this.heal(4);
 						retval = InteractionResult.sidedSuccess(this.level.isClientSide());
 					} else if (this.isTame() && this.isOwnedBy(sourceentity)) {
-						 this.setOrderedToSit(!this.isOrderedToSit());
 						this.navigation.stop();
+						 this.setOrderedToSit(!this.isOrderedToSit());
            				this.setTarget((LivingEntity)null);
+						this.navigation.stop();
+
 						retval = super.mobInteract(sourceentity, hand);
 							return InteractionResult.SUCCESS;
 	

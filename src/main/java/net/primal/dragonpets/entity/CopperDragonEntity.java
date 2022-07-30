@@ -241,6 +241,8 @@ public class CopperDragonEntity extends TamableAnimal {
 						this.navigation.stop();
 						this.setOrderedToSit(!this.isOrderedToSit());
            				this.setTarget((LivingEntity)null);
+						this.navigation.stop();
+
 						retval = super.mobInteract(sourceentity, hand);
 						return InteractionResult.SUCCESS;
 					}
