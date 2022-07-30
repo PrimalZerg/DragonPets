@@ -226,9 +226,11 @@ public class BirchDragonEntity extends TamableAnimal {
 						this.heal(4);
 						retval = InteractionResult.sidedSuccess(this.level.isClientSide());
 					} else  if (this.isTame() && this.isOwnedBy(sourceentity)) {
-						this.setOrderedToSit(!this.isOrderedToSit());
 						this.navigation.stop();
+						this.setOrderedToSit(!this.isOrderedToSit());
            				this.setTarget((LivingEntity)null);
+						this.navigation.stop();
+
 						retval = super.mobInteract(sourceentity, hand);
 						return InteractionResult.SUCCESS;
 					}
@@ -300,11 +302,14 @@ public class BirchDragonEntity extends TamableAnimal {
 	@Override
 	protected void checkFallDamage(double y, boolean onGroundIn, BlockState state, BlockPos pos) {
 	}
-
+	@Override
+	public void setNoGravity(boolean ignored) {
+		super.setNoGravity(false);
+	}
 	public void aiStep() {
 		super.aiStep();
+		this.setNoGravity(false);
 	}
-
 	public static void init() {
 		SpawnPlacements.register(DragonPetsModEntities.BIRCH_DRAGON.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
 				(entityType, world, reason, pos, random) -> Monster.isDarkEnoughToSpawn(world, pos, random) && Mob.checkMobSpawnRules(entityType, world, reason, pos, random));

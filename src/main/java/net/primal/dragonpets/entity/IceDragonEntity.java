@@ -243,9 +243,10 @@ public class IceDragonEntity extends TamableAnimal {
 						this.heal(4);
 						retval = InteractionResult.sidedSuccess(this.level.isClientSide());
 					} else if (this.isTame() && this.isOwnedBy(sourceentity)) {
-						 this.setOrderedToSit(!this.isOrderedToSit());
 						this.navigation.stop();
+						this.setOrderedToSit(!this.isOrderedToSit());
            				this.setTarget((LivingEntity)null);
+						this.navigation.stop();
       		        
 						retval = super.mobInteract(sourceentity, hand);
 						return InteractionResult.SUCCESS;
@@ -333,9 +334,13 @@ public class IceDragonEntity extends TamableAnimal {
 	@Override
 	protected void checkFallDamage(double y, boolean onGroundIn, BlockState state, BlockPos pos) {
 	}
-
+	@Override
+	public void setNoGravity(boolean ignored) {
+		super.setNoGravity(false);
+	}
 	public void aiStep() {
 		super.aiStep();
+		this.setNoGravity(false);
 		double x = this.getX();
 		double y = this.getY();
 		double z = this.getZ();

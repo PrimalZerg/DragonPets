@@ -224,9 +224,11 @@ public class LapisDragonEntity extends TamableAnimal {
 						this.heal(4);
 						retval = InteractionResult.sidedSuccess(this.level.isClientSide());
 					} else   if (this.isTame() && this.isOwnedBy(sourceentity)) {
-						this.setOrderedToSit(!this.isOrderedToSit());
 						this.navigation.stop();
+						this.setOrderedToSit(!this.isOrderedToSit());
            				this.setTarget((LivingEntity)null);
+						this.navigation.stop();
+
 						retval = super.mobInteract(sourceentity, hand);
 						return InteractionResult.SUCCESS;
 					}
@@ -265,8 +267,13 @@ public class LapisDragonEntity extends TamableAnimal {
 	@Override
 	protected void checkFallDamage(double y, boolean onGroundIn, BlockState state, BlockPos pos) {
 	}
+	@Override
+	public void setNoGravity(boolean ignored) {
+		super.setNoGravity(false);
+	}
 	public void aiStep() {
 		super.aiStep();
+		this.setNoGravity(false);
 	}
 
 	public static void init() {
@@ -281,7 +288,7 @@ public class LapisDragonEntity extends TamableAnimal {
 		builder = builder.add(Attributes.ARMOR, 5);
 		builder = builder.add(Attributes.ATTACK_DAMAGE, 5);
 		builder = builder.add(Attributes.FLYING_SPEED, 0.6);
-		builder = builder.add(ForgeMod.ENTITY_GRAVITY.get(), 0.0003);
+		builder = builder.add(ForgeMod.ENTITY_GRAVITY.get(), 0.03);
 		return builder;
 	}
 }
