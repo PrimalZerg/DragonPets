@@ -288,7 +288,7 @@ public class LapisDragonEntity extends TamableAnimal {
 		builder = builder.add(Attributes.ARMOR, 5);
 		builder = builder.add(Attributes.ATTACK_DAMAGE, 5);
 		builder = builder.add(Attributes.FLYING_SPEED, 0.6);
-		builder = builder.add(ForgeMod.ENTITY_GRAVITY.get(), 0.03);
+		builder = builder.add(ForgeMod.ENTITY_GRAVITY.get(), 0.0003);
 		return builder;
 	}
 }
