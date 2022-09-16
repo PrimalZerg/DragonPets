@@ -294,7 +294,7 @@ public class AcaciaDragonEntity extends TamableAnimal {
 			this.animationPosition += this.animationSpeed;
 			return;
 		}
-		this.maxUpStep = 0.3F;
+		this.maxUpStep = 1.3F;
 		this.flyingSpeed = 0.6F;
 		super.travel(dir);
 	}
